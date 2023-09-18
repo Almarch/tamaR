@@ -4,7 +4,7 @@
 \alias{tamaShiny}
 \title{Create a tamagotchi in a shiny environment}
 \usage{
-tamaShiny()
+tamaShiny(tama = NULL)
 }
 \description{
 Create a tamagotchi in a shiny environment
