@@ -2,7 +2,7 @@
 
 This is a package allowing the emulation of a P1 tamagotchi in R, using an object-oriented paradigm.
 
-![image](https://github.com/Almarch/tamaR/assets/13364928/e9164f48-271a-43f4-8e8f-5c042d3b331c)
+![Screenshot from 2023-09-15 17-54-02](https://github.com/Almarch/tamaR/assets/13364928/3acdecf1-f4b3-42d7-82a5-3f97140b529c)
 
 ## Installation
 
@@ -11,6 +11,7 @@ Start by cloning the git repository:
 ```bash
 git clone https://github.almarch/tamaR.git
 ```
+
 
 If you use Windows, you must comment out the line 8 of tamalib.cpp as follows:
 
