@@ -52,7 +52,7 @@ library(tamaR)
 The instanciation of an object of class `Tama` from R will run a tamagotchi and provide an interface for it within your R environement. The emulation is real-time. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```{r}
-guizmo = new(Tama)
+guizmo = Tama()
 ```
 
 A GUI is provided by the mean of a shiny app:
@@ -92,7 +92,5 @@ This package is a dependency of [tamacare](https://github.com/almarch/tamacare),
 ## To do
 
 - Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment). 
-
-- A `GetCPU()` should be implemented to return the cpustate content from tamalib. That would enable saving and loading a CPU state, a feature available in other tamalib implementations.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.

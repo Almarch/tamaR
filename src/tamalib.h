@@ -180,11 +180,12 @@ public:
   Rcpp::LogicalVector GetIcon();
   Rcpp::NumericMatrix GetMatrix();
   int GetFreq();
-  int GetByte(int n);
   Rcpp::LogicalVector GetButton();
-
+  Rcpp::NumericVector GetCPU();
+  
   // Setters
   void SetButton(int n, bool state);
+  void SetCPU(Rcpp::NumericVector res);
 
   // public methods
 

@@ -13,7 +13,8 @@ RCPP_MODULE(Tamalib) {             // Name used to "loadModule" in R script
   .method("GetFreq", &Tama::GetFreq)
   .method("GetMatrix", &Tama::GetMatrix)
   .method("GetIcon", &Tama::GetIcon)
-  .method("GetByte", &Tama::GetByte)
+  .method("SetCPU", &Tama::SetCPU)
+  .method("GetCPU", &Tama::GetCPU)
   .method("SetButton", &Tama::SetButton)
   .method("GetButton", &Tama::GetButton);
 }

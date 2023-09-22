@@ -2087,14 +2087,6 @@ Rcpp::NumericMatrix Tama::GetMatrix() {
 
 int Tama::GetFreq() { return (int)current_freq; }
 
-int Tama::GetByte(int n) {
-    unsigned char byte;
-    int num;
-    byte = g_program_b12[n];
-    num = byte;
-    return num;
-}
-
 void Tama::SetButton(int n, bool state){
   if (state) {
     button_buffer[n] = 1;
@@ -2114,5 +2106,41 @@ Rcpp::LogicalVector Tama::GetButton(){
     return button; 
 }
 
+Rcpp::NumericVector Tama::GetCPU(){
+    uint32_t i = 0;
+    unsigned char cpu[sizeof(cpu_state_t) + MEMORY_SIZE];
+    Rcpp::NumericVector res(sizeof(cpu));
 
+    cpu_get_state(&cpuState);
+
+    memcpy(&cpu, &cpuState, sizeof(cpu_state_t));
+
+    for (i = 0; i < MEMORY_SIZE; i++)
+    {
+        cpu[sizeof(cpu_state_t) + i] = cpuState.memory[i];
+    }
+
+    for(i = 0; i < sizeof(cpu); i++){
+	      res[i] = cpu[i];
+    }
+    return res;
+}
+
+void Tama::SetCPU(Rcpp::NumericVector res){
+    uint32_t i = 0;
+    unsigned char cpu[sizeof(cpu_state_t) + MEMORY_SIZE];
+    for (i = 0; i < sizeof(cpu) ; i++){
+       cpu[i] = res[i];
+    }
+
+    cpu_get_state(&cpuState);
+    u4_t *memTemp = cpuState.memory;
+    memcpy(&cpuState, &cpu, sizeof(cpu_state_t));
+    cpu_set_state(&cpuState);
+
+    for (i = 0; i < MEMORY_SIZE; i++)
+    {
+        memTemp[i] = (uint8_t)cpu[sizeof(cpu_state_t) + i];
+    }
+}
 

@@ -5,16 +5,13 @@
 #' A tamagotchi
 #' 
 #' @examples
-#' tama = new(Tama)
-#' tama$GetMatrix()
-#' tama$GetIcon()
-#' 
-#' tama$SetButton(0,T)
-#' tama$GetButton()
-#' tama$SetButton(0,F)
+#' tama = Tama()
+#' plot(Tama)
 #' 
 #' @export Tama
+#' @exportClass Tama
 #' 
 #' 
 
-loadModule(module = "Tamalib", TRUE)
+setRcppClass(Class = "Tama",
+             module = "Tamalib")
