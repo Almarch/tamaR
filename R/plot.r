@@ -3,8 +3,8 @@
 #' @name plot.Tama
 #' @param x a Tama object
 #' @examples 
-#' tama = new(Tama)
-#' plot(Tama)
+#' guizmo = new(Tama)
+#' plot(guizmo)
 #' 
 #' @export plot
 #' 

@@ -49,22 +49,38 @@ library(tamaR)
 
 ## Use
 
-The instanciation of an object of class `Tama` from R will run a tamagotchi and provide an interface for it within your R environement. The emulation is real-time. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` from R will run a tamagotchi and provide an interface for it. The emulation is real-time. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
-```{r}
+```r
 guizmo = Tama()
 ```
 
-A GUI is provided by the mean of a shiny app:
+The screen can be consulted via the plot function:
 
-```{r}
-tamaShiny()
+```r
+plot(guizmo)
 ```
 
-By default, the shiny app instanciates a new `Tama`. Alternatively, you can provide an existing `Tama` object as argument.
+Buttons (A, B and C) can be controlled using the click method:
 
-```{r}
-tamaShiny(guizmo)
+```r
+guizmo$click("B")
+guizmo$click(c("A","C"))
+```
+
+R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
+
+Alternatively, the tamagotchi can be played with using a shiny GUI:
+
+```r
+guizmo$shiny()
+```
+
+The state can be saved and load using the corresponding methods:
+
+```r
+guizmo$save("myTama.csv")
+guizmo$load("myTama.csv")
 ```
 
 ## Server hosting

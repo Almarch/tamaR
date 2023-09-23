@@ -10,7 +10,7 @@
 Plot S3 method for Tama objects
 }
 \examples{
-tama = new(Tama)
-plot(Tama)
+guizmo = new(Tama)
+plot(guizmo)
 
 }

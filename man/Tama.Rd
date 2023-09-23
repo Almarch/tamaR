@@ -2,15 +2,18 @@
 % Please edit documentation in R/tamaR-exports.r
 \name{Tama}
 \alias{Tama}
-\title{Create a Tama object from the C++ class}
+\title{Instanciate a Tama object}
 \value{
 A tamagotchi
 }
 \description{
-Create a Tama object from the C++ class
+Instanciate a Tama object
 }
 \examples{
-tama = Tama()
-plot(Tama)
+guizmo = Tama()
+plot(guizmo)
+guizmo$click("B"); Sys.sleep(3)
+for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
+plot(guizmo)
 
 }
