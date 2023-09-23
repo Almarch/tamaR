@@ -55,13 +55,13 @@ The instanciation of an object of class `Tama` from R will run a tamagotchi and 
 guizmo = Tama()
 ```
 
-The screen can be consulted via the plot function:
+The screen can be consulted via the `plot` function:
 
 ```r
 plot(guizmo)
 ```
 
-Buttons (A, B and C) can be controlled using the click method:
+Buttons (A, B and C) can be controlled using the `click` method:
 
 ```r
 guizmo$click("B")
@@ -76,11 +76,11 @@ Alternatively, the tamagotchi can be played with using a shiny GUI:
 guizmo$shiny()
 ```
 
-The state can be saved and load using the corresponding methods:
+The state can be saved and loaded using the corresponding methods:
 
 ```r
-guizmo$save("myTama.csv")
-guizmo$load("myTama.csv")
+guizmo$save("myTama.txt")
+guizmo$load("myTama.txt")
 ```
 
 ## Server hosting
