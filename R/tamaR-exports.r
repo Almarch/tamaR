@@ -30,7 +30,8 @@ setRcppClass(Class = "Tama",
              module = "Tamalib",
              methods = list(
 
-    display = function() {
+    display = function(background = NULL) {
+        if(is.null(background)) background = bg
         tmp = .self$GetMatrix()
         ics = .self$GetIcon()
 
@@ -39,7 +40,7 @@ setRcppClass(Class = "Tama",
         main[,,4] = tmp
 
         plot(c(0,32),c(0,32),type="n",axes=F,xlab="",ylab="",asp=1)
-        rasterImage(bg,-2, -1, 35, 33)
+        rasterImage(background,-2, -1, 35, 33)
         rasterImage(main,0,8,32,24,interpolate = F)
         if(ics[1]) rasterImage(icons$food     ,  2,26.5, 6,29.5)
         if(ics[2]) rasterImage(icons$lights   , 10,26.5,14,29.5)
@@ -73,13 +74,17 @@ setRcppClass(Class = "Tama",
     },
 
     load = function(file){
+        # glitch: cannot load from starting state
+        .self$click("B"); Sys.sleep(2); .self$click("B")
+         
+        # load
         state = readLines(file)
         state = unlist(strsplit(state,split=" ", fixed=T))
         state = as.numeric(as.hexmode(state))
         .self$SetCPU(state)
     },
 
-    shiny = function(){
+    shiny = function(background = NULL){
 
         ui = pageWithSidebar(
             headerPanel(""),
@@ -107,7 +112,7 @@ setRcppClass(Class = "Tama",
 
             output$screen = renderPlot({
                 autoInvalidate()
-                .self$display()
+                .self$display(background = background)
             })
         }
 
@@ -118,5 +123,32 @@ setRcppClass(Class = "Tama",
     #}
 
         shinyApp(ui, server)
+    },
+
+    secret = function(){
+        rom = .self$GetROM()
+        rom[7658:7824] = as.numeric(as.hexmode(c(
+            "39","c7","93","99","c2","9c","29","14",
+            "98","49","c4","98","49","14","9c","29",
+            "c2","93","99","d7","99","31","70","90",
+            "9","a3","9d","49","88","91","29","14",
+            "91","69","10","91","69","14","91","29",
+            "28","9a","49","c3","98","1","0","90",
+            "39","c7","93","99","c2","9c","29","14",
+            "9c","49","e4","9c","49","14","9c","29",
+            "c2","93","99","d7","99","31","70","90",
+            "9","87","9e","89","90","92","49","28",
+            "92","a9","24","92","a9","28","92","49",
+            "10","98","89","d7","9a","1","0","90",
+            "9","18","9a","49","a4","9c","49","2",
+            "9c","29","ca","90","29","4","90","29",
+            "3a","9c","e9","96","95","21","30","90",
+            "9","60","99","9","90","98","89","14",
+            "9d","49","c4","90","49","2","90","79",
+            "1f","9e","9","90","95","1","30","90",
+            "9","60","99","9","90","98","89","4",
+            "9d","49","c4","90","49","2","90","79",
+            "2f","9d","9","90","95","1","30")))
+        .self$SetROM(rom)
     }
 ))

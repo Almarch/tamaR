@@ -37,7 +37,7 @@ public class TamaRomConvert {
 			byte[] b = new byte[3];
 			BufferedWriter writer=null;
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("rom.h", false),"UTF-8"));
-			writer.write("static const unsigned char g_program_b12[] = {" + lineSeparator);
+			writer.write("static unsigned char g_program_b12[] = {" + lineSeparator);
 			for (int i = 0; i < (data.length/4); i++) {
 //				System.out.print(byteToHex(data[i]) + ",");
 				if ((i % 6)==0) writer.write("  ");

@@ -2144,3 +2144,21 @@ void Tama::SetCPU(Rcpp::NumericVector res){
     }
 }
 
+Rcpp::NumericVector Tama::GetROM() {
+  uint32_t i = 0;
+  Rcpp::NumericVector rom(sizeof(g_program_b12));
+  for (i = 0; i < sizeof(g_program_b12); i++)
+    {
+        rom[i] = (unsigned int)g_program_b12[i];
+    }
+    return rom;
+}
+
+void Tama::SetROM(Rcpp::NumericVector rom) {
+  uint32_t i = 0;
+  for (i = 0; i < sizeof(g_program_b12); i++)
+    {
+        g_program_b12[i] = (unsigned char)rom[i];
+    }
+}
+

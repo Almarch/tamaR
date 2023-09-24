@@ -182,10 +182,12 @@ public:
   int GetFreq();
   Rcpp::LogicalVector GetButton();
   Rcpp::NumericVector GetCPU();
+  Rcpp::NumericVector GetROM();
   
   // Setters
   void SetButton(int n, bool state);
   void SetCPU(Rcpp::NumericVector res);
+  void SetROM(Rcpp::NumericVector rom);
 
   // public methods
 

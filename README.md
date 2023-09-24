@@ -50,10 +50,12 @@ The instanciation of an object of class `Tama` from R will run a tamagotchi and 
 guizmo = Tama()
 ```
 
-The screen can be plotted via the `display` method:
+The screen can be plotted via the `display` method. A custom background can be provided as a png, imported using `png::readPNG`.
 
 ```r
 guizmo$display()
+data(p2)
+guizmo$display(p2)
 ```
 
 Buttons (A, B and C) can be controlled using the `click` method. The `delay` argument tells how long the click should last:
@@ -66,10 +68,10 @@ guizmo$click(c("A","C"),delay=2)
 
 R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-Alternatively, the tamagotchi can be played with using a shiny GUI:
+Alternatively, the tamagotchi can be played with using a shiny GUI. A custom background may still be provided as a png.
 
 ```r
-guizmo$shiny()
+guizmo$shiny(p2)
 ```
 
 The shiny app may be shut down with Ctrl+C.
@@ -103,10 +105,18 @@ Because Rcpp dependencies management was difficult, I gathered all tamalib code 
 
 This package is a dependency of [tamacare](https://github.com/almarch/tamacare), another R package aiming to provide automatic care for your pet.
 
+## Secret Character
+
+An alternative secret character is provided. Will you take up the challenge ? To load the alternative secret character, use the `secret` method:
+
+```r
+guizmo$secret()
+```
+
+If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+
 ## To do
 
 - Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
-  
-- There seem to be a glitch in the `load()`/`SetCPU()` methods. A get around is to call it a few times in a row, it eventually works.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
