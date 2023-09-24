@@ -109,6 +109,8 @@ This package is a dependency of [tamacare](https://github.com/almarch/tamacare),
 
 ## To do
 
-- Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment). 
+- Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
+  
+- There seem to be a glitch in the `load()`/`SetCPU()` methods. A get around is to call it twice, it eventually works.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
