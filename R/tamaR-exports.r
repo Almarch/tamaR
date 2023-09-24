@@ -74,17 +74,15 @@ setRcppClass(Class = "Tama",
     },
 
     load = function(file){
-        # glitch: cannot load from starting state
-        .self$click("B"); Sys.sleep(2); .self$click("B")
-         
-        # load
         state = readLines(file)
         state = unlist(strsplit(state,split=" ", fixed=T))
         state = as.numeric(as.hexmode(state))
         .self$SetCPU(state)
     },
 
-    shiny = function(background = NULL){
+    shiny = function(background = NULL, port = 1996){
+
+        options(shiny.port = port)
 
         ui = pageWithSidebar(
             headerPanel(""),

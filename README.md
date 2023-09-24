@@ -91,9 +91,9 @@ Shiny is not only a GUI but overall a powerfull web framework. Hence, the app ca
 
 - use the linux command `screen` to instanciate as many sessions as the number of pets you need. Run tamaShiny() on each of them and note the session ID.
 
-- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port with the 4 last numbers of your session ID (it may look like: L8888 | localhost:8888). From R, you can force the use of a given port for which a tunnel has been opened using the command: `options(shiny.port = 8888)`. Open the session and identify.
+- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port (default is 1996, so the line should look like: L1996 | localhost:1996). The session ID is provided as the `port` argument of the `shiny` method. Open the session and identify.
 
-- from the browser of your client computer, connect to your shiny session (localhost:8888 in the previous example), and enjoy some time with your friend !  
+- from the browser of your client computer, connect to your shiny session (localhost:1996 by default), and enjoy some time with your friend !  
 
 ## Note on the C++ structure
 
@@ -118,5 +118,7 @@ If you are spending time on a tamagotchi, odds are that you may have been a kid 
 ## To do
 
 - Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
+
+- There seem to be a glitch in the `load()`/`SetCPU()` methods. A get around is to call it a few times in a row, it eventually works.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
