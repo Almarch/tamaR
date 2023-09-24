@@ -93,7 +93,7 @@ Shiny is not only a GUI but overall a powerfull web framework. Hence, the app ca
 
 - use the linux command `screen` to instanciate as many sessions as the number of pets you need. Run tamaShiny() on each of them and note the session ID.
 
-- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port with the 4 last numbers of your session ID (it may look like: L8888 | localhost:8888). Open the session and identify.
+- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port with the 4 last numbers of your session ID (it may look like: L8888 | localhost:8888). From R, you can force the use of a given port for which a tunnel has been opened using the command: `options(shiny.port = 8888)`. Open the session and identify.
 
 - from the browser of your client computer, connect to your shiny session (localhost:8888 in the previous example), and enjoy some time with your friend !  
 

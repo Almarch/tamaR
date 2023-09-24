@@ -21,7 +21,6 @@
 setRcppClass(Class = "Tama",
              CppClass = "Tama",
              module = "Tamalib",
-             #fields = list(icons = "list"),
              methods = list(
 
     display = function() {
