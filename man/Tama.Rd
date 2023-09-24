@@ -11,9 +11,11 @@ Instanciate a Tama object
 }
 \examples{
 guizmo = Tama()
-plot(guizmo)
+guizmo$display()
 guizmo$click("B"); Sys.sleep(3)
 for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
-plot(guizmo)
+guizmo$display()
+guizmo$save("tmp.txt")
+guizmo$load("tmp.txt")
 
 }

@@ -55,16 +55,17 @@ The instanciation of an object of class `Tama` from R will run a tamagotchi and 
 guizmo = Tama()
 ```
 
-The screen can be consulted via the `plot` function:
+The screen can be plotted via the `display` method:
 
 ```r
-plot(guizmo)
+guizmo$display()
 ```
 
 Buttons (A, B and C) can be controlled using the `click` method:
 
 ```r
 guizmo$click("B")
+Sys.sleep(0.5)
 guizmo$click(c("A","C"))
 ```
 
@@ -75,6 +76,7 @@ Alternatively, the tamagotchi can be played with using a shiny GUI:
 ```r
 guizmo$shiny()
 ```
+The shiny app can be shut down with Ctrl+C.
 
 The state can be saved and loaded using the corresponding methods:
 
