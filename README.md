@@ -13,7 +13,7 @@ git clone https://github.almarch/tamaR.git
 ```
 
 
-If you use Windows, you must comment out the line 8 of tamalib.cpp as follows:
+If you use Windows, you must comment out the line 8 of tamaR/src/tamalib.cpp as follows:
 
 ```cpp
 // #define LINUX
@@ -29,15 +29,10 @@ java TamaRomConvert rom.bin
 
 That should produce a rom.h file in the src directory.
 
-Then, build and install the package with R (R.exe if you use the Windows terminal):
+Then, build and install the package with R (R.exe if you use the Windows terminal). From the directory in which tamaR was cloned:
 
 ```bash
 R CMD build tamaR
-```
-
-The package can then be installed:
-
-```bash
 R CMD INSTALL tamaR_1.0.0.tar.gz
 ```
 
@@ -61,12 +56,12 @@ The screen can be plotted via the `display` method:
 guizmo$display()
 ```
 
-Buttons (A, B and C) can be controlled using the `click` method:
+Buttons (A, B and C) can be controlled using the `click` method. The `delay` argument tells how long the click should last:
 
 ```r
 guizmo$click("B")
-Sys.sleep(0.5)
-guizmo$click(c("A","C"))
+Sys.sleep(3)
+guizmo$click(c("A","C"),delay=2)
 ```
 
 R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
@@ -76,7 +71,8 @@ Alternatively, the tamagotchi can be played with using a shiny GUI:
 ```r
 guizmo$shiny()
 ```
-The shiny app can be shut down with Ctrl+C.
+
+The shiny app may be shut down with Ctrl+C.
 
 The state can be saved and loaded using the corresponding methods:
 
