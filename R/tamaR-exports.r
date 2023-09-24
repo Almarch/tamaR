@@ -25,25 +25,25 @@ setRcppClass(Class = "Tama",
              methods = list(
 
     display = function() {
-        layout(matrix(c(2,3,4,5,
-                        1,1,1,1,
-                        6,7,8,9),
-                ncol = 4,
-                nrow = 3,
-                byrow = T),
-                heights = c(1,2,1))
-        par(mai = rep(0,4))
-        plot(as.raster(1-.self$GetMatrix()),interpolate=F)
-        par(mai = rep(1/2.54,4))
+        tmp = .self$GetMatrix()
         ics = .self$GetIcon()
-        if(ics[1]) plot(icons$food)       else plot.new()
-        if(ics[2]) plot(icons$lights)     else plot.new()
-        if(ics[3]) plot(icons$game)       else plot.new()
-        if(ics[4]) plot(icons$medicine)   else plot.new()
-        if(ics[5]) plot(icons$bathroom)   else plot.new()
-        if(ics[6]) plot(icons$status)     else plot.new()
-        if(ics[7]) plot(icons$training)   else plot.new()
-        if(ics[8]) plot(icons$attention)  else plot.new()
+
+        main = array(0,dim = c(16,32,4))
+        for(i in 1:3) main[,,i] = 1-tmp
+        main[,,4] = tmp
+
+        plot(c(0,32),c(0,32),type="n",axes=F,xlab="",ylab="",asp=1)
+        rasterImage(bg,-1, -1, 33, 33)
+        rasterImage(main,0,8,32,24,interpolate = F)
+        if(ics[1]) rasterImage(icons$food     ,  2,26, 6,29.5)
+        if(ics[2]) rasterImage(icons$lights   , 10,26,14,29.5)
+        if(ics[3]) rasterImage(icons$game     , 18,26,22,29.5)
+        if(ics[4]) rasterImage(icons$medicine , 26,26,30,29.5)
+        if(ics[5]) rasterImage(icons$bathroom ,  2, 2.5, 6, 6)
+        if(ics[6]) rasterImage(icons$status   , 10, 2.5,14, 6)
+        if(ics[7]) rasterImage(icons$training , 18, 2.5,22, 6)
+        if(ics[8]) rasterImage(icons$attention, 26, 2.5,30, 6)
+
     },
 
     click = function(button = c("A","B","C"),delay = .25){
