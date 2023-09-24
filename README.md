@@ -2,7 +2,7 @@
 
 This is a package allowing the emulation of a P1 tamagotchi in R, using an object-oriented paradigm.
 
-![Screenshot from 2023-09-15 17-54-02](https://github.com/Almarch/tamaR/assets/13364928/3acdecf1-f4b3-42d7-82a5-3f97140b529c)
+![Screenshot from 2023-09-24 12-03-04](https://github.com/Almarch/tamaR/assets/13364928/2c35e8cf-28b7-4933-96a5-cdccb060c809)
 
 ## Installation
 
