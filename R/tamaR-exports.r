@@ -42,14 +42,14 @@ setRcppClass(Class = "Tama",
         plot(c(0,32),c(0,32),type="n",axes=F,xlab="",ylab="",asp=1)
         rasterImage(background,-1, -1, 33, 33)
         rasterImage(main,0,8,32,24,interpolate = F)
-        if(ics[1]) rasterImage(icons$food     ,  2,26.5, 6,29.5)
-        if(ics[2]) rasterImage(icons$lights   , 10,26.5,14,29.5)
-        if(ics[3]) rasterImage(icons$game     , 18,26.5,22,29.5)
-        if(ics[4]) rasterImage(icons$medicine , 26,26.5,30,29.5)
-        if(ics[5]) rasterImage(icons$bathroom ,  2, 2.5, 6, 5.5)
-        if(ics[6]) rasterImage(icons$status   , 10, 2.5,14, 5.5)
-        if(ics[7]) rasterImage(icons$training , 18, 2.5,22, 5.5)
-        if(ics[8]) rasterImage(icons$attention, 26, 2.5,30, 5.5)
+        if(ics[1]) rasterImage(icons$food     ,  2,26.25, 6,29.75)
+        if(ics[2]) rasterImage(icons$lights   , 10,26.25,14,29.75)
+        if(ics[3]) rasterImage(icons$game     , 18,26.25,22,29.75)
+        if(ics[4]) rasterImage(icons$medicine , 26,26.5 ,30,29.75)
+        if(ics[5]) rasterImage(icons$bathroom ,  2, 2.5 , 6, 5.5 )
+        if(ics[6]) rasterImage(icons$status   , 10, 2.5 ,14, 5.25)
+        if(ics[7]) rasterImage(icons$training , 18, 2.5 ,22, 5.5 )
+        if(ics[8]) rasterImage(icons$attention, 26, 2.5,30,  5   )
 
     },
 
