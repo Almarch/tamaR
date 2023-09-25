@@ -107,7 +107,7 @@ This package is a dependency of [tamacare](https://github.com/almarch/tamacare),
 
 ## Secret Character
 
-An alternative secret character is provided. Will you take up the challenge ? To load the alternative secret character, use the `secret` method:
+An alternative secret character is provided. Will you take up the challenge and find out who this is ? To load the alternative secret character, use the `secret` method:
 
 ```r
 guizmo$secret()
@@ -119,6 +119,6 @@ If you are spending time on a tamagotchi, odds are that you may have been a kid 
 
 - Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
 
-- There seem to be a glitch in the `load()`/`SetCPU()` methods. A get around is to call it a few times in a row, it eventually works.
+- There seems to be a glitch in the `load()`/`SetCPU()` methods. A get around solution is to call it a few times in a row, it eventually works.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
