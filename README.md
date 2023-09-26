@@ -2,6 +2,10 @@
 
 This is a package allowing the emulation of a P1 tamagotchi in R, using an object-oriented paradigm.
 
+R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
+
+R is also the support for [shiny](https://shiny.posit.co/), a powerfull web framework that opens the possibility to host an online tamagotchi.
+
 ![Screenshot from 2023-09-25 17-07-39](https://github.com/Almarch/tamaR/assets/13364928/44a699a9-e1a2-489c-aaa3-9e53c633a7df)
 
 ## Installation
@@ -44,14 +48,14 @@ library(tamaR)
 
 ## Use
 
-The instanciation of an object of class `Tama` from R prepares a tamagotchi and provides an interface for it. The `run` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `run` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```r
 guizmo = Tama()
 guizmo$run()
 ```
 
-The screen can be plotted via the `display` method. A custom background can be provided as a png, imported using `png::readPNG`.
+The screen can be plotted via the `display` method. A custom background can be provided as a (square) png, imported using `png::readPNG`.
 
 ```r
 guizmo$display()
@@ -67,9 +71,7 @@ Sys.sleep(3)
 guizmo$click(c("A","C"),delay=2)
 ```
 
-R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
-
-Alternatively, the tamagotchi can be played with using a shiny GUI. A custom background may still be provided as a png.
+The tamagotchi can be played with using a shiny GUI. A custom background may still be provided as a png.
 
 ```r
 guizmo$shiny(p2)
@@ -93,21 +95,21 @@ guizmo$run()
 
 ## Server hosting
 
-Shiny is not only a GUI but overall a powerfull web framework. Hence, the app can be used to host a tamagotchi nest on a server that will keep living their life whenever you are not connected. Here is how you can do to prepare a cozy place for your pets:
+The shiny app can be used to host a tamagotchi on a server, so that it will keep living its life whenever you are not connected. Here is how you can do to prepare a cozy place for your pet:
 
 - your server needs to be accessible via internet. You can open your private network via your internet provider's administrator page: open a port (e.g. 22) and redirect to your server private IP. Be extremely cautious, the threat of cyberattacks is real. On GNU/Linux I would advise to use `firewall` and only authorize access to IPs you know.
 
-- use the linux command `screen` to instanciate as many sessions as the number of pets you need. Run tamaShiny() on each of them and note the session ID.
+- use the linux command `screen` to detach a session. Call the `shiny` method and note the port. If you're hosting several tamagotchis, use a different `port` argument each time.
 
-- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port (default is 1996, so the line should look like: L1996 | localhost:1996). The session ID is provided as the `port` argument of the `shiny` method. Open the session and identify.
+- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port (default is 1996, so the line should look like: L1996 | localhost:1996). Open the session and identify.
 
 - from the browser of your client computer, connect to your shiny session (localhost:1996 by default), and enjoy some time with your friend !  
 
 ## Note on the C++ structure
 
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module. The java module for the ROM conversion has also been adapted from ArduinoGotchi.
+Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module. The java module for the ROM conversion has also been adapted from ArduinoGotchi (the type declaration is different).
 
-Because Rcpp dependencies management was difficult, I gathered all tamalib code into a monolithic tamalib.cpp program.
+Because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
 
 ## Tamacare
 
@@ -125,6 +127,6 @@ If you are spending time on a tamagotchi, odds are that you may have been a kid 
 
 ## To do
 
-- Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
+- Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on GNU/Linux (at least not on my environment).
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
