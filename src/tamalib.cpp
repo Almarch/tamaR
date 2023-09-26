@@ -2051,9 +2051,11 @@ Tama::Tama() {
     tamalib_register_hal(&hal);
     tamalib_set_framerate(TAMA_DISPLAY_FRAMERATE);
     tamalib_init(1000000);
+}
+
+void Tama::run(){
     void* nada = 0;
     pthread_t thread;
-
     if (pthread_create(&thread, NULL, tamalib_mainloop, nada) != 0) {
       perror("pthread_create() error");
       exit(1);

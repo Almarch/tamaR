@@ -10,6 +10,7 @@
 RCPP_MODULE(Tamalib) {             // Name used to "loadModule" in R script
   Rcpp::class_<Tama>("Tama")       // This must be the C++ class name.
   .constructor()
+  .method("run", &Tama::run)
   .method("GetFreq", &Tama::GetFreq)
   .method("GetMatrix", &Tama::GetMatrix)
   .method("GetIcon", &Tama::GetIcon)

@@ -44,10 +44,11 @@ library(tamaR)
 
 ## Use
 
-The instanciation of an object of class `Tama` from R will run a tamagotchi and provide an interface for it. The emulation is real-time. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` from R prepares a tamagotchi and provides an interface for it. The `run` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instanciating several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```r
 guizmo = Tama()
+guizmo$run()
 ```
 
 The screen can be plotted via the `display` method. A custom background can be provided as a png, imported using `png::readPNG`.
@@ -76,11 +77,18 @@ guizmo$shiny(p2)
 
 The shiny app may be shut down with Ctrl+C.
 
-The state can be saved and loaded using the corresponding methods:
+The state can be saved anytime using the corresponding method:
 
 ```r
 guizmo$save("myTama.txt")
+```
+
+However, you cannot load a state into a running `Tama` (the result may be glitched). Use the methods in the following order:
+
+```r
+guizmo = Tama()
 guizmo$load("myTama.txt")
+guizmo$run()
 ```
 
 ## Server hosting
@@ -118,7 +126,5 @@ If you are spending time on a tamagotchi, odds are that you may have been a kid 
 ## To do
 
 - Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on Linux (at least not on my environment).
-
-- There seems to be a glitch in the `load()`/`SetCPU()` methods. A get around solution is to call it a few times in a row, it eventually works.
 
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
