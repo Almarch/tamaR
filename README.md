@@ -16,7 +16,6 @@ Start by cloning the git repository:
 git clone https://github.almarch/tamaR.git
 ```
 
-
 If you use Windows, you must comment out the line 8 of tamaR/src/tamalib.cpp as follows:
 
 ```cpp
@@ -25,10 +24,10 @@ If you use Windows, you must comment out the line 8 of tamaR/src/tamalib.cpp as 
 
 Indeed, the time management libraries that I used are OS-dependent. Supported OS are GNU/Linux and Windows, this has not been tested on macOS yet.
 
-The ROM must me converted to 12 bits and to a .h format. Place a rom.bin into the src repository, and run the following command line from tamaR/src:
+The ROM must me converted to 12 bits and to a .h format. Place a rom.bin into the src repository, and run the following R command line from tamaR/src:
 
-```bash
-java TamaRomConvert rom.bin
+```r
+source("TamaRomConvert.r")
 ```
 
 That should produce a rom.h file in the src directory.
@@ -107,7 +106,7 @@ The shiny app can be used to host a tamagotchi on a server, so that it will keep
 
 ## Note on the C++ structure
 
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module. The java module for the ROM conversion has also been adapted from ArduinoGotchi (the type declaration is different).
+Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step.
 
 Because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
 
@@ -117,13 +116,7 @@ This package is a dependency of [tamacare](https://github.com/almarch/tamacare),
 
 ## Secret Character
 
-An alternative secret character is provided. Will you take up the challenge and find out who this is ? To load the alternative secret character, use the `secret` method:
-
-```r
-guizmo$secret()
-```
-
-If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
 
 ## To do
 
