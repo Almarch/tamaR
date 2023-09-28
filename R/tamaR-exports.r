@@ -2,16 +2,18 @@
 #' 
 #' @name Tama
 #' @return
-#' A tamagotchi
+#' An object of class Tama
 #' 
 #' @examples
 #' guizmo = Tama()
+#' guizmo$save("egg.txt")
+#' guizmo$run()
 #' guizmo$display()
 #' guizmo$click("B"); Sys.sleep(3)
 #' for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
+#' Sys.sleep(310)
 #' guizmo$display()
-#' guizmo$save("tmp.txt")
-#' guizmo$load("tmp.txt")
+#' guizmo$save("babytchi.txt")
 #' 
 #' @export Tama
 #' @exportClass Tama
@@ -90,7 +92,6 @@ setRcppClass(Class = "Tama",
             splitLayout(actionButton("A"," "),
                         actionButton("B"," "),
                         actionButton("C"," "))
-            #checkboxInput("mute", "mute", value = TRUE)
             ),
             mainPanel(plotOutput("screen"))
         )
@@ -99,11 +100,6 @@ setRcppClass(Class = "Tama",
 
             autoInvalidate <- reactiveTimer(1000/6, session)
 
-            #freq  = 0
-            #rate = 44100
-            #tps = seq(0,10, length.out = 10 * rate)
-            #sound = play(0)
-
             observeEvent(input$A,.self$click("A"))
             observeEvent(input$B,.self$click("B"))
             observeEvent(input$C,.self$click("C"))
@@ -111,12 +107,6 @@ setRcppClass(Class = "Tama",
             output$screen = renderPlot({
                 autoInvalidate()
                 .self$display(background = background)
-
-            #    if(!input$mute & .self$GetFreq() != freq){
-            #        freq  = .self$GetFreq()
-            #        pause(sound)
-            #        sound = play(sin(2*pi*freq*tps), rate = rate)
-            #    }
             })
         }
         shinyApp(ui, server)
