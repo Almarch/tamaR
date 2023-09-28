@@ -6,12 +6,13 @@
 #' 
 #' @examples
 #' guizmo = Tama()
-#' guizmo$save("egg.txt")
 #' guizmo$run()
+#' guizmo$save("egg.txt")
 #' guizmo$display()
 #' guizmo$click("B"); Sys.sleep(3)
 #' for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
-#' Sys.sleep(310)
+#' guizmo$click("C"); Sys.sleep(3)
+#' Sys.sleep(300)
 #' guizmo$display()
 #' guizmo$save("babytchi.txt")
 #' 

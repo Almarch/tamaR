@@ -12,19 +12,22 @@ An object of class \code{array} of dimension 345 x 345 x 3.
 bg
 }
 \value{
-A tamagotchi
+An object of class Tama
 }
 \description{
 Instanciate a Tama object
 }
 \examples{
 guizmo = Tama()
+guizmo$save("egg.txt")
+guizmo$run()
 guizmo$display()
 guizmo$click("B"); Sys.sleep(3)
 for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
+guizmo$click("C"); Sys.sleep(3)
+Sys.sleep(300)
 guizmo$display()
-guizmo$save("tmp.txt")
-guizmo$load("tmp.txt")
+guizmo$save("babytchi.txt")
 
 }
 \keyword{datasets}
