@@ -105,7 +105,7 @@ The shiny app can be used to host a tamagotchi on a server, so that it will keep
 
 - from the browser of your client computer, connect to your shiny session (localhost:1996 by default), and enjoy some time with your friend !  
 
-## Note on the C++ structure
+## Notes on the C++ structure
 
 Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step.
 
