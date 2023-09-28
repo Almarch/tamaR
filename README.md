@@ -120,4 +120,6 @@ A new but familiar secret character has snuck in the game. Will you find out who
 
 ## To do
 
-- Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
+- The sound is properly fetched with the `GetFreq` method, but it still has to be implemented into the shiny app.
+
+- Similarily to this project, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.

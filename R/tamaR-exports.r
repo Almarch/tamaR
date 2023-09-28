@@ -89,8 +89,8 @@ setRcppClass(Class = "Tama",
             sidebarPanel(
             splitLayout(actionButton("A"," "),
                         actionButton("B"," "),
-                        actionButton("C"," ")),
-            checkboxInput("mute", "mute", value = TRUE)
+                        actionButton("C"," "))
+            #checkboxInput("mute", "mute", value = TRUE)
             ),
             mainPanel(plotOutput("screen"))
         )
@@ -99,10 +99,10 @@ setRcppClass(Class = "Tama",
 
             autoInvalidate <- reactiveTimer(1000/6, session)
 
-            freq  = 0
-            rate = 44100
-            tps = seq(0,10, length.out = 10 * rate)
-            sound = play(0)
+            #freq  = 0
+            #rate = 44100
+            #tps = seq(0,10, length.out = 10 * rate)
+            #sound = play(0)
 
             observeEvent(input$A,.self$click("A"))
             observeEvent(input$B,.self$click("B"))
@@ -112,11 +112,11 @@ setRcppClass(Class = "Tama",
                 autoInvalidate()
                 .self$display(background = background)
 
-                if(!input$mute & .self$GetFreq() != freq){
-                    freq  = .self$GetFreq()
-                    pause(sound)
-                    sound = play(sin(2*pi*freq*tps), rate = rate)
-                }
+            #    if(!input$mute & .self$GetFreq() != freq){
+            #        freq  = .self$GetFreq()
+            #        pause(sound)
+            #        sound = play(sin(2*pi*freq*tps), rate = rate)
+            #    }
             })
         }
         shinyApp(ui, server)
