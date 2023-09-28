@@ -6,7 +6,7 @@ Author@R:
 Description: Emulates a tamagotchi
 License: License: GPL-3
 Encoding: UTF-8
-Depends: R (>= 3.5.0), shiny, png
+Depends: R (>= 3.5.0), shiny, png, audio
 Imports: Rcpp (>= 1.0.0), methods
 LinkingTo: Rcpp
 SystemRequirements: C++12

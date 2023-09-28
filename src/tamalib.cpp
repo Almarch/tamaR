@@ -102,6 +102,7 @@ static u32_t ts_freq;
 static u8_t g_framerate = TAMA_DISPLAY_FRAMERATE;
 hal_t *g_hal;
 static uint16_t current_freq = 0;
+static uint16_t play_freq = 0; 
 static bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH/8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 static cpu_state_t cpuState;
@@ -1918,6 +1919,11 @@ static void hal_update_screen(void) {
 } 
 
 static void hal_play_frequency(bool_t en) {
+  if(en){
+    play_freq = current_freq;
+  } else{
+    play_freq = 0;
+  }
 }
 
 static hal_t hal = {
@@ -2087,7 +2093,7 @@ Rcpp::NumericMatrix Tama::GetMatrix() {
     }
     return matrix; }
 
-int Tama::GetFreq() { return (int)current_freq; }
+int Tama::GetFreq() { return play_freq; }
 
 void Tama::SetButton(int n, bool state){
   if (state) {

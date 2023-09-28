@@ -120,6 +120,4 @@ A new but familiar secret character has snuck in the game. Will you find out who
 
 ## To do
 
-- Implement sound. The frequency does not appear to be correctly collected from the `GetFreq()` method. Moreover, it seems that the `audio` solution to play the frequency on R doesn't work well on GNU/Linux (at least not on my environment).
-
 - Similarily, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
