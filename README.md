@@ -6,7 +6,8 @@ R is a scripting language, allowing either a live interaction or the elaboration
 
 R is also the support for [shiny](https://shiny.posit.co/), a powerfull web framework that opens the possibility to host an online tamagotchi.
 
-![Screenshot from 2023-09-25 17-07-39](https://github.com/Almarch/tamaR/assets/13364928/44a699a9-e1a2-489c-aaa3-9e53c633a7df)
+![image](https://github.com/Almarch/tamaR/assets/13364928/4b28e6d7-2d51-4ed7-8d70-c04d03397f38)
+
 
 ## Installation
 
