@@ -1,13 +1,12 @@
 # [Tamalib](https://github.com/jcrona/tamalib) is live on [R](https://r-project.org) !
 
-This is a package allowing the emulation of a P1 tamagotchi in R, using an object-oriented paradigm.
+This is a package allowing the emulation of a P1 tamagotchi in R.
 
 R is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-R is also the support for [shiny](https://shiny.posit.co/), a powerfull web framework that opens the possibility to host an online tamagotchi.
+R is also the support for [shiny](https://shiny.posit.co/), a powerfull web framework that opens the possibility to host a tamagotchi online.
 
 ![image](https://github.com/Almarch/tamaR/assets/13364928/4b28e6d7-2d51-4ed7-8d70-c04d03397f38)
-
 
 ## Installation
 
@@ -107,9 +106,11 @@ The shiny app can be used to host a tamagotchi on a server, so that it will keep
 
 ## Notes on the C++ structure
 
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step.
+Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. However, because Rcpp dependencies management was not trivial, I had to gather all tamalib code into a monolithic tamalib.cpp program.
 
-Because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available to the user and they might have an R implementation later.
+
+This compact, object-oriented version of tamalib can almost readily be packaged into Python. Like R, Python is accessible to a broad community and it allows scripting and the developement of web applications. Furthermore, it opens the possibility for the developement of an Android app.
 
 ## Tamacare
 
@@ -118,9 +119,3 @@ This package is a dependency of [tamacare](https://github.com/almarch/tamacare),
 ## Secret Character
 
 A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
-
-## To do
-
-- The sound is properly fetched with the `GetFreq` method, but it still has to be implemented into the shiny app.
-
-- Similarily to this project, tamalib could be implemented into [Python](https://www.python.org/). Like R, Python allows scripting and the development of web applications.
