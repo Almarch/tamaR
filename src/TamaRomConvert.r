@@ -1,3 +1,6 @@
+
+setwd("tamaR/src")
+
 obj = readBin(con = "rom.bin", what = "raw", n = file.info("rom.bin")$size)
 obj = paste(as.character(obj), collapse = "")
 
@@ -39,3 +42,6 @@ for(i in 1:length(obj)){
     }
 }
 cat("};\n", file = file, append= T)
+
+setwd("../..")
+print("Conversion succesfull. Enjoy !")

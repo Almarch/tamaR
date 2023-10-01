@@ -16,30 +16,20 @@ Start by cloning the git repository:
 git clone https://github.almarch/tamaR.git
 ```
 
-If you use Windows, you must comment out the line 8 of tamaR/src/tamalib.cpp as follows:
+A ROM named "rom.bin" must be placed into the src directory prior to building the package, and converted to 12 bits using Rscript (Rscript.exe if you use the Windows terminal):
 
-```cpp
-// #define LINUX
+```bash
+Rscript tamaR/src/TamaRomConvert.r
 ```
 
-Indeed, the time management libraries that I used are OS-dependent. Supported OS are GNU/Linux and Windows, this has not been tested on macOS yet.
-
-The ROM must me converted to 12 bits and to a .h format. Place a rom.bin into the src repository, and run the following R command line from tamaR/src:
-
-```r
-source("TamaRomConvert.r")
-```
-
-That should produce a rom.h file in the src directory.
-
-Then, build and install the package with R (R.exe if you use the Windows terminal). From the directory in which tamaR was cloned:
+Build and install the package with R (R.exe if you use the Windows terminal):
 
 ```bash
 R CMD build tamaR
 R CMD INSTALL tamaR_1.0.0.tar.gz
 ```
 
-You can then load the package from R:
+The package can now be loaded from R:
 
 ```r
 library(tamaR)
@@ -111,6 +101,8 @@ Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotc
 Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available to the user and they might have an R implementation later.
 
 This compact, object-oriented version of tamalib can almost readily be packaged into Python. Like R, Python is accessible to a broad community and it allows scripting and the developement of web applications. Furthermore, it opens the possibility for the developement of an Android app.
+
+Tamalib was adapted with attention to its platform agnosticity so it should run on any OS. The package has been tested on GNU/Linux and Windows.
 
 ## Tamacare
 

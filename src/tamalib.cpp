@@ -3,14 +3,9 @@
 #include "tamalib.h"
 #include <Rcpp.h>
 #include <pthread.h>
-#include <time.h>
-
-#define LINUX // needed to play with time. If not LINUX then WIN32
-#ifdef LINUX
-#include <unistd.h>
-#else
-#include <Windows.h>
-#endif
+#include <thread> // sleep_for
+#include <chrono> // high resolution clock
+#include <cstring> // memcpy
 
 #define TAMA_DISPLAY_FRAMERATE  6
 
@@ -133,6 +128,7 @@ static u8_t prog_timer_data = 0;
 static u8_t prog_timer_rld = 0;
 static u32_t tick_counter = 0;
 static timestamp_t ref_ts;
+static const auto epochTime = std::chrono::high_resolution_clock::from_time_t(0);
 
 typedef struct {
   u12_t code;
@@ -1639,7 +1635,7 @@ static const op_t1 ops1[] = {
   {&op_scpx_cb}, // SCPX
   {&op_scpy_cb}, // SCPY
   {&op_not_cb}, // NOT
-  {NULL}
+  {0}
 };
   
 u12_t getShiftArg0(u12_t code, u12_t mask) {
@@ -1693,12 +1689,6 @@ static void process_interrupts(void)
   }
 }
 
-static void print_state(u8_t op_num, u12_t op, u13_t addr)
-{
-}
-
-//static char logMsg[40];
-
 void cpu_reset(void)
 {
   u13_t i;
@@ -1713,19 +1703,10 @@ void cpu_reset(void)
   sp = 0; // undef
   flags = 0;
 
-  //sprintf(logMsg, "Start pc 1:0x%04X, %d", pc, pc); g_hal->log(LOG_ERROR, logMsg);
-
   /* Init RAM to zeros */
   for (i = 0; i < MEMORY_SIZE; i++) {
     memory[i] = 0;
   }
-  /*for (i = 0; i < MEM_IO_SIZE; i++) {
-    io_memory[i] = 0;
-  } */ 
-
-  //io_memory[REG_K40_K43_BZ_OUTPUT_PORT - MEM_IO_ADDR_OFS] = 0xF; // Output port (R40-R43)
-  //io_memory[REG_LCD_CTRL - MEM_IO_ADDR_OFS] = 0x8; // LCD control
-  /* TODO: Input relation register */
 
   cpu_sync_ref_timestamp();
 }
@@ -1781,9 +1762,6 @@ int cpu_step(void)
 
   next_pc = (pc + 1) & 0x1FFF;
 
-  /* Display the operation along with the current state of the processor */
-  print_state(i, op, pc);
-
   /* Match the speed of the real processor
    * NOTE: For better accuracy, the final wait should happen here, however
    * the downside is that all interrupts will likely be delayed by one OP
@@ -1794,7 +1772,7 @@ int cpu_step(void)
   ops11.cb1 = ops1[i].cb1;
 
   /* Process the OP code */
-  if (ops11.cb1 != NULL) {
+  if (ops11.cb1 != 0) {
     u12_t shiftArg0 = getShiftArg0(ops.code,ops.mask);
     u12_t maskArg0 = getMaskArg0(shiftArg0,ops.mask);
     if (maskArg0 != 0) {
@@ -1895,23 +1873,16 @@ static void hal_log(log_level_t level, char *buff, ...) {
 }
 
 static timestamp_t hal_get_timestamp(void) {
-    struct timespec t ;
-    #ifdef LINUX
-      clock_gettime ( CLOCK_MONOTONIC_RAW , & t ) ;
-    #else
-      clock_gettime ( CLOCK_MONOTONIC , & t ) ;
-    #endif
-    return t.tv_sec * 1000000 + ( t.tv_nsec + 500000 ) / 1000 ;
+    auto currentTime = std::chrono::system_clock::now();
+    auto usec = std::chrono::duration_cast<std::chrono::microseconds>(currentTime - epochTime);
+    timestamp_t t_usec = usec.count();
+    return  t_usec ;
 }
 
 static void hal_sleep_until(timestamp_t ts) {
-  int32_t remaining = (int32_t) (ts - hal_get_timestamp());
-  if (remaining > 0) {
-    #ifdef LINUX
-      usleep(1000) ;
-    #else
-      Sleep(1) ;
-    #endif
+  int32_t diff_usec = (int32_t) (ts - hal_get_timestamp());
+  if (diff_usec > 0) {
+    std::this_thread::sleep_for(std::chrono::microseconds(diff_usec));
   }
 }
 
@@ -2061,14 +2032,13 @@ Tama::Tama() {
 
 void Tama::run(){
     void* nada = 0;
-    pthread_t thread;
-    if (pthread_create(&thread, NULL, tamalib_mainloop, nada) != 0) {
+        pthread_t thread;
+        if (pthread_create(&thread, 0, tamalib_mainloop, nada) != 0) {
       perror("pthread_create() error");
       exit(1);
     }
 }
 
-// Getters
 Rcpp::LogicalVector Tama::GetIcon() { 
 
     Rcpp::LogicalVector icon (ICON_NUM) ;

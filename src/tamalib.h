@@ -6,10 +6,6 @@
 #include "rom.h"
 #include <Rcpp.h>
 
-#ifndef NULL
-	#define NULL 0
-#endif
-
 #define tamalib_set_button(btn, state)		hw_set_button(btn, state)
 #define tamalib_set_speed(speed)			    cpu_set_speed(speed)
 #define tamalib_refresh_hw()				      cpu_refresh_hw()
@@ -33,7 +29,6 @@
 #define MEM_IO_ADDR       0xF00
 #define MEM_IO_ADDR_OFS   0xF00
 #define MEM_IO_SIZE       0x080
-
 
 typedef uint8_t bool_t;
 typedef uint8_t u4_t;
@@ -142,9 +137,6 @@ typedef enum {
   INT_SLOT_NUM,
 } int_slot_t;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 bool_t hw_init(void);
 void hw_release(void);
 void hw_set_lcd_pin(u8_t seg, u8_t com, u8_t val);
@@ -165,10 +157,6 @@ void cpu_reset(void);
 bool_t cpu_init(u32_t freq);
 void cpu_release(void);
 int cpu_step(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 class Tama {
 public:
