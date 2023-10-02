@@ -1,4 +1,4 @@
-# Tamagotchi is live on R !
+# Tamalib is live on R !
 
 This is a package allowing the emulation of a P1 tamagotchi in R using [tamalib](https://github.com/jcrona/tamalib).
 
