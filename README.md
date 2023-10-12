@@ -88,9 +88,9 @@ The shiny app can be used to host a tamagotchi on a server, so that it will stay
 
 - your server needs to be accessible via internet. You can open your private network via your internet provider's administrator page: open a port (e.g. 22) and redirect to your server private IP. Be extremely cautious, the threat of cyberattacks is real. I would advise to use a firwall, for instance [ufw](https://manpages.ubuntu.com/manpages/lunar/en/man8/ufw.8.html), and only authorize access to IPs you know.
 
-- use the linux command `screen` to detach a session. Call the `shiny` method and note the port. If you're hosting several tamagotchis, use a different `port` argument each time.
+- use the linux command `screen` to detach a session. Call the `shiny` method and note the port. If you're hosting several tamagotchis, use a different `port` argument each time. The default port is 1996.
 
-- from a client computer, install PuTTY and prepare an access to your server. In Connection/SSH/Tunnels, add a new forwarded port (default is 1996, so the line should look like: L1996 | localhost:1996). Open the session and identify.
+- from your client computer, connect to your server via SSH. If the client OS is Windows, install PuTTY and open a tunnel (Connection/SSH/Tunnels, add a new forwarded port that should look like: L1996 | localhost:1996). Open the session and identify.
 
 - from the browser of your client computer, connect to your shiny session (localhost:1996 by default), and enjoy some time with your friend !  
 
