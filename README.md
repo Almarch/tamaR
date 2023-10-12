@@ -86,7 +86,7 @@ guizmo$run()
 
 The shiny app can be used to host a tamagotchi on a server, so that it will stay alive whenever you are not connected. Here is how you can do to prepare a cozy place for your pet:
 
-- your server needs to be accessible via internet. You can open your private network via your internet provider's administrator page: open a port (e.g. 22) and redirect to your server private IP. Be extremely cautious, the threat of cyberattacks is real. On GNU/Linux I would advise to use `firewall` and only authorize access to IPs you know.
+- your server needs to be accessible via internet. You can open your private network via your internet provider's administrator page: open a port (e.g. 22) and redirect to your server private IP. Be extremely cautious, the threat of cyberattacks is real. I would advise to use a firwall, for instance [ufw](https://manpages.ubuntu.com/manpages/lunar/en/man8/ufw.8.html), and only authorize access to IPs you know.
 
 - use the linux command `screen` to detach a session. Call the `shiny` method and note the port. If you're hosting several tamagotchis, use a different `port` argument each time.
 
