@@ -6,6 +6,7 @@
 #include <thread> // sleep_for
 #include <chrono> // high resolution clock
 #include <cstring> // memcpy
+#include <stdlib.h> // exit
 
 #define TAMA_DISPLAY_FRAMERATE  6
 
