@@ -5,6 +5,7 @@
 
 #include "rom.h"
 #include <Rcpp.h>
+#include <stdint.h> // uint8_t etc
 
 #define tamalib_set_button(btn, state)		hw_set_button(btn, state)
 #define tamalib_set_speed(speed)			    cpu_set_speed(speed)
