@@ -5,7 +5,7 @@ ADD . /app/tamaR
 WORKDIR /app
 
 RUN R -e "source('tamaR/src/TamaRomConvert.r')" \
-    && R -e "install.packages(c('shiny','png'))" \
+    && R -e "install.packages(c('Rcpp','shiny','png'))" \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_1.0.0.tar.gz \
     && rm tamaR_1.0.0.tar.gz \
