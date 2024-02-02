@@ -83,9 +83,10 @@ setRcppClass(Class = "Tama",
         .self$SetCPU(state)
     },
 
-    shiny = function(background = NULL, port = 1996){
+    shiny = function(background = NULL, port = 1996, host = "127.0.0.1"){
 
-        options(shiny.port = port)
+        options(shiny.port = port,
+                shiny.host = host)
 
         ui = pageWithSidebar(
             headerPanel(""),

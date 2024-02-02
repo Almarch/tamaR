@@ -16,7 +16,11 @@ Start by cloning the git repository:
 git clone https://github.almarch/tamaR.git
 ```
 
-A ROM named "rom.bin" must be placed into the src directory prior to building the package, and converted to 12 bits with Rscript (Rscript.exe if you use the Windows terminal):
+A ROM named "rom.bin" must then be placed into the src directory.
+
+### As an R package
+
+The ROM has to be converted to 12 bits (use Rscript.exe from a Windows terminal):
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
@@ -34,6 +38,18 @@ The package can now be loaded from R:
 ```r
 library(tamaR)
 ```
+
+### As a container
+
+Alternatively, you can quickly build and deploy a tamaR server using Docker.
+
+```bash
+cd tamaR
+docker build -t tama .
+ocker run -d -p 1996:8000 tama
+```
+
+Your web app is now available at http://127.0.0.1:1996/.
 
 ## Use
 
