@@ -46,7 +46,7 @@ Alternatively, you can quickly build and deploy a tamaR server using Docker.
 ```bash
 cd tamaR
 docker build -t tama .
-ocker run -d -p 1996:8000 tama
+docker run -d -p 1996:8000 tama
 ```
 
 Your web app is now available at http://127.0.0.1:1996/.
