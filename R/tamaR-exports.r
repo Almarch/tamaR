@@ -81,36 +81,5 @@ setRcppClass(Class = "Tama",
         state = unlist(strsplit(state,split=" ", fixed=T))
         state = as.numeric(as.hexmode(state))
         .self$SetCPU(state)
-    },
-
-    shiny = function(background = NULL, port = 1996, host = "127.0.0.1"){
-
-        options(shiny.port = port,
-                shiny.host = host)
-
-        ui = pageWithSidebar(
-            headerPanel(""),
-            sidebarPanel(
-            splitLayout(actionButton("A"," "),
-                        actionButton("B"," "),
-                        actionButton("C"," "))
-            ),
-            mainPanel(plotOutput("screen"))
-        )
-
-        server = function(input,output,session){
-
-            autoInvalidate <- reactiveTimer(1000/6, session)
-
-            observeEvent(input$A,.self$click("A"))
-            observeEvent(input$B,.self$click("B"))
-            observeEvent(input$C,.self$click("C"))
-
-            output$screen = renderPlot({
-                autoInvalidate()
-                .self$display(background = background)
-            })
-        }
-        shinyApp(ui, server)
     }
 ))
