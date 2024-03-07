@@ -82,13 +82,9 @@ This compact, object-oriented version of tamalib can almost readily be packaged 
 
 Tamalib was adapted with attention to its platform agnosticity, so it should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
-## Tamacare
-
-The package tamaR is a dependency of [tamacare](https://github.com/almarch/tamacare), an R package aiming to provide automatic care for your pet.
-
 ## ShinyGotchi
 
-The package tamaR is also a dependency of [shinyGotchi](https://github.com/almarch/shinyGotchi), an R package that leverages [shiny](https://shiny.posit.co/) to host a tamagotchi online.
+The package tamaR is a dependency for [shinyGotchi](https://github.com/almarch/shinyGotchi), an R package that leverages [shiny](https://shiny.posit.co/) to host a tamagotchi online.
 
 ## Secret Character
 
