@@ -4,7 +4,7 @@ This is a package allowing the emulation of a P1 tamagotchi in R using [tamalib]
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-![image](https://github.com/Almarch/tamaR/assets/13364928/4b28e6d7-2d51-4ed7-8d70-c04d03397f38)
+![image](https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b)
 
 ## Installation
 
