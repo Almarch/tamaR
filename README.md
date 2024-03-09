@@ -4,9 +4,7 @@ This is a package allowing the emulation of a P1 tamagotchi in R using [tamalib]
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-R is also the support for [shiny](https://shiny.posit.co/), a powerfull web framework that opens the possibility to host a tamagotchi online.
-
-![image](https://github.com/Almarch/tamaR/assets/13364928/4b28e6d7-2d51-4ed7-8d70-c04d03397f38)
+![image](https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b)
 
 ## Installation
 
@@ -16,11 +14,7 @@ Start by cloning the git repository:
 git clone https://github.almarch/tamaR.git
 ```
 
-A ROM named "rom.bin" must then be placed into the src directory.
-
-### As an R package
-
-The ROM has to be converted to 12 bits (use Rscript.exe from a Windows terminal):
+A ROM named "rom.bin" must then be placed into the src directory. The ROM has to be converted to 12 bits (use Rscript.exe from a Windows terminal):
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
@@ -38,18 +32,6 @@ The package can now be loaded from R:
 ```r
 library(tamaR)
 ```
-
-### As a container
-
-Alternatively, you can quickly build and deploy a tamaR server using Docker.
-
-```bash
-cd tamaR
-docker build -t tama .
-docker run -d -p 1996:8000 tama
-```
-
-Your web app is now available at http://127.0.0.1:1996/.
 
 ## Use
 
@@ -76,14 +58,6 @@ Sys.sleep(3)
 guizmo$click(c("A","C"),delay=2)
 ```
 
-The tamagotchi can be played with using a shiny GUI. A custom background may still be provided as a png.
-
-```r
-guizmo$shiny(p2)
-```
-
-The shiny app may be shut down with Ctrl+C.
-
 The state can be saved anytime using the corresponding method:
 
 ```r
@@ -98,17 +72,9 @@ guizmo$load("myTama.txt")
 guizmo$run()
 ```
 
-## Server hosting
+## ShinyGotchi
 
-The shiny app can be used to host a tamagotchi on a server, so that it will stay alive whenever you are not connected. Here is how you can do to prepare a cozy place for your pet:
-
-- your server needs to be accessible via internet. You can open your private network via your internet provider's administrator page: open a port (e.g. 22) and redirect to your server private IP. Be extremely cautious, the threat of cyberattacks is real. I would advise to use a firwall, for instance [ufw](https://manpages.ubuntu.com/manpages/lunar/en/man8/ufw.8.html), and only authorize access to IPs you know.
-
-- use the linux command `screen` to detach a session. Call the `shiny` method and note the port. If you're hosting several tamagotchis, use a different `port` argument each time. The default port is 1996.
-
-- from your client computer, connect to your server via SSH. If the client OS is Windows, install PuTTY and open a tunnel (Connection/SSH/Tunnels, add a new forwarded port that should look like: L1996 | localhost:1996). Open the session and identify.
-
-- from the browser of your client computer, connect to your shiny session (localhost:1996 by default), and enjoy some time with your friend !  
+The package tamaR is a dependency for [shinyGotchi](https://github.com/almarch/shinyGotchi), an R package that leverages [shiny](https://shiny.posit.co/) to host a tamagotchi online.
 
 ## Notes on the C++ structure
 
@@ -120,10 +86,10 @@ This compact, object-oriented version of tamalib can almost readily be packaged 
 
 Tamalib was adapted with attention to its platform agnosticity, so it should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
-## Tamacare
-
-The package tamaR is a dependency of [tamacare](https://github.com/almarch/tamacare), another R package aiming to provide automatic care for your pet.
-
 ## Secret Character
 
 A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+
+## License 
+
+This work is licensed under Attribution-NonCommercial 4.0 International.
