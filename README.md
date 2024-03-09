@@ -89,3 +89,7 @@ Tamalib was adapted with attention to its platform agnosticity, so it should run
 ## Secret Character
 
 A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+
+## License 
+
+This work is licensed under Attribution-NonCommercial 4.0 International.
