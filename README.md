@@ -20,16 +20,15 @@ A ROM named "rom.bin" must then be placed into the src directory. The ROM has to
 Rscript tamaR/src/TamaRomConvert.r
 ```
 
-Build and install the package with R (R.exe if you use the Windows terminal):
+Build and install the package with R (R.exe if you use the Windows terminal). Building tamaR requires the R package [Rcpp](https://rcpp.org):
 
 ```bash
-R CMD build tamaR
-R CMD INSTALL tamaR_1.0.0.tar.gz
+R CMD INSTALL tamaR
 ```
 
 The package can now be loaded from R:
 
-```r
+```R
 library(tamaR)
 ```
 
