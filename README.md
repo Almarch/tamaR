@@ -79,9 +79,7 @@ The package tamaR is a dependency for [shinyGotchi](https://github.com/almarch/s
 
 Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
 
-Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available to the user and they might have an R implementation later.
-
-This compact, object-oriented version of tamalib can almost readily be packaged into Python. Like R, Python is accessible to a broad community and it allows scripting and the developement of web applications. Furthermore, it opens the possibility for the developement of an Android app.
+Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available and they might have an R implementation later.
 
 Tamalib was adapted with attention to its platform agnosticity, so it should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
