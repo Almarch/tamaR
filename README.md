@@ -19,7 +19,7 @@ cp rom.bin tamaR/src/
 
 ### Installation as a docker container
 
-tamaR can be installed and launched as a [docker](https://docker.com) container. As such, R installation is not required.
+tamaR can be installed and launched as a docker container. As such, R installation is not required.
 
 ```bash
 cd tamaR
@@ -206,11 +206,11 @@ The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 ### Automatic care
 
-It also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
+The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
 
 When checking the "automatic care" option, it is also possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
-The "care" function works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
+The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
 
 ## Notes on the C++ structure
 
