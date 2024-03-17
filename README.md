@@ -32,11 +32,11 @@ The container can now be run:
 docker run -d -p 1996:80 tama
 ```
 
-The shiny web app is directly available at http://127.0.0.1:1996/
+The shiny app is directly available at http://127.0.0.1:1996/
 
 ### Installation as an R package
 
-tamaR can be installed as an R package. To do so, the first step is to convert the ROM into 12 bits. The the package can be built with [Rcpp](https://rcpp.org) and installed.
+tamaR can be installed as an R package. To do so, the first step is to convert the ROM into 12 bits. Then the package can be built with [Rcpp](https://rcpp.org) and installed.
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
