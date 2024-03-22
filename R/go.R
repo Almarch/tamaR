@@ -13,39 +13,39 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
   options(shiny.port = port,
           shiny.host = host)
   password = c(play = "",
-		       auto = "")
+               auto = "")
 
     ui <- fluidPage(
         useShinyjs(),
-	    tags$head(
-			tags$link(rel = "icon shortcut",
-			          type="image/png",
-			          href = "data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWj4MsGVbH+RpQAXIAAAADjQeA147IQJsFQ4AJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAoAGUuGTv8EzKv/VX5B/1IvA5Ncdjj/MKNz/1lzNvcAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAgEgA4TS0Cj2o9A8V0Xhj/b2Ie/3dbFP94WhP/cGId/21lIf9+Uwr+LhwDUwAAAAAAAAAAAAAAAAAAAAAZDAApbFsa8B+yiP8Ow5//BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/EMCb/2JvLv4wGwNVAAAAAAAAAAAAAAAAXzkEshm4kP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8IyKX/YkcOygAAAAAAAAAAAAAAAGVmJ/EEzKv/BMyr/y6jdP9cdTf/JK2C/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/19fI+MAAAAAAAAAAAAAAABiTBPOBcuq/wTMq/9Pg0n/FbyV/29iHv8Gy6n/BMyr/wTMq/8EzKv/BMyr/wTMq/9rYiH0AAAAAAAAAAAAAAAAQSYCeRm4kP8EzKv/S4dO/wTMq/9Dj1j/F7qT/wTMq/8EzKv/BMyr/wTMq/8EzKv/cV8b+AAAAAMAAAAAAAAAABcPACI6k2L6BMyr/wbKqP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/Ccil/2VtK/9xXBn2Z00R2DwjAm4AAAAAOFozqgTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8XupP/HbSK/xi6kv9bNgOrAAAAAE47DqEEzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8Gyqn/Wnc5/111Nv9edDX/aUkM1QAAAABgOQG0DMSh/xe6kv90Xhf/FruU/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wbLqf8FzKr/BMyr/2hZGuUAAAAATS4CkSCxh/8Gyqn/MaBw/wrHpP8EzKv/BMyr/wTMq/8spXf/Er6Z/xm4kP9oRgrSZkMIyl1EDb9DKAR6AAAAABsQADA7kV/4BMyr/wTMq/8EzKv/BMyr/wTMq/8KxqP/eFoT/yasgP9IiVH/IRUAPgAAAAAAAAAAAAAAAAAAAAAAAAAAPzcSiieqff8LxqP/BMyr/wTMq/8EzKv/BMyr/wTMq/8Ow57/WlAZywAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAElFwRERysGiFJJGLhSZS/ZVnQ68Fh5PvdcZyzoY0AIwhkPADIAAAAAAAAAAAAAAAAAAAAA8B8AAOAPAACADwAAAAcAAAAHAAAABwAAAAcAAAADAAAAAAAAgAAAAIAAAACAAAAAgAAAAIAHAADABwAAwA8AAA=="),
-			tags$style(HTML(
-		    ".btn {
-		            width: 100px;
-		            height: 100px;
+        tags$head(
+            tags$link(rel = "icon shortcut",
+                      type="image/png",
+                      href = "data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWj4MsGVbH+RpQAXIAAAADjQeA147IQJsFQ4AJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAoAGUuGTv8EzKv/VX5B/1IvA5Ncdjj/MKNz/1lzNvcAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAgEgA4TS0Cj2o9A8V0Xhj/b2Ie/3dbFP94WhP/cGId/21lIf9+Uwr+LhwDUwAAAAAAAAAAAAAAAAAAAAAZDAApbFsa8B+yiP8Ow5//BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/EMCb/2JvLv4wGwNVAAAAAAAAAAAAAAAAXzkEshm4kP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8IyKX/YkcOygAAAAAAAAAAAAAAAGVmJ/EEzKv/BMyr/y6jdP9cdTf/JK2C/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/19fI+MAAAAAAAAAAAAAAABiTBPOBcuq/wTMq/9Pg0n/FbyV/29iHv8Gy6n/BMyr/wTMq/8EzKv/BMyr/wTMq/9rYiH0AAAAAAAAAAAAAAAAQSYCeRm4kP8EzKv/S4dO/wTMq/9Dj1j/F7qT/wTMq/8EzKv/BMyr/wTMq/8EzKv/cV8b+AAAAAMAAAAAAAAAABcPACI6k2L6BMyr/wbKqP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/Ccil/2VtK/9xXBn2Z00R2DwjAm4AAAAAOFozqgTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8XupP/HbSK/xi6kv9bNgOrAAAAAE47DqEEzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8Gyqn/Wnc5/111Nv9edDX/aUkM1QAAAABgOQG0DMSh/xe6kv90Xhf/FruU/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wbLqf8FzKr/BMyr/2hZGuUAAAAATS4CkSCxh/8Gyqn/MaBw/wrHpP8EzKv/BMyr/wTMq/8spXf/Er6Z/xm4kP9oRgrSZkMIyl1EDb9DKAR6AAAAABsQADA7kV/4BMyr/wTMq/8EzKv/BMyr/wTMq/8KxqP/eFoT/yasgP9IiVH/IRUAPgAAAAAAAAAAAAAAAAAAAAAAAAAAPzcSiieqff8LxqP/BMyr/wTMq/8EzKv/BMyr/wTMq/8Ow57/WlAZywAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAElFwRERysGiFJJGLhSZS/ZVnQ68Fh5PvdcZyzoY0AIwhkPADIAAAAAAAAAAAAAAAAAAAAA8B8AAOAPAACADwAAAAcAAAAHAAAABwAAAAcAAAADAAAAAAAAgAAAAIAAAACAAAAAgAAAAIAHAADABwAAwA8AAA=="),
+            tags$style(HTML(
+            ".btn {
+                    width: 100px;
+                    height: 100px;
                     border: 5px solid black;
-		            border-radius: 50%;
+                    border-radius: 50%;
                       }
 
              .menu {
-		            width: 150px;
-		            height: 80px;
-			        border: 1px solid black;
-			        border-radius: 10%;
-		       }"
-		    ))
-	    ),
+                    width: 150px;
+                    height: 80px;
+                    border: 1px solid black;
+                    border-radius: 10%;
+               }"
+            ))
+        ),
         headerPanel(""),
 
         ### First connection screen
         fluidRow(column(12,
-	    textInput("pass_play","Original gameplay password:"),
-	    textInput("pass_auto","Automatic care password:"),
-	    actionButton("register","Register passwords",class="menu"))),
+        textInput("pass_play","Original gameplay password:"),
+        textInput("pass_auto","Automatic care password:"),
+        actionButton("register","Register passwords",class="menu"))),
 
-	    ### Game screen
+        ### Game screen
         fluidRow(
             column(12,
                    mainPanel(plotOutput("screen"))
@@ -54,9 +54,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
         ### Log in prompt
         fluidRow(column(12,splitLayout(
-	    textInput("pass","Password:"),
-	    actionButton("log_in","Log in", class = "menu")
-	))),
+        textInput("pass","Password:"),
+        actionButton("log_in","Log in", class = "menu")
+    ))),
 
         ### Original gameplay
         fluidRow(column(12,splitLayout(
@@ -65,7 +65,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                      actionButton("C","",class="btn")))
         ),
 
-	   ### Automatic care
+       ### Automatic care
         br(),
         br(),
         br(),
@@ -80,7 +80,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
     server = function(input,output,session){
 
-	    ### Reactive values
+        ### Reactive values
         etc <- reactiveValues()
         etc[["t0"]]    = Sys.time()
         etc[["todo"]]  = list(actions = c(), wait = 0)
@@ -92,70 +92,70 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         etc[["scold"]] = F
         etc[["egg"]]   = T
         etc[["next_check"]] = 0
-	    etc[["logged_in"]] = c(play = F,
-			                   auto = F)
+        etc[["logged_in"]] = c(play = F,
+                               auto = F)
 
         ### Conditionnal UI
         observe({
-	    if(password["play"] == "" &
-	       password["auto"] == ""){
-		shinyjs::hide("screen")
-	    shinyjs::hide("care")
-		shinyjs::hide("disc")
-		shinyjs::hide("A")
-		shinyjs::hide("B")
-		shinyjs::hide("C")
-		shinyjs::hide("pass")
-		shinyjs::hide("log_in")
-	    shinyjs::show("pass_play")
-		shinyjs::show("pass_auto")
-		shinyjs::show("register")
-	    } else {
+        if(password["play"] == "" &
+           password["auto"] == ""){
+        shinyjs::hide("screen")
+        shinyjs::hide("care")
+        shinyjs::hide("disc")
+        shinyjs::hide("A")
+        shinyjs::hide("B")
+        shinyjs::hide("C")
+        shinyjs::hide("pass")
+        shinyjs::hide("log_in")
+        shinyjs::show("pass_play")
+        shinyjs::show("pass_auto")
+        shinyjs::show("register")
+        } else {
         shinyjs::show("screen")
-	    shinyjs::hide("pass_play")
-		shinyjs::hide("pass_auto")
-		shinyjs::hide("register")
-		if(etc[["logged_in"]]["play"]){
-		    shinyjs::show("A")
-		    shinyjs::show("B")
-		    shinyjs::show("C")
-		    shinyjs::hide("care")
-		    shinyjs::hide("disc")
-		    shinyjs::hide("pass")
-		    shinyjs::hide("log_in")
-		} else if(etc[["logged_in"]]["auto"]) {
-		    shinyjs::show("care")
-		    shinyjs::hide("pass")
-		    shinyjs::hide("log_in")
-		    if(input$care){
-	            shinyjs::hide("A")
-		        shinyjs::hide("B")
-			    shinyjs::hide("C")
-			    shinyjs::show("disc")
-	        } else {
-	            shinyjs::show("A")
-		        shinyjs::show("B")
-			    shinyjs::show("C")
-		   	    shinyjs::hide("disc")
-		    }
-		} else {
-	        shinyjs::hide("A")
-		    shinyjs::hide("B")
-		    shinyjs::hide("C")
-		    shinyjs::hide("care")
-		    shinyjs::hide("disc")
-		    shinyjs::show("pass")
-		    shinyjs::show("log_in")
-		}
+        shinyjs::hide("pass_play")
+        shinyjs::hide("pass_auto")
+        shinyjs::hide("register")
+        if(etc[["logged_in"]]["play"]){
+            shinyjs::show("A")
+            shinyjs::show("B")
+            shinyjs::show("C")
+            shinyjs::hide("care")
+            shinyjs::hide("disc")
+            shinyjs::hide("pass")
+            shinyjs::hide("log_in")
+        } else if(etc[["logged_in"]]["auto"]) {
+            shinyjs::show("care")
+            shinyjs::hide("pass")
+            shinyjs::hide("log_in")
+            if(input$care){
+                shinyjs::hide("A")
+                shinyjs::hide("B")
+                shinyjs::hide("C")
+                shinyjs::show("disc")
+            } else {
+                shinyjs::show("A")
+                shinyjs::show("B")
+                shinyjs::show("C")
+                shinyjs::hide("disc")
+            }
+        } else {
+            shinyjs::hide("A")
+            shinyjs::hide("B")
+            shinyjs::hide("C")
+            shinyjs::hide("care")
+            shinyjs::hide("disc")
+            shinyjs::show("pass")
+            shinyjs::show("log_in")
+        }
     }})
 
-	### register password
-	observeEvent(input$register,{
+    ### register password
+    observeEvent(input$register,{
             if(input$pass_play != "" &
-	           input$pass_auto != "" &
-	           input$pass_play != input$pass_auto){
+               input$pass_auto != "" &
+               input$pass_play != input$pass_auto){
             password["play"] <<- input$pass_play
-	        password["auto"] <<- input$pass_auto
+            password["auto"] <<- input$pass_auto
     }
 })
 
@@ -164,77 +164,77 @@ observeEvent(input$log_in, {
     Sys.sleep(2)
     if(input$pass == password["play"]) etc[["logged_in"]]["play"] = T
     if(input$pass == password["auto"]) etc[["logged_in"]]["auto"] = T
-})	     
+})         
 
 ## care routine
 observe({
     if(!etc[["busy"]] & input$care) {
-	etc[["busy"]] = T
+    etc[["busy"]] = T
 
-	t1 = Sys.time()
-	elapsed = as.numeric(difftime(t1,etc[["t0"]],units = "sec"))
-	etc[["t0"]] = t1
+    t1 = Sys.time()
+    elapsed = as.numeric(difftime(t1,etc[["t0"]],units = "sec"))
+    etc[["t0"]] = t1
 
-	### if it's an egg, set the clock
-	if(etc[["egg"]]) {
-	    if(is.egg(tama)) {
-		    etc[["todo"]] = set_clock()
-	    }
-	    etc[["egg"]]  = F
-	}
+    ### if it's an egg, set the clock
+    if(etc[["egg"]]) {
+        if(is.egg(tama)) {
+            etc[["todo"]] = set_clock()
+        }
+        etc[["egg"]]  = F
+    }
 
-	### if dead, that's over
-	if(is.dead(tama)) {
-	    etc[["dead"]] = T
-	    etc[["todo"]]$wait = Inf
-	}
-	
-	### stop the need to scold if it doesn't cry anymore
-	if(!tama$GetIcon()[8]) {
-	    etc[["scold"]] = F
-	}
-	
-	### otherwise, plan an action
-	if(is.asleep(tama,"off")){
-	    etc[["stats"]] = c(hunger = 4,
-			       happiness = 4)
+    ### if dead, that's over
+    if(is.dead(tama)) {
+        etc[["dead"]] = T
+        etc[["todo"]]$wait = Inf
+    }
+    
+    ### stop the need to scold if it doesn't cry anymore
+    if(!tama$GetIcon()[8]) {
+        etc[["scold"]] = F
+    }
+    
+    ### otherwise, plan an action
+    if(is.asleep(tama,"off")){
+        etc[["stats"]] = c(hunger = 4,
+                   happiness = 4)
 
-	} else if(etc[["todo"]]$wait <= 0 &
-		    length(etc[["todo"]]$actions) == 0) {
+    } else if(etc[["todo"]]$wait <= 0 &
+            length(etc[["todo"]]$actions) == 0) {
 
-	    # end what has been started
-	    if(etc[["doing"]] != "") {
-	    if(etc[["doing"]] == "try_to_clean") {
-		if(is.dirty(tama,"top")) {
-		# still dirty => asleep, turn the light off
-		etc[["todo"]] = light()
-		etc[["doing"]] = ""
-		}
+        # end what has been started
+        if(etc[["doing"]] != "") {
+        if(etc[["doing"]] == "try_to_clean") {
+        if(is.dirty(tama,"top")) {
+        # still dirty => asleep, turn the light off
+        etc[["todo"]] = light()
+        etc[["doing"]] = ""
+        }
 
-	    } else if(etc[["doing"]] == "check_arrow") {
-		# now that the arrow is checked, feed
-		etc[["todo"]] = feed(ifelse(is.burger(tama),
-						"top",
-						"bottom"),
-					times = 4 - etc[["stats"]]["hunger"])
-		etc[["stats"]]["hunger"] = 4
-		etc[["doing"]] = ""
+        } else if(etc[["doing"]] == "check_arrow") {
+        # now that the arrow is checked, feed
+        etc[["todo"]] = feed(ifelse(is.burger(tama),
+                        "top",
+                        "bottom"),
+                    times = 4 - etc[["stats"]]["hunger"])
+        etc[["stats"]]["hunger"] = 4
+        etc[["doing"]] = ""
 
-	    } else if(etc[["doing"]] == "check_status_1") {
-		# check hunger
-		etc[["stats"]]["hunger"] = nb.hearts(tama)
-		etc[["todo"]] = check_status(step = 2)
-		etc[["doing"]] = "check_status_2"
+        } else if(etc[["doing"]] == "check_status_1") {
+        # check hunger
+        etc[["stats"]]["hunger"] = nb.hearts(tama)
+        etc[["todo"]] = check_status(step = 2)
+        etc[["doing"]] = "check_status_2"
 
-	    } else if(etc[["doing"]] == "check_status_2") {
-		# check happiness
-		etc[["stats"]]["happiness"] = nb.hearts(tama)
-		etc[["todo"]] = check_status(step = 3)
-		etc[["doing"]] = ""
+        } else if(etc[["doing"]] == "check_status_2") {
+        # check happiness
+        etc[["stats"]]["happiness"] = nb.hearts(tama)
+        etc[["todo"]] = check_status(step = 3)
+        etc[["doing"]] = ""
 
-		if(tama$GetIcon()[8] &
-		    !is.asleep(tama, "on") &
-		    etc[["stats"]]["hunger"] > 0 &
+        if(tama$GetIcon()[8] &
+            !is.asleep(tama, "on") &
+            etc[["stats"]]["hunger"] > 0 &
                             etc[["stats"]]["happiness"] > 0){
                         etc[["scold"]] = T
                         }
@@ -300,12 +300,12 @@ observe({
             }
         })
 
-	## Original gameplay
+    ## Original gameplay
         observeEvent(input$A,tama$click("A"))
         observeEvent(input$B,tama$click("B"))
         observeEvent(input$C,tama$click("C"))
 
-	## display screen
+    ## display screen
         observe({
             output$screen = renderPlot({
                 tama$display(background = background)
