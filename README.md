@@ -6,6 +6,8 @@ This is a package allowing the emulation of a P1 tamagotchi in R using [tamalib]
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either with R, either without, using [docker](https://docker.com).
 
+![311432812-dbf7285f-a233-4667-8983-b687dc40f67d](https://github.com/Almarch/tamaR/assets/13364928/aefe1e81-267b-49c3-8b2f-952dd32a0528)
+
 ## Installation
 
 Start by cloning the git repository. A ROM named "rom.bin" must then be placed into the src directory.
@@ -17,7 +19,7 @@ cp rom.bin tamaR/src/
 
 ### Installation as a docker container
 
-tamaR can be installed and launched as a [docker](https://docker.com) container. As such, R installation is not required.
+tamaR can be installed and launched as a docker container. As such, R installation is not required.
 
 ```bash
 cd tamaR
@@ -188,6 +190,8 @@ At first connection, the app requires the set-up of 2 passwords. Future users se
 
 - "Automatic care": the user identifying with this password can play the game with the original 3 buttons, and has access to the "automatic care" feature.
 
+![311851338-c60679b7-b10b-41c7-84eb-4663140cd5a0](https://github.com/Almarch/tamaR/assets/13364928/eea8ae97-cd4e-4a52-9ed6-f7d1fcb0d3ad)
+
 For optimal security, provide strong passwords. The 2 passwords cannot be identical. After setting up the passwords, a refresh might be needed.
 
 At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts.
@@ -198,13 +202,15 @@ Tamagotchi has not been designed as a multi-player game. Several users attemptin
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
+![311852036-bbfc0a9c-ed81-4fef-945c-bbf47fd9ee16](https://github.com/Almarch/tamaR/assets/13364928/c03ad9b4-7126-40f9-87b6-78169d500368)
+
 ### Automatic care
 
-It also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
+The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
 
 When checking the "automatic care" option, it is also possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
-The "care" function works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
+The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
 
 ## Notes on the C++ structure
 
