@@ -153,6 +153,12 @@ etc[["autocare"]] = settings$autocare
 ### Conditionnal UI
 observe({
 
+    if(etc[["autocare"]]){
+        updateActionButton(session,"autocare","disable automatic care")
+    } else {
+        updateActionButton(session,"autocare","enable automatic care")
+    }
+
     if(settings$password["admin"] == ""){
 
         shinyjs::show("pass_admin")
@@ -331,12 +337,6 @@ observeEvent(input$log_in, {
 observeEvent(input$autocare,{
     settings$autocare  <<- !settings$autocare
     etc[["autocare"]]   <- settings$autocare
-    updateActionButton(session,
-        "autocare",
-        ifelse(settings$autocare,
-        "disable automatic care",
-        "enable automatic care")
-    )
 })
 
 observeEvent(input$start,{
