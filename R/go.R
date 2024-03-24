@@ -10,10 +10,16 @@
 
 go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
-  options(shiny.port = port,
-          shiny.host = host)
-  password = c(admin = "",
-               user  = "")
+    options(shiny.port = port,
+            shiny.host = host)
+
+    settings = list(
+        password = c(admin = "",
+                     user  = ""),
+        autocare = F,
+        background = NULL
+  )
+
 
     ui <- fluidPage(
         useShinyjs(),
@@ -108,7 +114,12 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         fluidRow(column(12,splitLayout(
             actionButton("save_rom","dump ROM"),
             actionButton("load_rom","replace ROM"))
-        ))
+        )),
+
+        fluidRow(column(12,
+            textInput("pass_user","User password:"),
+            actionButton("save_user_pwd","Save",class="menu")
+        )),
     )
 
     server = function(input,output,session){
