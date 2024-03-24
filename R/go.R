@@ -8,17 +8,19 @@
 #' 
 #' 
 
-go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
+go = function(tama, port = 1996, host = "127.0.0.1"){
 
     options(shiny.port = port,
             shiny.host = host)
 
+    tama$stop()
     settings = list(
         password = c(admin = "",
                      user  = ""),
+        background = NULL,
         autocare = F,
-        background = NULL
-  )
+        running = F
+    )
 
 
     ui <- fluidPage(
@@ -48,7 +50,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         ### First connection screen
         fluidRow(column(12,
             textInput("pass_admin","Administrator password:"),
-            actionButton("save_admin_pwd","Save",class="menu")
+            actionButton("save_pass_admin","Save",class="menu")
         )),
 
         ### Game screen
@@ -68,10 +70,37 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                      actionButton("B","",class="big"),
                      actionButton("C","",class="big"))
         )),
+        fluidRow(column(12,
+            actionButton("start","START",class="big"),
+            align = "center"
+        )),
 
-        br(),
-        br(),
-        br(),
+        fluidRow(column(12,
+            actionButton("stop","STOP",class="big"),
+            align = "center"
+        )),
+
+        br(), # 1
+
+        fluidRow(column(12,
+            actionButton("autocare",
+            ifelse(settings$autocare,
+            "disable automatic care",
+            "enable automatic care"))
+        )),
+
+        br(), # 2
+
+        fluidRow(column(12,
+            actionButton("background","change background"),
+        )),
+
+        br(), # 3
+
+        fluidRow(column(12,splitLayout(
+            textInput("pass_user","User password:"),
+            actionButton("save_pass_user","Save",class="menu"))
+        )),
 
         fluidRow(
             column(12,splitLayout(
@@ -79,136 +108,248 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 checkboxInput("disc", "Care for discipline", value = T))
         )),
 
-        ### Admin board
-        fluidRow(column(12,splitLayout(
-            actionButton("A_","A"),
-            actionButton("B_","B"),
-            actionButton("C_","C"),
-            actionButton("AC","A+C"))
-        )),
-
-        # when running
         fluidRow(column(12,
-            actionButton("stop","STOP"),
-        )),
-
-        # when stopped
-        fluidRow(column(12,
-            actionButton("start","START"),
-        )),
-
-        fluidRow(column(12,splitLayout(
             actionButton("save_state","SAVE"),
             actionButton("load_state","LOAD"),
-            actionButton("reset_state","RESET"))
+            actionButton("reset_state","RESET")
         )),
 
         fluidRow(column(12,
-            checkboxInput("autocare","allow automatic care"),
+            actionButton("a","A"),
+            actionButton("b","B"),
+            actionButton("c","C"),
+            actionButton("ac","A+C")
         )),
+
+        br(), # 4
 
         fluidRow(column(12,
-            actionButton("background","change background"),
-        )),
-
-        fluidRow(column(12,splitLayout(
             actionButton("save_rom","dump ROM"),
-            actionButton("load_rom","replace ROM"))
+            actionButton("load_rom","switch ROM")
         )),
-
-        fluidRow(column(12,
-            textInput("pass_user","User password:"),
-            actionButton("save_user_pwd","Save",class="menu")
-        )),
+        
+        br() # 5
     )
 
     server = function(input,output,session){
 
-        ### Reactive values
-        etc <- reactiveValues()
-        etc[["t0"]]    = Sys.time()
-        etc[["todo"]]  = list(actions = c(), wait = 0)
-        etc[["busy"]]  = F
-        etc[["dead"]]  = F
-        etc[["doing"]] = ""
-        etc[["stats"]] = c(hunger = 4, #nb of full hearts
-                           happiness = 4)
-        etc[["scold"]] = F
-        etc[["egg"]]   = T
-        etc[["next_check"]] = 0
-        etc[["logged_in"]] = c(play = F,
-                               auto = F)
+### Reactive values
+etc <- reactiveValues()
+etc[["t0"]]    = Sys.time()
+etc[["todo"]]  = list(actions = c(), wait = 0)
+etc[["busy"]]  = F
+etc[["dead"]]  = F
+etc[["doing"]] = ""
+etc[["stats"]] = c(hunger = 4, #nb of full hearts
+                    happiness = 4)
+etc[["scold"]] = F
+etc[["egg"]]   = T
+etc[["next_check"]] = 0
+etc[["logged_in"]] = c(admin = F,
+                        user  = F)
+etc[["running"]] = settings$running
+etc[["autocare"]] = settings$autocare
 
-        ### Conditionnal UI
-        observe({
-        if(password["play"] == "" &
-           password["auto"] == ""){
+### Conditionnal UI
+observe({
+
+    if(settings$password["admin"] == ""){
+
+        shinyjs::show("pass_admin")
+        shinyjs::show("save_pass_admin")
         shinyjs::hide("screen")
-        shinyjs::hide("care")
-        shinyjs::hide("disc")
+        shinyjs::hide("pass")
+        shinyjs::hide("log_in")
         shinyjs::hide("A")
         shinyjs::hide("B")
         shinyjs::hide("C")
-        shinyjs::hide("pass")
-        shinyjs::hide("log_in")
-        shinyjs::show("pass_play")
-        shinyjs::show("pass_auto")
-        shinyjs::show("register")
-        } else {
+        shinyjs::hide("care")
+        shinyjs::hide("disc")
+        shinyjs::hide("a")
+        shinyjs::hide("b")
+        shinyjs::hide("c")
+        shinyjs::hide("ac")
+        shinyjs::hide("stop")
+        shinyjs::hide("start")
+        shinyjs::hide("save_state")
+        shinyjs::hide("load_state")
+        shinyjs::hide("reset_state")
+        shinyjs::hide("autocare")
+        shinyjs::hide("background")
+        shinyjs::hide("save_rom")
+        shinyjs::hide("load_rom")
+        shinyjs::hide("pass_user")
+        shinyjs::hide("save_pass_user")
+
+    } else {
+
         shinyjs::show("screen")
-        shinyjs::hide("pass_play")
-        shinyjs::hide("pass_auto")
-        shinyjs::hide("register")
-        if(etc[["logged_in"]]["play"]){
-            shinyjs::show("A")
-            shinyjs::show("B")
-            shinyjs::show("C")
-            shinyjs::hide("care")
-            shinyjs::hide("disc")
+        shinyjs::hide("pass_admin")
+        shinyjs::hide("save_pass_admin")
+
+        if(etc[["logged_in"]]["admin"]) {
+
             shinyjs::hide("pass")
             shinyjs::hide("log_in")
-        } else if(etc[["logged_in"]]["auto"]) {
-            shinyjs::show("care")
-            shinyjs::hide("pass")
-            shinyjs::hide("log_in")
-            if(input$care){
-                shinyjs::hide("A")
-                shinyjs::hide("B")
-                shinyjs::hide("C")
-                shinyjs::show("disc")
-            } else {
-                shinyjs::show("A")
-                shinyjs::show("B")
-                shinyjs::show("C")
-                shinyjs::hide("disc")
-            }
-        } else {
             shinyjs::hide("A")
             shinyjs::hide("B")
             shinyjs::hide("C")
             shinyjs::hide("care")
             shinyjs::hide("disc")
-            shinyjs::show("pass")
-            shinyjs::show("log_in")
-        }
-    }})
+            shinyjs::show("autocare")
+            shinyjs::show("background")
+            shinyjs::show("save_rom")
+            shinyjs::show("load_rom")
+            shinyjs::show("pass_user")
+            shinyjs::show("save_pass_user")
 
-    ### register password
-    observeEvent(input$register,{
-            if(input$pass_play != "" &
-               input$pass_auto != "" &
-               input$pass_play != input$pass_auto){
-            password["play"] <<- input$pass_play
-            password["auto"] <<- input$pass_auto
+            if(etc[["running"]]){
+
+                shinyjs::show("a")
+                shinyjs::show("b")
+                shinyjs::show("c")
+                shinyjs::show("ac")
+                shinyjs::show("stop")
+                shinyjs::hide("start")
+                shinyjs::hide("save_state")
+                shinyjs::hide("load_state")
+                shinyjs::hide("reset_state")
+
+            } else {
+
+                shinyjs::hide("a")
+                shinyjs::hide("b")
+                shinyjs::hide("c")
+                shinyjs::hide("ac")
+                shinyjs::hide("stop")
+                shinyjs::show("start")
+                shinyjs::show("save_state")
+                shinyjs::show("load_state")
+                shinyjs::show("reset_state")
+
+            }
+        } else if(etc[["logged_in"]]["user"]) {
+
+            shinyjs::hide("pass")
+            shinyjs::hide("log_in")
+            shinyjs::hide("a")
+            shinyjs::hide("b")
+            shinyjs::hide("c")
+            shinyjs::hide("ac")
+            shinyjs::hide("stop")
+            shinyjs::hide("start")
+            shinyjs::hide("save_state")
+            shinyjs::hide("load_state")
+            shinyjs::hide("reset_state")
+            shinyjs::hide("autocare")
+            shinyjs::hide("background")
+            shinyjs::hide("save_rom")
+            shinyjs::hide("load_rom")
+            shinyjs::hide("pass_user")
+            shinyjs::hide("save_pass_user")
+
+            if(etc[["autocare"]]) {
+
+                shinyjs::show("care")
+
+                if(input$care){
+
+                    shinyjs::hide("A")
+                    shinyjs::hide("B")
+                    shinyjs::hide("C")
+                    shinyjs::show("disc")
+
+                } else {
+
+                    shinyjs::show("A")
+                    shinyjs::show("B")
+                    shinyjs::show("C")
+                    shinyjs::hide("disc")
+
+                }
+            } else {
+
+                shinyjs::hide("care")
+                shinyjs::show("A")
+                shinyjs::show("B")
+                shinyjs::show("C")
+                shinyjs::hide("disc")
+
+            }
+        } else {
+
+        shinyjs::show("pass")
+        shinyjs::show("log_in")
+        shinyjs::hide("A")
+        shinyjs::hide("B")
+        shinyjs::hide("C")
+        shinyjs::hide("care")
+        shinyjs::hide("disc")
+        shinyjs::hide("a")
+        shinyjs::hide("b")
+        shinyjs::hide("c")
+        shinyjs::hide("ac")
+        shinyjs::hide("stop")
+        shinyjs::hide("start")
+        shinyjs::hide("save_state")
+        shinyjs::hide("load_state")
+        shinyjs::hide("reset_state")
+        shinyjs::hide("autocare")
+        shinyjs::hide("background")
+        shinyjs::hide("save_rom")
+        shinyjs::hide("load_rom")
+        shinyjs::hide("pass_user")
+        shinyjs::hide("save_pass_user")
+
+        }
+    }
+})
+
+### register admin password
+observeEvent(input$save_pass_admin,{
+    if(input$pass_admin != ""){
+            settings$password["admin"] <<- input$pass_admin
+    }
+})
+
+### register user password
+observeEvent(input$save_pass_user,{
+    if(input$pass_user != "" &
+       input$pass_user != settings$password["admin"]){
+            settings$password["user"] <<- input$pass_user
     }
 })
 
 ### log in
 observeEvent(input$log_in, {
     Sys.sleep(2)
-    if(input$pass == password["play"]) etc[["logged_in"]]["play"] = T
-    if(input$pass == password["auto"]) etc[["logged_in"]]["auto"] = T
+    if(input$pass == settings$password["admin"]) etc[["logged_in"]]["admin"] = T
+    if(input$pass == settings$password["user" ]) etc[["logged_in"]]["user"] = T
 })         
+
+### admin board
+observeEvent(input$autocare,{
+    settings$autocare  <<- !settings$autocare
+    etc[["autocare"]]   <- settings$autocare
+    updateActionButton(session,
+        "autocare",
+        ifelse(settings$autocare,
+        "disable automatic care",
+        "enable automatic care")
+    )
+})
+
+observeEvent(input$start,{
+    tama$start()
+    settings$running <<- T
+    etc[["running"]]  <- T
+})
+
+observeEvent(input$stop,{
+    tama$stop()
+    settings$running <<- F
+    etc[["running"]]  <- F
+})
 
 ## care routine
 observe({
@@ -344,20 +485,25 @@ observe({
             }
         })
 
-    ## Original gameplay
-        observeEvent(input$A,tama$click("A"))
-        observeEvent(input$B,tama$click("B"))
-        observeEvent(input$C,tama$click("C"))
+## Original gameplay
+observeEvent(input$A,tama$click("A"))
+observeEvent(input$B,tama$click("B"))
+observeEvent(input$C,tama$click("C"))
 
-    ## display screen
-        observe({
-            output$screen = renderPlot({
-                tama$display(background = background)
-                etc[["busy"]] = F
-                invalidateLater(1000/3, session)
-              })
+observeEvent(input$a,tama$click("A"))
+observeEvent(input$b,tama$click("B"))
+observeEvent(input$c,tama$click("C"))
+observeEvent(input$ac,tama$click(c("A","C"),delay=2))
+
+## display screen
+observe({
+    output$screen = renderPlot({
+        tama$display(background = settings$background)
+        etc[["busy"]] = F
+        invalidateLater(1000/3, session)
         })
-    }
+})
+}
 
     shinyApp(ui, server)
 }
