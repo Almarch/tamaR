@@ -103,6 +103,7 @@ static bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH/8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 static cpu_state_t cpuState;
 static bool_t button_buffer[BUTTON_NUM];
+static bool keep_going = false;
 
 const static u8_t seg_pos[40] = {0, 1, 2, 3, 4, 5, 6, 7, 32, 8, 9, 10, 11, 12 ,13 ,14, 15, 33, 34, 35, 31, 30, 29, 28, 27, 26, 25, 24, 36, 23, 22, 21, 20, 19, 18, 17, 16, 37, 38, 39};
 
@@ -1962,9 +1963,10 @@ void tamalib_mainloop_step_by_step(void)
 }
 
 void* tamalib_mainloop(void* nada){
-  while(true){
+  while(keep_going){
     tamalib_mainloop_step_by_step();
   };
+  return nada;
 }
 
 bool_t hw_init(void)
@@ -2033,11 +2035,12 @@ Tama::Tama() {
 
 void Tama::start(){
     pthread_t thread;
+    keep_going = true;
     pthread_create(&thread, 0, tamalib_mainloop, 0);
 }
 
 void Tama::stop(){
-
+    keep_going = false;
 }
 
 Rcpp::LogicalVector Tama::GetIcon() { 
