@@ -12,8 +12,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
   options(shiny.port = port,
           shiny.host = host)
-  password = c(play = "",
-               auto = "")
+  password = c(admin = "",
+               user  = "")
 
     ui <- fluidPage(
         useShinyjs(),
@@ -22,7 +22,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                       type="image/png",
                       href = "data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWj4MsGVbH+RpQAXIAAAADjQeA147IQJsFQ4AJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAoAGUuGTv8EzKv/VX5B/1IvA5Ncdjj/MKNz/1lzNvcAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAgEgA4TS0Cj2o9A8V0Xhj/b2Ie/3dbFP94WhP/cGId/21lIf9+Uwr+LhwDUwAAAAAAAAAAAAAAAAAAAAAZDAApbFsa8B+yiP8Ow5//BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/EMCb/2JvLv4wGwNVAAAAAAAAAAAAAAAAXzkEshm4kP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8IyKX/YkcOygAAAAAAAAAAAAAAAGVmJ/EEzKv/BMyr/y6jdP9cdTf/JK2C/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/19fI+MAAAAAAAAAAAAAAABiTBPOBcuq/wTMq/9Pg0n/FbyV/29iHv8Gy6n/BMyr/wTMq/8EzKv/BMyr/wTMq/9rYiH0AAAAAAAAAAAAAAAAQSYCeRm4kP8EzKv/S4dO/wTMq/9Dj1j/F7qT/wTMq/8EzKv/BMyr/wTMq/8EzKv/cV8b+AAAAAMAAAAAAAAAABcPACI6k2L6BMyr/wbKqP8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/Ccil/2VtK/9xXBn2Z00R2DwjAm4AAAAAOFozqgTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8XupP/HbSK/xi6kv9bNgOrAAAAAE47DqEEzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wTMq/8Gyqn/Wnc5/111Nv9edDX/aUkM1QAAAABgOQG0DMSh/xe6kv90Xhf/FruU/wTMq/8EzKv/BMyr/wTMq/8EzKv/BMyr/wbLqf8FzKr/BMyr/2hZGuUAAAAATS4CkSCxh/8Gyqn/MaBw/wrHpP8EzKv/BMyr/wTMq/8spXf/Er6Z/xm4kP9oRgrSZkMIyl1EDb9DKAR6AAAAABsQADA7kV/4BMyr/wTMq/8EzKv/BMyr/wTMq/8KxqP/eFoT/yasgP9IiVH/IRUAPgAAAAAAAAAAAAAAAAAAAAAAAAAAPzcSiieqff8LxqP/BMyr/wTMq/8EzKv/BMyr/wTMq/8Ow57/WlAZywAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAElFwRERysGiFJJGLhSZS/ZVnQ68Fh5PvdcZyzoY0AIwhkPADIAAAAAAAAAAAAAAAAAAAAA8B8AAOAPAACADwAAAAcAAAAHAAAABwAAAAcAAAADAAAAAAAAgAAAAIAAAACAAAAAgAAAAIAHAADABwAAwA8AAA=="),
             tags$style(HTML(
-            ".btn {
+            ".big {
                     width: 100px;
                     height: 100px;
                     border: 5px solid black;
@@ -41,41 +41,74 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
         ### First connection screen
         fluidRow(column(12,
-        textInput("pass_play","Original gameplay password:"),
-        textInput("pass_auto","Automatic care password:"),
-        actionButton("register","Register passwords",class="menu"))),
+            textInput("pass_admin","Administrator password:"),
+            actionButton("save_admin_pwd","Save",class="menu")
+        )),
 
         ### Game screen
-        fluidRow(
-            column(12,
-                   mainPanel(plotOutput("screen"))
-            )
-        ),
+        fluidRow(column(12,
+            mainPanel(plotOutput("screen"))
+        )),
 
         ### Log in prompt
         fluidRow(column(12,splitLayout(
-        textInput("pass","Password:"),
-        actionButton("log_in","Log in", class = "menu")
-    ))),
+            textInput("pass","Password:"),
+            actionButton("log_in","Log in", class = "menu"))
+        )),
 
-        ### Original gameplay
+        ### User board
         fluidRow(column(12,splitLayout(
-                     actionButton("A","",class="btn"),
-                     actionButton("B","",class="btn"),
-                     actionButton("C","",class="btn")))
-        ),
+                     actionButton("A","",class="big"),
+                     actionButton("B","",class="big"),
+                     actionButton("C","",class="big"))
+        )),
 
-       ### Automatic care
         br(),
         br(),
         br(),
-        br(),
-        br(),
+
         fluidRow(
             column(12,splitLayout(
                 checkboxInput("care", "Automatic care",      value = F),
-                checkboxInput("disc", "Care for discipline", value = T)))
-        )
+                checkboxInput("disc", "Care for discipline", value = T))
+        )),
+
+        ### Admin board
+        fluidRow(column(12,splitLayout(
+            actionButton("A_","A"),
+            actionButton("B_","B"),
+            actionButton("C_","C"),
+            actionButton("AC","A+C"))
+        )),
+
+        # when running
+        fluidRow(column(12,
+            actionButton("stop","STOP"),
+        )),
+
+        # when stopped
+        fluidRow(column(12,
+            actionButton("start","START"),
+        )),
+
+        fluidRow(column(12,splitLayout(
+            actionButton("save_state","SAVE"),
+            actionButton("load_state","LOAD"),
+            actionButton("reset_state","RESET"))
+        )),
+
+        fluidRow(column(12,
+            checkboxInput("autocare","allow automatic care"),
+        )),
+
+        fluidRow(column(12,
+            actionButton("background","change background"),
+        )),
+
+        fluidRow(column(12,splitLayout(
+            actionButton("save_rom","dump ROM"),
+            actionButton("load_rom","replace ROM"))
+        ))
     )
 
     server = function(input,output,session){

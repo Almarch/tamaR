@@ -184,17 +184,13 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of 2 passwords. Future users seeking to interact with the pet will then need to authentify using one or the other password:
+At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, that allows parameterizing the game.
 
-- "Original gameplay" password: the user identifying with this password can play the game with the original 3 buttons.
+Among other parameterizations, the administrator should define a user password. The other password cannot be null and should be different from the administrator password.
 
-- "Automatic care": the user identifying with this password can play the game with the original 3 buttons, and has access to the "automatic care" feature.
+At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
-![311851338-c60679b7-b10b-41c7-84eb-4663140cd5a0](https://github.com/Almarch/tamaR/assets/13364928/eea8ae97-cd4e-4a52-9ed6-f7d1fcb0d3ad)
-
-For optimal security, provide strong passwords. The 2 passwords cannot be identical. After setting up the passwords, a refresh might be needed.
-
-At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts.
+For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts.
 
 Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
 
@@ -211,6 +207,10 @@ The shiny app also provides the option to automatically care for the hosted pet,
 When checking the "automatic care" option, it is also possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
 The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
+
+### Administrator board
+
+
 
 ## Notes on the C++ structure
 
