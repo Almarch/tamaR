@@ -55,11 +55,11 @@ library(tamaR)
 
 ## Use as an R package
 
-The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `run` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```r
 guizmo = Tama()
-guizmo$run()
+guizmo$start()
 ```
 
 The screen can be plotted via the `display` method. A custom background can be provided as a square-ish png, imported using `png::readPNG`.
@@ -84,12 +84,12 @@ The state can be saved anytime using the corresponding method:
 guizmo$save("myTama.txt")
 ```
 
-However, you cannot load a state into a running `Tama` (the result may be glitched). Use the methods in the following order:
+However, you cannot load a state into a running `Tama` (the result may be glitched). Stop the emulation first using `stop`:
 
 ```r
-guizmo = Tama()
+guizmo$stop()
 guizmo$load("myTama.txt")
-guizmo$run()
+guizmo$start()
 ```
 
 Finally, you can launch the shiny app from a running Tamagotchi using the `go` function.

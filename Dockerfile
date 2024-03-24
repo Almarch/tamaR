@@ -10,6 +10,6 @@ RUN R -e "source('tamaR/src/TamaRomConvert.r')" \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_*.tar.gz
 
-CMD R -e "library('tamaR'); guizmo = Tama(); guizmo\$run(); go(guizmo,port = 80, host =  '0.0.0.0')"
+CMD R -e "library('tamaR'); guizmo = Tama(); guizmo\$start(); go(guizmo,port = 80, host =  '0.0.0.0')"
 
 EXPOSE 80

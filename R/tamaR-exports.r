@@ -56,7 +56,7 @@ setRcppClass(Class = "Tama",
 
     },
 
-    click = function(button = c("A","B","C"),delay = .10){
+    click = function(button = c("A","B","C"),delay = .1){
 
         stopifnot(all(button %in% c("A","B","C")))
         stopifnot(delay > 0)

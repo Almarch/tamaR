@@ -2031,13 +2031,13 @@ Tama::Tama() {
     tamalib_init(1000000);
 }
 
-void Tama::run(){
-    void* nada = 0;
-        pthread_t thread;
-        if (pthread_create(&thread, 0, tamalib_mainloop, nada) != 0) {
-      perror("pthread_create() error");
-      exit(1);
-    }
+void Tama::start(){
+    pthread_t thread;
+    pthread_create(&thread, 0, tamalib_mainloop, 0);
+}
+
+void Tama::stop(){
+
 }
 
 Rcpp::LogicalVector Tama::GetIcon() { 

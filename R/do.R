@@ -10,6 +10,6 @@ do = function(obj,todo){
     }
   todo$actions = todo$actions[-1]
   }
-  Sys.sleep(.25)
+  Sys.sleep(.2)
   return(todo)
 }

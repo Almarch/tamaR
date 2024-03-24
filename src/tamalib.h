@@ -179,7 +179,8 @@ public:
   void SetROM(Rcpp::NumericVector rom);
 
   // public methods
-  void run();
+  void start();
+  void stop();
 
 private: 
 };
