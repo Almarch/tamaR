@@ -10,6 +10,6 @@ do = function(obj,todo){
     }
   todo$actions = todo$actions[-1]
   }
-  Sys.sleep(.2)
+  Sys.sleep(.4) # click + delay cannot go <0.5 sec
   return(todo)
 }
