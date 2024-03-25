@@ -6,10 +6,10 @@ ADD . /app/tamaR
 WORKDIR /app
 
 RUN R -e "source('tamaR/src/TamaRomConvert.r')" \
-    && R -e "install.packages(c('Rcpp','shiny','png','shinyjs'))" \
+    && R -e "install.packages(c('Rcpp','shiny','png','shinyjs','base64enc'))" \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_*.tar.gz
 
-CMD R -e "library('tamaR'); guizmo = Tama(); guizmo\$run(); go(guizmo,port = 80, host =  '0.0.0.0')"
+CMD R -e "library('tamaR'); guizmo = Tama(); go(guizmo,port = 80, host =  '0.0.0.0')"
 
 EXPOSE 80
