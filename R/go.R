@@ -47,9 +47,9 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
         headerPanel(""),
 
         ### First connection screen
-        fluidRow(column(12,
+        fluidRow(column(12,splitLayout(
             textInput("pass_admin","Administrator password:"),
-            actionButton("save_pass_admin","Save",class="menu")
+            actionButton("save_pass_admin","Save",class="menu"))
         )),
 
         ### Game screen
@@ -127,7 +127,11 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             actionButton("load_rom","switch ROM")
         )),
         
-        br() # 5
+        br(), # 5
+
+        fluidRow(column(12,
+            actionButton("back","Back")
+        ))
     )
 
     server = function(input,output,session){
@@ -185,6 +189,7 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                 shinyjs::hide("load_rom")
                 shinyjs::hide("pass_user")
                 shinyjs::hide("save_pass_user")
+                shinyjs::hide("back")
 
             } else {
 
@@ -207,6 +212,7 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::show("load_rom")
                     shinyjs::show("pass_user")
                     shinyjs::show("save_pass_user")
+                    shinyjs::show("back")
 
                     if(etc[["running"]]){
 
@@ -252,6 +258,7 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("load_rom")
                     shinyjs::hide("pass_user")
                     shinyjs::hide("save_pass_user")
+                    shinyjs::hide("back")
 
                     if(etc[["autocare"]]) {
 
@@ -283,28 +290,29 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     }
                 } else {
 
-                shinyjs::show("pass")
-                shinyjs::show("log_in")
-                shinyjs::hide("A")
-                shinyjs::hide("B")
-                shinyjs::hide("C")
-                shinyjs::hide("care")
-                shinyjs::hide("disc")
-                shinyjs::hide("a")
-                shinyjs::hide("b")
-                shinyjs::hide("c")
-                shinyjs::hide("ac")
-                shinyjs::hide("stop")
-                shinyjs::hide("start")
-                shinyjs::hide("save_state")
-                shinyjs::hide("load_state")
-                shinyjs::hide("reset_state")
-                shinyjs::hide("autocare")
-                shinyjs::hide("background")
-                shinyjs::hide("save_rom")
-                shinyjs::hide("load_rom")
-                shinyjs::hide("pass_user")
-                shinyjs::hide("save_pass_user")
+                    shinyjs::show("pass")
+                    shinyjs::show("log_in")
+                    shinyjs::hide("A")
+                    shinyjs::hide("B")
+                    shinyjs::hide("C")
+                    shinyjs::hide("care")
+                    shinyjs::hide("disc")
+                    shinyjs::hide("a")
+                    shinyjs::hide("b")
+                    shinyjs::hide("c")
+                    shinyjs::hide("ac")
+                    shinyjs::hide("stop")
+                    shinyjs::hide("start")
+                    shinyjs::hide("save_state")
+                    shinyjs::hide("load_state")
+                    shinyjs::hide("reset_state")
+                    shinyjs::hide("autocare")
+                    shinyjs::hide("background")
+                    shinyjs::hide("save_rom")
+                    shinyjs::hide("load_rom")
+                    shinyjs::hide("pass_user")
+                    shinyjs::hide("save_pass_user")
+                    shinyjs::hide("back")
 
                 }
             }
@@ -348,6 +356,10 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             tama$start()
             settings$running <<- T
             etc[["running"]]  <- T
+        })
+
+        observeEvent(input$back,{
+            shinyjs::refresh()
         })
 
         observeEvent(input$stop,{
