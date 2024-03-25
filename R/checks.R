@@ -59,6 +59,11 @@ is.egg = function(obj){
 
     return(all(pic1 == egg1) |
            all(pic1 == egg2) |
+           all(pic1 == egg3) |
+           all(pic1 == egg4) |
+
            all(pic2 == egg1) |
-           all(pic2 == egg2) )
+           all(pic2 == egg2) |
+           all(pic2 == egg3) |
+           all(pic2 == egg4) )
 }
