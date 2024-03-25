@@ -40,7 +40,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
-R -e "install.packages(c('Rcpp','shiny','png','shinyjs'))"
+R -e "install.packages(c('Rcpp','shiny','png','shinyjs','base64enc))"
 R CMD build tamaR
 R CMD INSTALL tamaR_*.tar.gz
 ```
@@ -55,11 +55,11 @@ library(tamaR)
 
 ## Use as an R package
 
-The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `run` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```r
 guizmo = Tama()
-guizmo$run()
+guizmo$start()
 ```
 
 The screen can be plotted via the `display` method. A custom background can be provided as a square-ish png, imported using `png::readPNG`.
@@ -84,12 +84,12 @@ The state can be saved anytime using the corresponding method:
 guizmo$save("myTama.txt")
 ```
 
-However, you cannot load a state into a running `Tama` (the result may be glitched). Use the methods in the following order:
+However, you cannot load a state into a running `Tama` (the result may be glitched). Stop the emulation first using `stop`:
 
 ```r
-guizmo = Tama()
+guizmo$stop()
 guizmo$load("myTama.txt")
-guizmo$run()
+guizmo$start()
 ```
 
 Finally, you can launch the shiny app from a running Tamagotchi using the `go` function.
@@ -184,25 +184,41 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of 2 passwords. Future users seeking to interact with the pet will then need to authentify using one or the other password:
+At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, that allows parameterizing the game. Among other parameterizations, the administrator should define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
-- "Original gameplay" password: the user identifying with this password can play the game with the original 3 buttons.
+![ezgif-4-9a6201e672](https://github.com/Almarch/tamaR/assets/13364928/34b9bd8b-e49d-4fbd-afc8-4eee66f2d5c8)
 
-- "Automatic care": the user identifying with this password can play the game with the original 3 buttons, and has access to the "automatic care" feature.
+For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts. Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
 
-![311851338-c60679b7-b10b-41c7-84eb-4663140cd5a0](https://github.com/Almarch/tamaR/assets/13364928/eea8ae97-cd4e-4a52-9ed6-f7d1fcb0d3ad)
+### Administration
 
-For optimal security, provide strong passwords. The 2 passwords cannot be identical. After setting up the passwords, a refresh might be needed.
+The following settings are available from the administrator board:
 
-At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts.
+- Set or modify the user password ;
 
-Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
+- Stop or resume the emulation ;
+
+- Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock ;
+
+- Save the game and load a previously saved game ;
+
+- Change the background for a light, square png ;
+
+- Enable the use of the automatic care feature ;
+
+- Switch the sprites to the P2 ones ;
+
+- Reset the game.
 
 ### Original gameplay
 
+The original gameplay is available when the user is connected using the user password.
+
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
-![311852036-bbfc0a9c-ed81-4fef-945c-bbf47fd9ee16](https://github.com/Almarch/tamaR/assets/13364928/c03ad9b4-7126-40f9-87b6-78169d500368)
+![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
+
+The jungle background comes from [here](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts.
 
 ### Automatic care
 
@@ -210,19 +226,27 @@ The shiny app also provides the option to automatically care for the hosted pet,
 
 When checking the "automatic care" option, it is also possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
+![ezgif-4-8ae50b90eb](https://github.com/Almarch/tamaR/assets/13364928/dd439054-5208-4f7f-946f-61ed1e5f00bf)
+
 The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
 
-## Notes on the C++ structure
+### P2 sprites
 
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+Using [tamatool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
 
-Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available and they might have an R implementation later.
+![ezgif-4-32dc6da647](https://github.com/Almarch/tamaR/assets/13364928/a2217d3b-171a-4877-acce-c9d16391d984)
 
-Tamalib was adapted with attention to its platform agnosticity, so it should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
+This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
 ## Secret Character
 
-A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+A new but familiar secret character has snuck in the game. Will you find out who this is ?
+
+## Notes on the C++ structure
+
+Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+
+Tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
 ## Disclaimer
 

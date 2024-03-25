@@ -21,13 +21,6 @@
 #' 
 #' 
 
-bg = readPNG("img/background.png")
-icons = list()
-for(ics in c("attention","bathroom","food","game",
-             "lights","medicine","status","training")){
-    icons[[ics]] = readPNG(paste0("img/",ics,".png"))
-}
-
 setRcppClass(Class = "Tama",
              CppClass = "Tama",
              module = "Tamalib",
@@ -56,7 +49,7 @@ setRcppClass(Class = "Tama",
 
     },
 
-    click = function(button = c("A","B","C"),delay = .10){
+    click = function(button = c("A","B","C"),delay = .1){
 
         stopifnot(all(button %in% c("A","B","C")))
         stopifnot(delay > 0)
