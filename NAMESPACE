@@ -2,6 +2,7 @@
 
 export(Tama)
 export(go)
+export(p2)
 exportClasses(Tama)
 import(Rcpp)
 import(methods)

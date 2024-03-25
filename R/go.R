@@ -19,7 +19,8 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                      user  = ""),
         background = background,
         autocare = F,
-        running = F
+        running = F,
+        ROM = tama$GetROM()
     )
 
     ui <- fluidPage(
@@ -79,8 +80,6 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             align = "center"
         )),
 
-        br(), # 1
-
         fluidRow(column(12,
             actionButton("autocare",
             ifelse(settings$autocare,
@@ -88,17 +87,13 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             "enable automatic care"))
         )),
 
-        br(), # 2
-
-        fluidRow(column(12,
-            actionButton("background","change background"),
-        )),
-
-        br(), # 3
-
         fluidRow(column(12,splitLayout(
             textInput("pass_user","User password:"),
             actionButton("save_pass_user","Save",class="menu"))
+        )),
+
+        fluidRow(column(12,
+            fileInput("background","Change background", multiple = FALSE),
         )),
 
         fluidRow(
@@ -108,9 +103,10 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
         )),
 
         fluidRow(column(12,
-            actionButton("save_state","SAVE"),
-            actionButton("load_state","LOAD"),
-            actionButton("reset_state","RESET")
+            downloadButton("save", "SAVE"),
+            actionButton("p2","P2"),
+            actionButton("reset","RESET"),
+            fileInput("load","LOAD", multiple = FALSE)
         )),
 
         fluidRow(column(12,
@@ -120,17 +116,9 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             actionButton("ac","A+C")
         )),
 
-        br(), # 4
-
         fluidRow(column(12,
-            actionButton("save_rom","dump ROM"),
-            actionButton("load_rom","switch ROM")
-        )),
-        
-        br(), # 5
-
-        fluidRow(column(12,
-            actionButton("back","Back")
+            actionButton("back","Back",class="big"),
+            align = "center"
         ))
     )
 
@@ -180,13 +168,12 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                 shinyjs::hide("ac")
                 shinyjs::hide("stop")
                 shinyjs::hide("start")
-                shinyjs::hide("save_state")
-                shinyjs::hide("load_state")
-                shinyjs::hide("reset_state")
+                shinyjs::hide("save")
+                shinyjs::hide("load")
+                shinyjs::hide("reset")
+                shinyjs::hide("p2")
                 shinyjs::hide("autocare")
                 shinyjs::hide("background")
-                shinyjs::hide("save_rom")
-                shinyjs::hide("load_rom")
                 shinyjs::hide("pass_user")
                 shinyjs::hide("save_pass_user")
                 shinyjs::hide("back")
@@ -208,8 +195,6 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("disc")
                     shinyjs::show("autocare")
                     shinyjs::show("background")
-                    shinyjs::show("save_rom")
-                    shinyjs::show("load_rom")
                     shinyjs::show("pass_user")
                     shinyjs::show("save_pass_user")
                     shinyjs::show("back")
@@ -222,9 +207,10 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                         shinyjs::show("ac")
                         shinyjs::show("stop")
                         shinyjs::hide("start")
-                        shinyjs::hide("save_state")
-                        shinyjs::hide("load_state")
-                        shinyjs::hide("reset_state")
+                        shinyjs::hide("save")
+                        shinyjs::hide("load")
+                        shinyjs::hide("p2")
+                        shinyjs::hide("reset")
 
                     } else {
 
@@ -234,9 +220,10 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                         shinyjs::hide("ac")
                         shinyjs::hide("stop")
                         shinyjs::show("start")
-                        shinyjs::show("save_state")
-                        shinyjs::show("load_state")
-                        shinyjs::show("reset_state")
+                        shinyjs::show("save")
+                        shinyjs::show("load")
+                        shinyjs::show("p2")
+                        shinyjs::show("reset")
 
                     }
                 } else if(etc[["logged_in"]]["user"]) {
@@ -249,13 +236,12 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("ac")
                     shinyjs::hide("stop")
                     shinyjs::hide("start")
-                    shinyjs::hide("save_state")
-                    shinyjs::hide("load_state")
-                    shinyjs::hide("reset_state")
+                    shinyjs::hide("save")
+                    shinyjs::hide("load")
+                    shinyjs::hide("p2")
+                    shinyjs::hide("reset")
                     shinyjs::hide("autocare")
                     shinyjs::hide("background")
-                    shinyjs::hide("save_rom")
-                    shinyjs::hide("load_rom")
                     shinyjs::hide("pass_user")
                     shinyjs::hide("save_pass_user")
                     shinyjs::hide("back")
@@ -303,13 +289,12 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("ac")
                     shinyjs::hide("stop")
                     shinyjs::hide("start")
-                    shinyjs::hide("save_state")
-                    shinyjs::hide("load_state")
-                    shinyjs::hide("reset_state")
+                    shinyjs::hide("save")
+                    shinyjs::hide("load")
+                    shinyjs::hide("p2")
+                    shinyjs::hide("reset")
                     shinyjs::hide("autocare")
                     shinyjs::hide("background")
-                    shinyjs::hide("save_rom")
-                    shinyjs::hide("load_rom")
                     shinyjs::hide("pass_user")
                     shinyjs::hide("save_pass_user")
                     shinyjs::hide("back")
@@ -366,6 +351,72 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             tama$stop()
             settings$running <<- F
             etc[["running"]]  <- F
+        })
+
+        observeEvent(input$p2,{
+            tama$stop()
+            p2(tama)
+            settings$background <<- bg2
+
+            tama$start()
+            Sys.sleep(.1)
+            tama$stop()
+        })
+
+        observeEvent(input$reset,{
+            tama$stop()
+            settings$background <<- NULL
+            tama$SetROM(settings$ROM)
+            init = rep(0,384)
+            init[ 2] = 1
+            init[ 9] = 1
+            init[33] = 96
+            init[34] = 219
+            init[35] = 127
+            init[36] = 42
+            init[37] = 203
+            init[38] = 113
+            init[44] = 12
+            init[48] = 10
+            init[52] = 8
+            init[56] = 6
+            init[60] = 4
+            init[64] = 2
+            tama$SetCPU(init)
+        })
+
+        output$save <- downloadHandler(
+            filename = "save.txt",
+            content = function(file) {
+                tama$stop()
+                state = tama$GetCPU()
+                state = as.character(as.hexmode(state))
+                state = paste(state, collapse = " ")
+                write(state, file)
+            }
+        )
+
+        observeEvent(input$load,{
+            tama$stop()
+            inFile <- input$load
+            try({
+                state = readLines(inFile$datapath)
+                state = unlist(strsplit(state,split=" ", fixed=T))
+                state = as.numeric(as.hexmode(state))
+                tama$SetCPU(state)
+
+                tama$start()
+                Sys.sleep(.1)
+                tama$stop()
+            })
+        })
+
+        observeEvent(input$background,{
+            inFile <- input$background
+            try({
+                bg = readPNG(inFile$datapath)
+                settings$background <<- bg
+            })
         })
 
         ## care routine

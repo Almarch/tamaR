@@ -184,17 +184,35 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, that allows parameterizing the game.
-
-Among other parameterizations, the administrator should define a user password. The other password cannot be null and should be different from the administrator password.
+At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, that allows parameterizing the game. Among other parameterizations, the administrator should define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further.
 
 At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
-For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts.
+For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts. Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
 
-Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
+### Administration
+
+The following settings are available from the administrator board:
+
+- Set or modify the user password ;
+
+- Stop or resume the emulation ;
+
+- Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock ;
+
+- Save the game and load a previously saved game ;
+
+- Change the background for a light, square png ;
+
+- Enable the use of the automatic care feature ;
+
+- Switch the sprites to the P2 ones ;
+
+- Reset the game.
 
 ### Original gameplay
+
+The original gameplay is available when the user is connected using the user password.
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
@@ -208,21 +226,21 @@ When checking the "automatic care" option, it is also possible to choose whether
 
 The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
 
-### Administrator board
+### P2 sprites
 
+Using [tamatool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites. This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
-
-## Notes on the C++ structure
-
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
-
-Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. The user-tailored methods presented in this document and in the manual (`?Tama`) are developped in R, and they rely on lower-level C++ methods. Noteworthily, not all developed C++ methods are used in the R interface: for instance `GetFreq` properly fetches the buzzer frequency and `GetROM` dumps the ROM. These C++ methods are still available and they might have an R implementation later.
-
-Tamalib was adapted with attention to its platform agnosticity, so it should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
 ## Secret Character
 
-A new but familiar secret character has snuck in the game. Will you find out who this is ? If you are spending time on a tamagotchi, odds are that you may have been a kid in the 90's and this secret character is dedicated to you.
+A new but familiar secret character has snuck in the game. Will you find out who this is ?
+
+## Notes on the C++ structure
+
+Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+
+
+Tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
 
 ## Disclaimer
 
