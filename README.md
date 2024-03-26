@@ -66,8 +66,6 @@ The screen can be plotted via the `display` method. A custom background can be p
 
 ```r
 guizmo$display()
-data(p2)
-guizmo$display(p2)
 ```
 
 Buttons (A, B and C) can be controlled using the `click` method. The `delay` argument tells how long the click should last:
