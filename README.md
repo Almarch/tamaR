@@ -1,6 +1,6 @@
 # Tamagotchi is live on R !
 
-This is a package allowing the emulation of a P1 tamagotchi in R using [tamalib](https://github.com/jcrona/tamalib).
+This is a package allowing the emulation of a P1 Tamagotchi in R using [tamalib](https://github.com/jcrona/tamalib).
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
@@ -55,7 +55,7 @@ library(tamaR)
 
 ## Use as an R package
 
-The instanciation of an object of class `Tama` prepares a tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
+The instanciation of an object of class `Tama` prepares a Tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single Tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
 ```r
 guizmo = Tama()
@@ -218,7 +218,7 @@ The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 ![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
 
-The jungle background comes from [here](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts.
+The jungle background comes from [here](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
 
 ### Automatic care
 
@@ -228,7 +228,7 @@ When checking the "automatic care" option, it is also possible to choose whether
 
 ![ezgif-4-8ae50b90eb](https://github.com/Almarch/tamaR/assets/13364928/dd439054-5208-4f7f-946f-61ed1e5f00bf)
 
-The "care" process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session open.
+The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
 ### P2 sprites
 
@@ -246,7 +246,7 @@ A new but familiar secret character has snuck in the game. Will you find out who
 
 Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
 
-Tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. The package tamaR has been succesfully built, installed and tested on GNU/Linux and Windows.
+Tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
 ## Disclaimer
 
