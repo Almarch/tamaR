@@ -182,7 +182,7 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, that allows parameterizing the game. Among other parameterizations, the administrator should define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
+At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, from which the game can be parameterized. Among other parameterizations, the administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
 ![ezgif-4-9a6201e672](https://github.com/Almarch/tamaR/assets/13364928/34b9bd8b-e49d-4fbd-afc8-4eee66f2d5c8)
 
@@ -216,7 +216,7 @@ The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 ![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
 
-The jungle background comes from [here](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
+The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
 
 ### Automatic care
 
@@ -242,9 +242,9 @@ A new but familiar secret character has snuck in the game. Will you find out who
 
 ## Notes on the C++ structure
 
-Tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. Tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
 
-Tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
+tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
 ## Disclaimer
 
