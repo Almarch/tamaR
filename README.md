@@ -246,6 +246,10 @@ tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotc
 
 tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
+## To do
+
+The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the `GetFreq` method.
+
 ## Disclaimer
 
 Enabling the web server exposes your server to the internet. Cares have been taken to make the web server application as safe as possible; however, by utilizing this functionality, you acknowledge and agree that you are solely responsible for configuring and securing your web server. The developer and associated parties are not liable for any damages, losses, or security breaches resulting from using the web server application or from using any information found on this page.
