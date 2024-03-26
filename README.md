@@ -174,7 +174,7 @@ sudo systemctl restart nginx
 
 The app is now available world-wide at http://`<public ip>`:8000
 
-It can be played with a smartphone. A shortcut to the webpage may be added to the home screen. 
+It can be played from a smartphone. A shortcut to the webpage may be added to the home screen. 
 
 The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
