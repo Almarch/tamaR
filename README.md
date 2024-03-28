@@ -216,13 +216,13 @@ The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 ![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
 
-The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
+The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
 
 ### Automatic care
 
 The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
 
-When checking the "automatic care" option, it is also possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
+When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
 ![ezgif-4-8ae50b90eb](https://github.com/Almarch/tamaR/assets/13364928/dd439054-5208-4f7f-946f-61ed1e5f00bf)
 
