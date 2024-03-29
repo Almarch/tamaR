@@ -40,7 +40,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
-R -e "install.packages(c('Rcpp','shiny','png','shinyjs','base64enc'))"
+R -e "install.packages(c('Rcpp','shiny','png','shinyjs','base64enc','bsplus'))"
 R CMD build tamaR
 R CMD INSTALL tamaR_*.tar.gz
 ```
@@ -184,7 +184,7 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, from which the game can be parameterized. Among other parameterizations, the administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
-![ezgif-4-9a6201e672](https://github.com/Almarch/tamaR/assets/13364928/34b9bd8b-e49d-4fbd-afc8-4eee66f2d5c8)
+![pwd](https://github.com/Almarch/tamaR/assets/13364928/59311c44-5693-4905-9c75-8b509eb7ad98)
 
 For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts. Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
 
@@ -192,21 +192,36 @@ For optimal security, provide strong passwords. At each log in, a 2 seconds dela
 
 The following settings are available from the administrator board:
 
-- Set or modify the user password ;
-
 - Stop or resume the emulation ;
 
-- Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock ;
+- Go back to the log-in screen ;
 
-- Save the game and load a previously saved game ;
+- User settings:
 
-- Change the background for a light, square png ;
+    - Set or modify the user password ;
 
-- Enable the use of the automatic care feature ;
+    - Enable the use of the automatic care feature.
 
-- Switch the sprites to the P2 ones ;
+- Play as admin (the game must be running):
 
-- Reset the game.
+    - Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock.
+
+- Aesthetics (the game must be stopped):
+
+    - Change the background for a light, square png ;
+
+    - Switch the sprites to the P2 ones ;
+
+    - Dump the ROM or load a new, customized one ;
+
+    - Reset all aesthetics.
+
+- Game state (the game must be stopped):
+
+    - Save the game or load a previously saved one ;
+
+    - Reset the game state (as the back button from the original toy).
+
 
 ### Original gameplay
 
@@ -214,7 +229,7 @@ The original gameplay is available when the user is connected using the user pas
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
-![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
+![game](https://github.com/Almarch/tamaR/assets/13364928/8d80eca2-1161-4cd1-844e-c69313d6d666)
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
 
@@ -224,7 +239,7 @@ The shiny app also provides the option to automatically care for the hosted pet,
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
-![ezgif-4-8ae50b90eb](https://github.com/Almarch/tamaR/assets/13364928/dd439054-5208-4f7f-946f-61ed1e5f00bf)
+![care](https://github.com/Almarch/tamaR/assets/13364928/dd6a2b13-d03a-46a3-aea8-f4d540a01582)
 
 The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
@@ -232,7 +247,7 @@ The automatic care process works on the frontend, so it will not support being l
 
 Using [tamatool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
 
-![ezgif-4-32dc6da647](https://github.com/Almarch/tamaR/assets/13364928/a2217d3b-171a-4877-acce-c9d16391d984)
+![p2](https://github.com/Almarch/tamaR/assets/13364928/d28fb569-0a98-43e1-9ecd-e50e39cd12d8)
 
 This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 

@@ -74,5 +74,24 @@ setRcppClass(Class = "Tama",
         state = unlist(strsplit(state,split=" ", fixed=T))
         state = as.numeric(as.hexmode(state))
         .self$SetCPU(state)
+    },
+
+    reset = function(){
+        init = rep(0,384)
+        init[ 2] = 1
+        init[ 9] = 1
+        init[33] = 96
+        init[34] = 219
+        init[35] = 127
+        init[36] = 42
+        init[37] = 203
+        init[38] = 113
+        init[44] = 12
+        init[48] = 10
+        init[52] = 8
+        init[56] = 6
+        init[60] = 4
+        init[64] = 2
+        .self$SetCPU(init)
     }
 ))
