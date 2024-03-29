@@ -1,5 +1,6 @@
 
 setwd("tamaR/src")
+source("../R/nb2hex.R")
 
 obj = readBin(con = "rom.bin", what = "raw", n = file.info("rom.bin")$size)
 obj = paste(as.character(obj), collapse = "")
@@ -29,19 +30,10 @@ obj[7658:7824] = c(#           z(_(")(")
     "2f","9d","09","90","95","01","30")
 }
 
-obj = paste0("0x",toupper(obj))
-file = "rom.h"
-cat("static unsigned char g_program_b12[] = {\n", file = file, append= F)
-for(i in 1:length(obj)){
-    cat(obj[i], file = file, append= T)
-    cat(",", file = file, append= T)
-    if(!i%%18) {
-        cat("\n", file = file, append= T)
-    } else if(!i%%3){
-        cat(" ", file = file, append= T)
-    }
-}
-cat("};\n", file = file, append= T)
+obj = as.numeric(as.hexmode(obj))
+obj = nb2hex(obj)
+obj = paste0(obj,"\n")
+cat(obj, file = "rom.h", append= F)
 
 setwd("../..")
 print("Conversion succesfull. Enjoy !")

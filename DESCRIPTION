@@ -6,9 +6,9 @@ Author@R:
 Description: Emulates a tamagotchi
 License: Attribution-NonCommercial 4.0 International
 Encoding: UTF-8
-Depends: R (>= 3.5.0), png, base64enc, shiny, shinyjs
+Depends: R (>= 3.5.0), png, base64enc, shiny, shinyjs, bsplus
 Imports: Rcpp (>= 1.0.0), methods
 LinkingTo: Rcpp
 SystemRequirements: C++12
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.3.9000
 Roxygen: list(markdown = TRUE)

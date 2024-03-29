@@ -37,6 +37,13 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     border-radius: 50%;
                       }
 
+            .mid {
+                    width: 75px;
+                    height: 75px;
+                    border: 5px solid black;
+                    border-radius: 50%;
+                      }
+
              .menu {
                     width: 150px;
                     height: 80px;
@@ -64,61 +71,35 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             actionButton("log_in","Log in", class = "menu"))
         )),
 
-        ### User board
-        fluidRow(column(12,splitLayout(
-                     actionButton("A","",class="big"),
-                     actionButton("B","",class="big"),
-                     actionButton("C","",class="big"))
-        )),
+        ### Buttons
         fluidRow(column(12,
-            actionButton("start","START",class="big"),
+            splitLayout(
+                actionButton("A","",class="big"),
+                actionButton("B","",class="big"),
+                actionButton("C","",class="big")
+            ),
             align = "center"
         )),
 
         fluidRow(column(12,
-            actionButton("stop","STOP",class="big"),
+            splitLayout(
+                uiOutput("startstop"),
+                actionButton("back","BACK"  ,class="big")
+            ),
             align = "center"
         )),
-
-        fluidRow(column(12,
-            actionButton("autocare",
-            ifelse(settings$autocare,
-            "disable automatic care",
-            "enable automatic care"))
-        )),
-
-        fluidRow(column(12,splitLayout(
-            textInput("pass_user","User password:"),
-            actionButton("save_pass_user","Save",class="menu"))
-        )),
-
-        fluidRow(column(12,
-            fileInput("background","Change background", multiple = FALSE),
-        )),
-
+        
+        br(),
+        
         fluidRow(
             column(12,splitLayout(
                 checkboxInput("care", "Automatic care",      value = F),
                 checkboxInput("disc", "Care for discipline", value = T))
         )),
 
+        ### Admin board
         fluidRow(column(12,
-            downloadButton("save", "SAVE"),
-            actionButton("p2","P2"),
-            actionButton("reset","RESET"),
-            fileInput("load","LOAD", multiple = FALSE)
-        )),
-
-        fluidRow(column(12,
-            actionButton("a","A"),
-            actionButton("b","B"),
-            actionButton("c","C"),
-            actionButton("ac","A+C")
-        )),
-
-        fluidRow(column(12,
-            actionButton("back","Back",class="big"),
-            align = "center"
+            uiOutput("admin")
         ))
     )
 
@@ -142,6 +123,97 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
         etc[["autocare"]] = settings$autocare
 
         ### Conditionnal UI
+
+        observe({
+            if(etc[["running"]]) {
+
+                output$startstop = renderUI(actionButton("stop","STOP",class="big"))
+                output$admin = renderUI(
+                    bsplus::bs_accordion(id = "admin_running") |> bs_set_opts(
+                        panel_type = "info"
+                    ) |> bs_append(
+                        title = "User settings",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                textInput("pass_user","User password:"),
+                                actionButton("save_pass_user","Save",class="menu")
+                            ),
+                            br(),
+                            fluidRow(column(12,
+                                actionButton("autocare",
+                                ifelse(settings$autocare,
+                                "disable automatic care",
+                                "enable automatic care"))
+                            )),
+                            align = "center"
+                        ))
+                    ) |> bs_append(
+                        title = "Play as admin",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                actionButton("a","A",class="mid"),
+                                actionButton("b","B",class="mid"),
+                                actionButton("c","C",class="mid"),
+                                actionButton("ac","A+C",class="mid")
+                            ),
+                            align = "center"
+                        ))
+                    )
+                )
+            } else {
+                output$startstop = renderUI(actionButton("start","START",class="big"))
+                output$admin = renderUI(
+                    
+                    bsplus::bs_accordion(id = "admin_stopped") |> bs_set_opts(
+                        panel_type = "warning"
+                    ) |> bs_append(
+                        title = "User settings",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                textInput("pass_user","User password:"),
+                                actionButton("save_pass_user","Save",class="menu")
+                            ),
+                            br(),
+                            fluidRow(column(12,
+                                actionButton("autocare",
+                                ifelse(settings$autocare,
+                                "disable automatic care",
+                                "enable automatic care"))
+                            )),
+                            align = "center"
+                        ))
+                    ) |> bs_append(
+                        title = "Aesthetics",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                actionButton("p2","Switch to P2 sprites"),
+                                fileInput("background","Change background", multiple = FALSE)
+                            ),
+                            br(),
+                            splitLayout(
+                                downloadButton("save_rom", "Dump the ROM"),
+                                fileInput("load_rom", "Load a ROM", multiple = FALSE)
+                            ),
+                            br(),
+                            actionButton("reset_aes","Reset all aesthetics"),
+                            align = "center"
+                        ))
+                    ) |> bs_append(
+                        title = "Game state",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                downloadButton("save_state", "Save the game"),
+                                fileInput("load_state", "Load a game", multiple = FALSE)
+                            ),
+                            br(),
+                            actionButton("reset_state","Reset the game"),
+                            align = "center"
+                        ))
+                    )
+                )
+            }
+        })
+            
         observe({
 
             if(etc[["autocare"]]){
@@ -162,20 +234,8 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                 shinyjs::hide("C")
                 shinyjs::hide("care")
                 shinyjs::hide("disc")
-                shinyjs::hide("a")
-                shinyjs::hide("b")
-                shinyjs::hide("c")
-                shinyjs::hide("ac")
-                shinyjs::hide("stop")
-                shinyjs::hide("start")
-                shinyjs::hide("save")
-                shinyjs::hide("load")
-                shinyjs::hide("reset")
-                shinyjs::hide("p2")
-                shinyjs::hide("autocare")
-                shinyjs::hide("background")
-                shinyjs::hide("pass_user")
-                shinyjs::hide("save_pass_user")
+                shinyjs::hide("admin")
+                shinyjs::hide("startstop")
                 shinyjs::hide("back")
 
             } else {
@@ -193,57 +253,16 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("C")
                     shinyjs::hide("care")
                     shinyjs::hide("disc")
-                    shinyjs::show("autocare")
-                    shinyjs::show("background")
-                    shinyjs::show("pass_user")
-                    shinyjs::show("save_pass_user")
+                    shinyjs::show("admin")
+                    shinyjs::show("startstop")
                     shinyjs::show("back")
 
-                    if(etc[["running"]]){
-
-                        shinyjs::show("a")
-                        shinyjs::show("b")
-                        shinyjs::show("c")
-                        shinyjs::show("ac")
-                        shinyjs::show("stop")
-                        shinyjs::hide("start")
-                        shinyjs::hide("save")
-                        shinyjs::hide("load")
-                        shinyjs::hide("p2")
-                        shinyjs::hide("reset")
-
-                    } else {
-
-                        shinyjs::hide("a")
-                        shinyjs::hide("b")
-                        shinyjs::hide("c")
-                        shinyjs::hide("ac")
-                        shinyjs::hide("stop")
-                        shinyjs::show("start")
-                        shinyjs::show("save")
-                        shinyjs::show("load")
-                        shinyjs::show("p2")
-                        shinyjs::show("reset")
-
-                    }
                 } else if(etc[["logged_in"]]["user"]) {
-
+                    
                     shinyjs::hide("pass")
                     shinyjs::hide("log_in")
-                    shinyjs::hide("a")
-                    shinyjs::hide("b")
-                    shinyjs::hide("c")
-                    shinyjs::hide("ac")
-                    shinyjs::hide("stop")
-                    shinyjs::hide("start")
-                    shinyjs::hide("save")
-                    shinyjs::hide("load")
-                    shinyjs::hide("p2")
-                    shinyjs::hide("reset")
-                    shinyjs::hide("autocare")
-                    shinyjs::hide("background")
-                    shinyjs::hide("pass_user")
-                    shinyjs::hide("save_pass_user")
+                    shinyjs::hide("admin")
+                    shinyjs::hide("startstop")
                     shinyjs::hide("back")
 
                     if(etc[["autocare"]]) {
@@ -283,20 +302,8 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
                     shinyjs::hide("C")
                     shinyjs::hide("care")
                     shinyjs::hide("disc")
-                    shinyjs::hide("a")
-                    shinyjs::hide("b")
-                    shinyjs::hide("c")
-                    shinyjs::hide("ac")
-                    shinyjs::hide("stop")
-                    shinyjs::hide("start")
-                    shinyjs::hide("save")
-                    shinyjs::hide("load")
-                    shinyjs::hide("p2")
-                    shinyjs::hide("reset")
-                    shinyjs::hide("autocare")
-                    shinyjs::hide("background")
-                    shinyjs::hide("pass_user")
-                    shinyjs::hide("save_pass_user")
+                    shinyjs::hide("admin")
+                    shinyjs::hide("startstop")
                     shinyjs::hide("back")
 
                 }
@@ -357,57 +364,61 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
             tama$stop()
             p2(tama)
             settings$background <<- bg2
-
-            tama$start()
-            Sys.sleep(.1)
-            tama$stop()
+            glimpse(tama)
         })
 
-        observeEvent(input$reset,{
+        observeEvent(input$reset_aes,{
             tama$stop()
             settings$background <<- NULL
             tama$SetROM(settings$ROM)
-            init = rep(0,384)
-            init[ 2] = 1
-            init[ 9] = 1
-            init[33] = 96
-            init[34] = 219
-            init[35] = 127
-            init[36] = 42
-            init[37] = 203
-            init[38] = 113
-            init[44] = 12
-            init[48] = 10
-            init[52] = 8
-            init[56] = 6
-            init[60] = 4
-            init[64] = 2
-            tama$SetCPU(init)
+            glimpse(tama)
         })
 
-        output$save <- downloadHandler(
+        observeEvent(input$reset_state,{
+            tama$stop()
+            tama$reset()
+            glimpse(tama)
+        })
+
+        output$save_state <- downloadHandler(
             filename = "save.txt",
             content = function(file) {
                 tama$stop()
                 state = tama$GetCPU()
-                state = as.character(as.hexmode(state))
-                state = paste(state, collapse = " ")
+                state = nb2hex(state)
                 write(state, file)
             }
         )
 
-        observeEvent(input$load,{
+        observeEvent(input$load_state,{
             tama$stop()
-            inFile <- input$load
+            inFile <- input$load_state
             try({
                 state = readLines(inFile$datapath)
-                state = unlist(strsplit(state,split=" ", fixed=T))
-                state = as.numeric(as.hexmode(state))
+                state = hex2nb(state)
                 tama$SetCPU(state)
+                glimpse(tama)
+            })
+        })
 
-                tama$start()
-                Sys.sleep(.1)
+         output$save_rom <- downloadHandler(
+            filename = "rom.h",
+            content = function(file) {
                 tama$stop()
+                rom = tama$GetROM()
+                rom = nb2hex(rom)
+                write(rom, file)
+            }
+        )
+
+        observeEvent(input$load_rom,{
+            tama$stop()
+            inFile <- input$load_rom
+            try({
+                rom = readLines(inFile$datapath)
+                rom = hex2nb(rom)
+                tama$SetROM(rom)
+                glimpse(tama)
             })
         })
 
