@@ -184,6 +184,7 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, from which the game can be parameterized. Among other parameterizations, the administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
+![pwd](https://github.com/Almarch/tamaR/assets/13364928/59311c44-5693-4905-9c75-8b509eb7ad98)
 
 For optimal security, provide strong passwords. At each log in, a 2 seconds delay is observed to hamper brute force cracking attempts. Tamagotchi has not been designed as a multi-player game. Several users attempting to interact simultaneously with the toy will not work well.
 
@@ -193,7 +194,7 @@ The following settings are available from the administrator board:
 
 - Stop or resume the emulation ;
 
-- Go back to the log in screen ;
+- Go back to the log-in screen ;
 
 - User settings:
 
@@ -201,23 +202,23 @@ The following settings are available from the administrator board:
 
     - Enable the use of the automatic care feature.
 
-- When the game is running, play as admin:
+- Play as admin (the game must be running):
 
     - Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock.
 
-- When the game is stopped, aesthetics:
+- Aesthetics (the game must be stopped):
 
     - Change the background for a light, square png ;
 
     - Switch the sprites to the P2 ones ;
 
-    - Dump the ROM or load a new one, which allows playing with any customized ROM ;
+    - Dump the ROM or load a new, customized one ;
 
     - Reset all aesthetics.
 
-- When the game is stopped, game state:
+- Game state (the game must be stopped):
 
-    - Save the game or load a previously saved game ;
+    - Save the game or load a previously saved one ;
 
     - Reset the game state (as the back button from the original toy).
 
@@ -228,7 +229,7 @@ The original gameplay is available when the user is connected using the user pas
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
-![ezgif-4-3c79d44fda](https://github.com/Almarch/tamaR/assets/13364928/47635506-623d-4a9d-b65d-cb718134bf0b)
+![game](https://github.com/Almarch/tamaR/assets/13364928/8d80eca2-1161-4cd1-844e-c69313d6d666)
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
 
@@ -238,6 +239,7 @@ The shiny app also provides the option to automatically care for the hosted pet,
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
+![care](https://github.com/Almarch/tamaR/assets/13364928/dd6a2b13-d03a-46a3-aea8-f4d540a01582)
 
 The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
@@ -245,6 +247,7 @@ The automatic care process works on the frontend, so it will not support being l
 
 Using [tamatool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
 
+![p2](https://github.com/Almarch/tamaR/assets/13364928/d28fb569-0a98-43e1-9ecd-e50e39cd12d8)
 
 This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
