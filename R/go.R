@@ -5,6 +5,9 @@
 #' @param background A png image to use as background. It should be square and imported using png::readPNG
 #' @param port The port to use for shiny, default is 1996
 #' @export go
+#' @examples
+#' guizmo = Tama()
+#' go(Guizmo)
 #' 
 #' 
 

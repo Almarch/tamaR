@@ -16,3 +16,9 @@ go(tama, port = 1996, background = NULL, host = "127.0.0.1")
 \description{
 A Shiny application to play with your virtual pet
 }
+\examples{
+guizmo = Tama()
+go(Guizmo)
+
+
+}

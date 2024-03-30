@@ -1,4 +1,4 @@
-FROM r-base:4.2.0
+FROM r-base:4.1.0
 
 RUN mkdir -p /app/tamaR
 ADD . /app/tamaR
