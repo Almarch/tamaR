@@ -1,6 +1,6 @@
 # Tamagotchi is live on R !
 
-This is a package allowing the emulation of a P1 Tamagotchi in R using [tamalib](https://github.com/jcrona/tamalib).
+This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
@@ -245,7 +245,7 @@ The automatic care process works on the frontend, so it will not support being l
 
 ### P2 sprites
 
-Using [tamatool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
+Using [TamaTool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
 
 ![p2](https://github.com/Almarch/tamaR/assets/13364928/d28fb569-0a98-43e1-9ecd-e50e39cd12d8)
 
@@ -257,9 +257,9 @@ A new but familiar secret character has snuck in the game. Will you find out who
 
 ## Notes on the C++ structure
 
-tamalib has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. tamalib was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all tamalib code into a monolithic tamalib.cpp program.
+TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
 
-tamalib was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
+TamaLIB was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
 ## To do
 
