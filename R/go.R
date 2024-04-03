@@ -4,6 +4,7 @@
 #' @param tama An object of class Tama
 #' @param background A png image to use as background. It should be square and imported using png::readPNG
 #' @param port The port to use for shiny, default is 1996
+#' @param host The host to use for shiny, default is "127.0.0.1" (localhost)
 #' @export go
 #' @examples
 #' guizmo = Tama()
@@ -11,7 +12,7 @@
 #' 
 #' 
 
-go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
+go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
     options(shiny.port = port,
             shiny.host = host)
@@ -27,34 +28,17 @@ go = function(tama, port = 1996, background = NULL, host = "127.0.0.1"){
     )
 
     ui <- fluidPage(
+        title = "TaMaGoTcHi",
         useShinyjs(),
         tags$head(
-            tags$link(rel = "icon shortcut",
-                      type="image/png",
-                      href = ico),
-            tags$style(HTML(
-            ".big {
-                    width: 100px;
-                    height: 100px;
-                    border: 5px solid black;
-                    border-radius: 50%;
-                      }
-
-            .mid {
-                    width: 75px;
-                    height: 75px;
-                    border: 5px solid black;
-                    border-radius: 50%;
-                      }
-
-             .menu {
-                    width: 150px;
-                    height: 80px;
-                    border: 1px solid black;
-                    border-radius: 10%;
-               }"
-            ))
+            tags$link(rel  = "icon shortcut",
+                      type = "image/png",
+                      href = "www/icon.png"),
+            tags$link(rel  = "stylesheet",
+                      type = "text/css",
+                      href = "www/styles.css")
         ),
+
         headerPanel(""),
 
         ### First connection screen
