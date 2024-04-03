@@ -4,14 +4,16 @@
 \alias{go}
 \title{A Shiny application to play with your virtual pet}
 \usage{
-go(tama, port = 1996, background = NULL, host = "127.0.0.1")
+go(tama, background = NULL, port = 1996, host = "127.0.0.1")
 }
 \arguments{
 \item{tama}{An object of class Tama}
 
+\item{background}{A png image to use as background. It should be square and imported using png::readPNG}
+
 \item{port}{The port to use for shiny, default is 1996}
 
-\item{background}{A png image to use as background. It should be square and imported using png::readPNG}
+\item{host}{The host to use for shiny, default is "127.0.0.1" (localhost)}
 }
 \description{
 A Shiny application to play with your virtual pet
