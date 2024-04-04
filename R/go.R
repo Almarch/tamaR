@@ -565,7 +565,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             output$screen = renderPlot({
                 tama$display(background = settings$background)
                 etc[["busy"]] = F
-                invalidateLater(1000/3, session)
+                invalidateLater(1000/6, session)
                 })
         })
     }   
