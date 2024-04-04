@@ -1,4 +1,4 @@
-# Tamagotchi is live on R !
+# <img src="inst/www/icon.png" alt="TaMaGoTcHi" width="35"/> The Tamagotchi is live on <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/>
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
 
@@ -272,3 +272,5 @@ Enabling the web server exposes your server to the internet. Cares have been tak
 ## License 
 
 This work is licensed under Attribution-NonCommercial 4.0 International.
+
+All graphical resources come from the extraordinarily rich Tamagotchi [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)).
