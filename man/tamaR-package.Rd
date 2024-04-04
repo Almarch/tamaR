@@ -4,10 +4,7 @@
 \name{tamaR-package}
 \alias{tamaR}
 \alias{tamaR-package}
-\title{tamaR: Tamagotchi is live on R !}
+\title{tamaR: The Tamagotchi is live on R !}
 \description{
-Emulates a tamagotchi
-}
-\details{
-The Tamalib library for R
+Emulates a P1 Tamagotchi
 }
