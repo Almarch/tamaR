@@ -1,9 +1,9 @@
 Package: tamaR
-Title: Tamagotchi is live on R !
+Title: The Tamagotchi is live on R !
 Version: 1.0.0
 Author@R:
     person(email = "almarch@github.com")
-Description: Emulates a tamagotchi
+Description: Emulates a P1 Tamagotchi
 License: Attribution-NonCommercial 4.0 International
 Encoding: UTF-8
 Depends: R (>= 4.1.0), png, shiny, shinyjs, bsplus
