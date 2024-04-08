@@ -585,8 +585,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 )
                 etc[["freq"]] <- new_freq
             }
-            invalidateLater(1000/6, session)
-        })
+            invalidateLater(5, session)
+        },
+        priority = 1)
     }   
 
     shinyApp(ui, server)
