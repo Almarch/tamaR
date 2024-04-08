@@ -13,8 +13,8 @@ for(ics in c("attention","bathroom","food","game",
 ### make audio resources available
 
 waves = list()
-rate      = 4410
-duration  = 1/5
+rate      = 4410 # hz
+duration  = 1/3  # sec
 amplitude = 1
 tmp = tempfile(fileext = ".wav")
 

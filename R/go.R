@@ -109,6 +109,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         etc[["running"]] = settings$running
         etc[["autocare"]] = settings$autocare
 
+        etc[["freq"]] = 0
+
         ### Conditionnal UI
 
         observe({
@@ -553,17 +555,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         ## Original gameplay
         observeEvent(input$A,tama$click("A"))
         observeEvent(input$B,tama$click("B"))
-        #observeEvent(input$C,tama$click("C"))
-        observeEvent(input$C,{
-            insertUI(
-                    selector = "#screen",
-                    where = "afterEnd",
-                    tags$audio(id = "audio",
-                               src = waves[[paste0(tama$GetFreq(),"Hz")]],
-                               type = "audio/wav",
-                               autoplay = T)
-            )
-        })
+        observeEvent(input$C,tama$click("C"))
 
         observeEvent(input$a,tama$click("A"))
         observeEvent(input$b,tama$click("B"))
@@ -576,7 +568,24 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 tama$display(background = settings$background)
                 etc[["busy"]] = F
                 invalidateLater(1000/6, session)
-                })
+            })
+        })
+
+        observe({
+            new_freq = tama$GetFreq()
+            if(new_freq != etc[["freq"]]){
+                try(removeUI("audio"))
+                insertUI(
+                        selector = "#screen",
+                        where = "afterEnd",
+                        tags$audio(id = "audio",
+                            src = waves[[paste0(new_freq,"Hz")]],
+                            type = "audio/wav",
+                            autoplay = T)
+                )
+                etc[["freq"]] <- new_freq
+            }
+            invalidateLater(1000/6, session)
         })
     }   
 
