@@ -440,8 +440,6 @@ static void set_io(u12_t n, u4_t v)
 
     case REG_K40_K43_BZ_OUTPUT_PORT:
       /* Output port (R40-R43) */
-      //g_hal->log(LOG_INFO, "Output/Buzzer: 0x%X\n", v);
-      hw_enable_buzzer(!(v & 0x8));
       break;
 
     case REG_CPU_OSC3_CTRL:
@@ -710,7 +708,6 @@ static void op_nop7_cb(u8_t arg0, u8_t arg1)
 
 static void op_halt_cb(u8_t arg0, u8_t arg1)
 {
-  g_hal->halt();
 }
 
 static void op_inc_x_cb(u8_t arg0, u8_t arg1)
@@ -1868,9 +1865,6 @@ static int hal_handler(void) {
   return 0;
 }
 
-static void hal_halt(void) {
-}
-
 static void hal_log(log_level_t level, char *buff, ...) {
 }
 
@@ -1889,18 +1883,13 @@ static void hal_sleep_until(timestamp_t ts) {
 }
 
 static void hal_update_screen(void) {
-} 
+}
 
-static void hal_play_frequency(bool_t en) {
-  if(en){
-    play_freq = current_freq;
-  } else{
-    play_freq = 0;
-  }
+static void hal_play_frequency(void) {
+  play_freq = current_freq;
 }
 
 static hal_t hal = {
-  .halt = &hal_halt,
   .log = &hal_log,
   .sleep_until = &hal_sleep_until,
   .get_timestamp = &hal_get_timestamp,
@@ -1978,10 +1967,6 @@ bool_t hw_init(void)
 	return 0;
 }
 
-void hw_release(void)
-{
-}
-
 void hw_set_lcd_pin(u8_t seg, u8_t com, u8_t val)
 {
 	if (seg_pos[seg] < LCD_WIDTH) {
@@ -2019,11 +2004,6 @@ void hw_set_buzzer_freq(u4_t freq)
 {
   if (freq>7) return;
   g_hal->set_frequency(snd_freq[freq]);
-}
-
-void hw_enable_buzzer(bool_t en)
-{
-	g_hal->play_frequency(en);
 }
 
 // Constructor

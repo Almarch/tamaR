@@ -564,6 +564,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         observe({
             output$screen = renderPlot({
                 tama$display(background = settings$background)
+                insertUI(selector = "#screen", where = "afterEnd",
+                tags$audio(id = "audio",src = waves[[paste0(tama$GetFreq())]], type = "audio/wav", autoplay = T) )
                 etc[["busy"]] = F
                 invalidateLater(1000/6, session)
                 })

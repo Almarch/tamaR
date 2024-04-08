@@ -40,7 +40,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
-R -e "install.packages(c('Rcpp','shiny','png','shinyjs','bsplus'))"
+R -e "install.packages(c('Rcpp','shiny','png','shinyjs','bsplus','base64enc','audio'))"
 R CMD build tamaR
 R CMD INSTALL tamaR_*.tar.gz
 ```
@@ -260,10 +260,6 @@ A new but familiar secret character has snuck in the game. Will you find out who
 TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
 
 TamaLIB was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
-
-## To do
-
-The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the `GetFreq` method.
 
 ## Disclaimer
 

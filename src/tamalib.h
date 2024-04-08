@@ -48,15 +48,14 @@ typedef enum {
 } log_level_t;
 
 typedef struct {
-	void (*halt)(void);
 	void (*log)(log_level_t level, char *buff, ...);
 	void (*sleep_until)(timestamp_t ts);
 	timestamp_t (*get_timestamp)(void);
-	void (*update_screen)(void);
+void (*update_screen)(void);
 	void (*set_lcd_matrix)(u8_t x, u8_t y, bool_t val);
 	void (*set_lcd_icon)(u8_t icon, bool_t val);
 	void (*set_frequency)(u32_t freq);
-	void (*play_frequency)(bool_t en);
+	void (*play_frequency)(void);
 	int (*handler)(void);
 } hal_t;
 
@@ -139,11 +138,9 @@ typedef enum {
 } int_slot_t;
 
 bool_t hw_init(void);
-void hw_release(void);
 void hw_set_lcd_pin(u8_t seg, u8_t com, u8_t val);
 void hw_set_button(button_t btn, btn_state_t state);
 void hw_set_buzzer_freq(u4_t freq);
-void hw_enable_buzzer(bool_t en);
 bool_t tamalib_init(u32_t freq);
 void tamalib_set_framerate(u8_t framerate);
 void tamalib_register_hal(hal_t *hal);
