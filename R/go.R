@@ -38,6 +38,10 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                       type = "text/css",
                       href = "www/styles.css")
         ),
+        tags$audio(id = "audio",
+                   src = waves[["0Hz"]],
+                   type = "audio/wav",
+                   autoplay = T),
 
         headerPanel(""),
 
@@ -553,7 +557,17 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         ## Original gameplay
         observeEvent(input$A,tama$click("A"))
         observeEvent(input$B,tama$click("B"))
-        observeEvent(input$C,tama$click("C"))
+        #observeEvent(input$C,tama$click("C"))
+        observeEvent(input$C,{
+            insertUI(
+                    selector = "#screen",
+                    where = "afterEnd",
+                    tags$audio(id = "audio",
+                               src = waves[[2]],
+                               type = "audio/wav",
+                               autoplay = T)
+            )
+        })
 
         observeEvent(input$a,tama$click("A"))
         observeEvent(input$b,tama$click("B"))
@@ -564,8 +578,6 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         observe({
             output$screen = renderPlot({
                 tama$display(background = settings$background)
-                insertUI(selector = "#screen", where = "afterEnd",
-                tags$audio(id = "audio",src = waves[[paste0(tama$GetFreq())]], type = "audio/wav", autoplay = T) )
                 etc[["busy"]] = F
                 invalidateLater(1000/6, session)
                 })
