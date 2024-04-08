@@ -8,8 +8,6 @@
 #include <cstring> // memcpy
 #include <stdlib.h> // exit
 
-#define TAMA_DISPLAY_FRAMERATE  6
-
 #define CPU_SPEED_RATIO      1
 #define TICK_FREQUENCY        32768 // Hz
 #define TIMER_1HZ_PERIOD      32768 // in ticks
@@ -93,9 +91,7 @@
 
 static exec_mode_t exec_mode = EXEC_MODE_RUN;
 static u32_t step_depth = 0;
-static timestamp_t screen_ts = 0;
 static u32_t ts_freq;
-static u8_t g_framerate = TAMA_DISPLAY_FRAMERATE;
 hal_t *g_hal;
 static uint16_t current_freq = 0;
 static uint16_t play_freq = 0; 
@@ -433,50 +429,9 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_rld = (prog_timer_rld & 0xF) | (v << 4);
       break;
 
-    case REG_K00_K03_INPUT_PORT:
-      /* Input port (K00-K03) */
-      /* Write not allowed */
-      break;
-
-    case REG_K40_K43_BZ_OUTPUT_PORT:
-      /* Output port (R40-R43) */
-      break;
-
-    case REG_CPU_OSC3_CTRL:
-      /* CPU/OSC3 clocks switch, CPU voltage switch */
-      /* Assume 32,768 OSC1 selected, OSC3 off, battery >= 3,1V (0x1) */
-      break;
-
-    case REG_LCD_CTRL:
-      /* LCD control */
-      break;
-
-    case REG_LCD_CONTRAST:
-      /* LCD contrast */
-      /* Assume medium contrast (0x8) */
-      break;
-
-    case REG_SVD_CTRL:
-      /* SVD */
-      /* Assume battery voltage always OK (0x6) */
-      break;
-
     case REG_BUZZER_CTRL1:
       /* Buzzer config 1 */
       hw_set_buzzer_freq(v & 0x7);
-      break;
-
-    case REG_BUZZER_CTRL2:
-      /* Buzzer config 2 */
-      break;
-
-    case REG_CLK_WD_TIMER_CTRL:
-      /* Clock/Watchdog timer reset */
-      /* Ignore watchdog */
-      break;
-
-    case REG_SW_TIMER_CTRL:
-      /* Stopwatch stop/run/reset */
       break;
 
     case REG_PROG_TIMER_CTRL:
@@ -492,14 +447,8 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_enabled = v & 0x1;
       break;
 
-    case REG_PROG_TIMER_CLK_SEL:
-      /* Prog timer clock selection */
-      /* Assume 256Hz, output disabled */
-      break;
-
     default:
       break;
-      //g_hal->log(LOG_ERROR,   "Write 0x%X to unimplemented I/O 0x%03X - PC = 0x%04X\n", v, n, pc);
   }
 }
 
@@ -1882,9 +1831,6 @@ static void hal_sleep_until(timestamp_t ts) {
   }
 }
 
-static void hal_update_screen(void) {
-}
-
 static void hal_play_frequency(void) {
   play_freq = current_freq;
 }
@@ -1893,7 +1839,6 @@ static hal_t hal = {
   .log = &hal_log,
   .sleep_until = &hal_sleep_until,
   .get_timestamp = &hal_get_timestamp,
-  .update_screen = &hal_update_screen,
   .set_lcd_matrix = &hal_set_lcd_matrix,
   .set_lcd_icon = &hal_set_lcd_icon,
   .set_frequency = &hal_set_frequency,
@@ -1915,11 +1860,6 @@ bool_t tamalib_init(u32_t freq)
 	return res;
 }
 
-void tamalib_set_framerate(u8_t framerate)
-{
-	g_framerate = framerate;
-}
-
 void tamalib_register_hal(hal_t *hal)
 {
 	g_hal = hal;
@@ -1937,16 +1877,6 @@ void tamalib_mainloop_step_by_step(void)
         exec_mode = EXEC_MODE_PAUSE;
         step_depth = cpu_get_depth();
       }
-    }
-
-
-    /* Update the screen @ g_framerate fps */
-    ts = g_hal->get_timestamp();
-    
-    if (ts - screen_ts >= ts_freq/g_framerate) {
-    //if (ts - screen_ts >= ts_freq/DEFAULT_FRAMERATE) {
-      screen_ts = ts;
-      g_hal->update_screen();
     }
   }
 }
@@ -2009,7 +1939,6 @@ void hw_set_buzzer_freq(u4_t freq)
 // Constructor
 Tama::Tama() {
     tamalib_register_hal(&hal);
-    tamalib_set_framerate(TAMA_DISPLAY_FRAMERATE);
     tamalib_init(1000000);
 }
 
