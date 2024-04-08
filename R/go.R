@@ -38,10 +38,6 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                       type = "text/css",
                       href = "www/styles.css")
         ),
-        tags$audio(id = "audio",
-                   src = waves[["0Hz"]],
-                   type = "audio/wav",
-                   autoplay = T),
 
         headerPanel(""),
 
@@ -563,7 +559,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                     selector = "#screen",
                     where = "afterEnd",
                     tags$audio(id = "audio",
-                               src = waves[[2]],
+                               src = waves[[paste0(tama$GetFreq(),"Hz")]],
                                type = "audio/wav",
                                autoplay = T)
             )

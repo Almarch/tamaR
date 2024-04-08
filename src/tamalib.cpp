@@ -94,7 +94,6 @@ static u32_t step_depth = 0;
 static u32_t ts_freq;
 hal_t *g_hal;
 static uint16_t current_freq = 0;
-static uint16_t play_freq = 0; 
 static bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH/8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 static cpu_state_t cpuState;
@@ -1827,10 +1826,6 @@ static void hal_sleep_until(timestamp_t ts) {
   }
 }
 
-static void hal_play_frequency(void) {
-  play_freq = current_freq;
-}
-
 static hal_t hal = {
   .log = &hal_log,
   .sleep_until = &hal_sleep_until,
@@ -1838,7 +1833,6 @@ static hal_t hal = {
   .set_lcd_matrix = &hal_set_lcd_matrix,
   .set_lcd_icon = &hal_set_lcd_icon,
   .set_frequency = &hal_set_frequency,
-  .play_frequency = &hal_play_frequency,
   .handler = &hal_handler,
 };
 
@@ -1972,7 +1966,7 @@ Rcpp::NumericMatrix Tama::GetMatrix() {
     }
     return matrix; }
 
-int Tama::GetFreq() { return play_freq; }
+int Tama::GetFreq() { return current_freq; }
 
 void Tama::SetButton(int n, bool state){
   if (state) {
