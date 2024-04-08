@@ -460,7 +460,7 @@ static void set_lcd(u12_t n, u4_t v)
   seg = ((n & 0x7F) >> 1);
   com0 = (((n & 0x80) >> 7) * 8 + (n & 0x1) * 4);
 
-  for (i = 0; i < 4; i++) {
+for (i = 0; i < 4; i++) {
     hw_set_lcd_pin(seg, com0 + i, (v >> i) & 0x1);
   }
 }
@@ -1666,10 +1666,6 @@ bool_t cpu_init(u32_t freq)
   ts_freq = freq;
   cpu_reset();
   return 0;
-}
-
-void cpu_release(void)
-{
 }
 
 u12_t getProgramOpCode(u12_t pc) {

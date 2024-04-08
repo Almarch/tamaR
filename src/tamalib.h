@@ -51,7 +51,6 @@ typedef struct {
 	void (*log)(log_level_t level, char *buff, ...);
 	void (*sleep_until)(timestamp_t ts);
 	timestamp_t (*get_timestamp)(void);
-void (*update_screen)(void);
 	void (*set_lcd_matrix)(u8_t x, u8_t y, bool_t val);
 	void (*set_lcd_icon)(u8_t icon, bool_t val);
 	void (*set_frequency)(u32_t freq);
@@ -153,7 +152,6 @@ void cpu_sync_ref_timestamp(void);
 void cpu_refresh_hw(void);
 void cpu_reset(void);
 bool_t cpu_init(u32_t freq);
-void cpu_release(void);
 int cpu_step(void);
 
 class Tama {
