@@ -547,7 +547,17 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 if(etc[["todo"]]$wait > 0) {
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
                 } else {
-                    etc[["todo"]] = do(tama, etc[["todo"]])
+                    if(length(etc[["todo"]]$actions) > 0){
+                        act = etc[["todo"]]$actions[1]
+
+                        if(act %in% c("A","B","C")) {
+                            tama$click(button = act)
+                        } else {
+                            etc[["todo"]]$wait = as.numeric(act)
+                        }
+                        etc[["todo"]]$actions = etc[["todo"]]$actions[-1]
+                    }
+                    Sys.sleep(.4)
                 }
             }
         })
