@@ -419,6 +419,25 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             })
         })
 
+        
+        observe({
+            new_freq = tama$GetFreq()
+            if(new_freq != etc[["freq"]]){
+                try(removeUI("audio"))
+                insertUI(
+                        selector = "#screen",
+                        where = "afterEnd",
+                        tags$audio(id = "audio",
+                            src = waves[[paste0(new_freq,"Hz")]],
+                            type = "audio/wav",
+                            autoplay = T)
+                )
+                etc[["freq"]] <- new_freq
+            }
+            invalidateLater(3, session)
+        },
+        priority = 1)  
+
         ## care routine
         observe({
             if(!etc[["busy"]]) {
@@ -552,7 +571,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
                 } else if(etc[["todo"]]$unclick){
                     for(b in 0:2) tama$SetButton(b,F)
-                    etc[["todo"]]$wait =  .2
+                    etc[["todo"]]$wait =  .1
                     etc[["todo"]]$unclick =  F
                 } else {
                     if(length(etc[["todo"]]$actions) > 0){
@@ -594,27 +613,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 etc[["busy"]] = F
                 invalidateLater(1000/6, session)
             })
-        },
-        priority = 1)
+        })
 
-        observe({
-            new_freq = tama$GetFreq()
-            if(new_freq != etc[["freq"]]){
-                try(removeUI("audio"))
-                insertUI(
-                        selector = "#screen",
-                        where = "afterEnd",
-                        tags$audio(id = "audio",
-                            src = waves[[paste0(new_freq,"Hz")]],
-                            type = "audio/wav",
-                            autoplay = T)
-                )
-                etc[["freq"]] <- new_freq
-            }
-            invalidateLater(5, session)
-        },
-        priority = 2)
-    }   
-
+    }
     shinyApp(ui, server)
 }

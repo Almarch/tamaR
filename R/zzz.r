@@ -14,7 +14,7 @@ for(ics in c("attention","bathroom","food","game",
 
 waves = list()
 rate      = 4410 # hz
-duration  = 1/10  # sec
+duration  = .1  # sec
 amplitude = 1
 tmp = tempfile(fileext = ".wav")
 
