@@ -95,7 +95,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         ### Reactive values
         etc <- reactiveValues()
         etc[["t0"]]    = Sys.time()
-        etc[["todo"]]  = list(actions = c(), wait = 0)
+        etc[["todo"]]  = list(actions = c(), wait = 0, unclick = T)
         etc[["busy"]]  = F
         etc[["dead"]]  = F
         etc[["doing"]] = ""
@@ -353,20 +353,20 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             tama$stop()
             p2(tama)
             settings$background <<- bg2
-            glimpse(tama)
+            tama$glimpse()
         })
 
         observeEvent(input$reset_aes,{
             tama$stop()
             settings$background <<- NULL
             tama$SetROM(settings$ROM)
-            glimpse(tama)
+            tama$glimpse()
         })
 
         observeEvent(input$reset_state,{
             tama$stop()
             tama$reset()
-            glimpse(tama)
+            tama$glimpse()
         })
 
         output$save_state <- downloadHandler(
@@ -386,7 +386,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 state = readLines(inFile$datapath)
                 state = hex2nb(state)
                 tama$SetCPU(state)
-                glimpse(tama)
+                tama$glimpse()
             })
         })
 
@@ -407,7 +407,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 rom = readLines(inFile$datapath)
                 rom = hex2nb(rom)
                 tama$SetROM(rom)
-                glimpse(tama)
+                tama$glimpse()
             })
         })
 
@@ -421,7 +421,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
         ## care routine
         observe({
-            if(!etc[["busy"]] & input$care) {
+        if(!etc[["busy"]] & input$care) {
             etc[["busy"]] = T
 
             t1 = Sys.time()
@@ -569,7 +569,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 etc[["busy"]] = F
                 invalidateLater(1000/6, session)
             })
-        })
+        },
+        priority = 1)
 
         observe({
             new_freq = tama$GetFreq()
@@ -587,7 +588,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             }
             invalidateLater(5, session)
         },
-        priority = 1)
+        priority = 2)
     }   
 
     shinyApp(ui, server)
