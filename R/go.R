@@ -453,45 +453,45 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                                 happiness = 4)
 
             } else if(etc[["todo"]]$wait <= 0 &
-                    length(etc[["todo"]]$actions) == 0) {
+                      length(etc[["todo"]]$actions) == 0) {
 
                 # end what has been started
                 if(etc[["doing"]] != "") {
-                if(etc[["doing"]] == "try_to_clean") {
-                    if(is.dirty(tama,"top")) {
-                        # still dirty => asleep, turn the light off
-                        etc[["todo"]] = light()
+                    if(etc[["doing"]] == "try_to_clean") {
+                        if(is.dirty(tama,"top")) {
+                            # still dirty => asleep, turn the light off
+                            etc[["todo"]] = light()
+                            etc[["doing"]] = ""
+                        }
+
+                    } else if(etc[["doing"]] == "check_arrow") {
+                        # now that the arrow is checked, feed
+                        etc[["todo"]] = feed(ifelse(is.burger(tama),
+                                        "top",
+                                        "bottom"),
+                                    times = 4 - etc[["stats"]]["hunger"])
+                        etc[["stats"]]["hunger"] = 4
                         etc[["doing"]] = ""
+
+                    } else if(etc[["doing"]] == "check_status_1") {
+                        # check hunger
+                        etc[["stats"]]["hunger"] = nb.hearts(tama)
+                        etc[["todo"]] = check_status(step = 2)
+                        etc[["doing"]] = "check_status_2"
+
+                    } else if(etc[["doing"]] == "check_status_2") {
+                        # check happiness
+                        etc[["stats"]]["happiness"] = nb.hearts(tama)
+                        etc[["todo"]] = check_status(step = 3)
+                        etc[["doing"]] = ""
+
+                        if(tama$GetIcon()[8] &
+                        !is.asleep(tama, "on") &
+                        etc[["stats"]]["hunger"] > 0 &
+                        etc[["stats"]]["happiness"] > 0){
+                            etc[["scold"]] = T
+                        }
                     }
-
-                } else if(etc[["doing"]] == "check_arrow") {
-                    # now that the arrow is checked, feed
-                    etc[["todo"]] = feed(ifelse(is.burger(tama),
-                                    "top",
-                                    "bottom"),
-                                times = 4 - etc[["stats"]]["hunger"])
-                    etc[["stats"]]["hunger"] = 4
-                    etc[["doing"]] = ""
-
-                } else if(etc[["doing"]] == "check_status_1") {
-                    # check hunger
-                    etc[["stats"]]["hunger"] = nb.hearts(tama)
-                    etc[["todo"]] = check_status(step = 2)
-                    etc[["doing"]] = "check_status_2"
-
-                } else if(etc[["doing"]] == "check_status_2") {
-                    # check happiness
-                    etc[["stats"]]["happiness"] = nb.hearts(tama)
-                    etc[["todo"]] = check_status(step = 3)
-                    etc[["doing"]] = ""
-
-                    if(tama$GetIcon()[8] &
-                    !is.asleep(tama, "on") &
-                    etc[["stats"]]["hunger"] > 0 &
-                    etc[["stats"]]["happiness"] > 0){
-                        etc[["scold"]] = T
-                    }
-                }
 
                 # check bad screens (clock, light off when not asleep)
                 } else if(is.clock(tama)) {
@@ -543,21 +543,24 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                         etc[["scold"]] = F # we will check that
                     }
                 }
+                
                 ### do what has been planned
                 if(etc[["todo"]]$wait > 0) {
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
                 } else {
                     if(length(etc[["todo"]]$actions) > 0){
+
                         act = etc[["todo"]]$actions[1]
 
                         if(act %in% c("A","B","C")) {
                             tama$click(button = act)
+                            etc[["todo"]]$wait =  .4
                         } else {
                             etc[["todo"]]$wait = as.numeric(act)
                         }
+
                         etc[["todo"]]$actions = etc[["todo"]]$actions[-1]
                     }
-                    Sys.sleep(.4)
                 }
             }
         })
