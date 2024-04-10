@@ -8,8 +8,6 @@
 #include <cstring> // memcpy
 #include <stdlib.h> // exit
 
-#define TAMA_DISPLAY_FRAMERATE  6
-
 #define CPU_SPEED_RATIO      1
 #define TICK_FREQUENCY        32768 // Hz
 #define TIMER_1HZ_PERIOD      32768 // in ticks
@@ -93,12 +91,9 @@
 
 static exec_mode_t exec_mode = EXEC_MODE_RUN;
 static u32_t step_depth = 0;
-static timestamp_t screen_ts = 0;
 static u32_t ts_freq;
-static u8_t g_framerate = TAMA_DISPLAY_FRAMERATE;
 hal_t *g_hal;
 static uint16_t current_freq = 0;
-static uint16_t play_freq = 0; 
 static bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH/8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 static cpu_state_t cpuState;
@@ -433,52 +428,9 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_rld = (prog_timer_rld & 0xF) | (v << 4);
       break;
 
-    case REG_K00_K03_INPUT_PORT:
-      /* Input port (K00-K03) */
-      /* Write not allowed */
-      break;
-
-    case REG_K40_K43_BZ_OUTPUT_PORT:
-      /* Output port (R40-R43) */
-      //g_hal->log(LOG_INFO, "Output/Buzzer: 0x%X\n", v);
-      hw_enable_buzzer(!(v & 0x8));
-      break;
-
-    case REG_CPU_OSC3_CTRL:
-      /* CPU/OSC3 clocks switch, CPU voltage switch */
-      /* Assume 32,768 OSC1 selected, OSC3 off, battery >= 3,1V (0x1) */
-      break;
-
-    case REG_LCD_CTRL:
-      /* LCD control */
-      break;
-
-    case REG_LCD_CONTRAST:
-      /* LCD contrast */
-      /* Assume medium contrast (0x8) */
-      break;
-
-    case REG_SVD_CTRL:
-      /* SVD */
-      /* Assume battery voltage always OK (0x6) */
-      break;
-
     case REG_BUZZER_CTRL1:
       /* Buzzer config 1 */
       hw_set_buzzer_freq(v & 0x7);
-      break;
-
-    case REG_BUZZER_CTRL2:
-      /* Buzzer config 2 */
-      break;
-
-    case REG_CLK_WD_TIMER_CTRL:
-      /* Clock/Watchdog timer reset */
-      /* Ignore watchdog */
-      break;
-
-    case REG_SW_TIMER_CTRL:
-      /* Stopwatch stop/run/reset */
       break;
 
     case REG_PROG_TIMER_CTRL:
@@ -494,14 +446,8 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_enabled = v & 0x1;
       break;
 
-    case REG_PROG_TIMER_CLK_SEL:
-      /* Prog timer clock selection */
-      /* Assume 256Hz, output disabled */
-      break;
-
     default:
       break;
-      //g_hal->log(LOG_ERROR,   "Write 0x%X to unimplemented I/O 0x%03X - PC = 0x%04X\n", v, n, pc);
   }
 }
 
@@ -513,7 +459,7 @@ static void set_lcd(u12_t n, u4_t v)
   seg = ((n & 0x7F) >> 1);
   com0 = (((n & 0x80) >> 7) * 8 + (n & 0x1) * 4);
 
-  for (i = 0; i < 4; i++) {
+for (i = 0; i < 4; i++) {
     hw_set_lcd_pin(seg, com0 + i, (v >> i) & 0x1);
   }
 }
@@ -710,7 +656,6 @@ static void op_nop7_cb(u8_t arg0, u8_t arg1)
 
 static void op_halt_cb(u8_t arg0, u8_t arg1)
 {
-  g_hal->halt();
 }
 
 static void op_inc_x_cb(u8_t arg0, u8_t arg1)
@@ -1722,10 +1667,6 @@ bool_t cpu_init(u32_t freq)
   return 0;
 }
 
-void cpu_release(void)
-{
-}
-
 u12_t getProgramOpCode(u12_t pc) {
   u12_t i = pc >> 1;  // divided by 2
   if ((pc & 0x1)==0) {   // if pc is a even number
@@ -1868,9 +1809,6 @@ static int hal_handler(void) {
   return 0;
 }
 
-static void hal_halt(void) {
-}
-
 static void hal_log(log_level_t level, char *buff, ...) {
 }
 
@@ -1888,27 +1826,13 @@ static void hal_sleep_until(timestamp_t ts) {
   }
 }
 
-static void hal_update_screen(void) {
-} 
-
-static void hal_play_frequency(bool_t en) {
-  if(en){
-    play_freq = current_freq;
-  } else{
-    play_freq = 0;
-  }
-}
-
 static hal_t hal = {
-  .halt = &hal_halt,
   .log = &hal_log,
   .sleep_until = &hal_sleep_until,
   .get_timestamp = &hal_get_timestamp,
-  .update_screen = &hal_update_screen,
   .set_lcd_matrix = &hal_set_lcd_matrix,
   .set_lcd_icon = &hal_set_lcd_icon,
   .set_frequency = &hal_set_frequency,
-  .play_frequency = &hal_play_frequency,
   .handler = &hal_handler,
 };
 
@@ -1924,11 +1848,6 @@ bool_t tamalib_init(u32_t freq)
 	ts_freq = freq;
 
 	return res;
-}
-
-void tamalib_set_framerate(u8_t framerate)
-{
-	g_framerate = framerate;
 }
 
 void tamalib_register_hal(hal_t *hal)
@@ -1949,16 +1868,6 @@ void tamalib_mainloop_step_by_step(void)
         step_depth = cpu_get_depth();
       }
     }
-
-
-    /* Update the screen @ g_framerate fps */
-    ts = g_hal->get_timestamp();
-    
-    if (ts - screen_ts >= ts_freq/g_framerate) {
-    //if (ts - screen_ts >= ts_freq/DEFAULT_FRAMERATE) {
-      screen_ts = ts;
-      g_hal->update_screen();
-    }
   }
 }
 
@@ -1976,10 +1885,6 @@ bool_t hw_init(void)
 	cpu_set_input_pin(PIN_K01, PIN_STATE_HIGH);
 	cpu_set_input_pin(PIN_K02, PIN_STATE_HIGH);
 	return 0;
-}
-
-void hw_release(void)
-{
 }
 
 void hw_set_lcd_pin(u8_t seg, u8_t com, u8_t val)
@@ -2021,15 +1926,9 @@ void hw_set_buzzer_freq(u4_t freq)
   g_hal->set_frequency(snd_freq[freq]);
 }
 
-void hw_enable_buzzer(bool_t en)
-{
-	g_hal->play_frequency(en);
-}
-
 // Constructor
 Tama::Tama() {
     tamalib_register_hal(&hal);
-    tamalib_set_framerate(TAMA_DISPLAY_FRAMERATE);
     tamalib_init(1000000);
 }
 
@@ -2067,7 +1966,7 @@ Rcpp::NumericMatrix Tama::GetMatrix() {
     }
     return matrix; }
 
-int Tama::GetFreq() { return play_freq; }
+int Tama::GetFreq() { return current_freq; }
 
 void Tama::SetButton(int n, bool state){
   if (state) {

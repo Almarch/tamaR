@@ -93,5 +93,11 @@ setRcppClass(Class = "Tama",
         init[60] = 4
         init[64] = 2
         .self$SetCPU(init)
-    }
+    },
+
+    glimpse = function(delay = .1){
+    .self$start()
+    Sys.sleep(delay)
+    .self$stop()
+} 
 ))
