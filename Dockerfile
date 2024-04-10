@@ -8,7 +8,7 @@ WORKDIR /app
 RUN if ! [ -f "tamaR/src/rom.h" ]; then \
         R -e "source('tamaR/src/TamaRomConvert.r')"; \
     fi \
-    && R -e "install.packages(c('Rcpp','png','shinyjs','bsplus','base64enc','audio'))" \
+    && R -e "install.packages(c('Rcpp','png','shinyjs','bsplus'))" \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_*.tar.gz
 
