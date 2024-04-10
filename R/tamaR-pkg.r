@@ -1,5 +1,5 @@
 #' @useDynLib tamaR, .registration = TRUE
-#' @import methods Rcpp
+#' @import Rcpp
 #' 
 #' 
 "_PACKAGE"
