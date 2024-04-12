@@ -255,6 +255,8 @@ This is not a perfect emulation of P2: some animations vary slightly, and the "n
 
 A new but familiar secret character has snuck in the game. Will you find out who this is ?
 
+Several releases of P1 exist: an older one (1996) and a replica re-release. According to the [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)), replicas evolve from Maskutchi independently on the discipline level, as opposed to the original 1996 version that requires a strict 0 discipline to unlock the secret character. Testing this property led to the conclusion that the circulating ROM would be the 1996 version, not the latter replica.
+
 ## Notes on the C++ structure
 
 TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
@@ -263,7 +265,7 @@ TamaLIB was adapted with attention to its platform agnosticity, so tamaR should 
 
 ## To do
 
-The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method.
+The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method. Implementation through a Websocket should be explored further.
 
 ## Disclaimer
 
