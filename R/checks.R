@@ -40,7 +40,9 @@ is.burger = function(obj){
 
 is.dead = function(obj){
     to_check = bottom_right(obj)
-    return(all(to_check == dead) | all(to_check == yr))
+    return(all(to_check == dead1) |
+           all(to_check == dead2) |
+           all(to_check == yr   ))
 }
 
 nb.hearts = function(obj){
