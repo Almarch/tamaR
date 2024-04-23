@@ -94,6 +94,7 @@ static u32_t step_depth = 0;
 static u32_t ts_freq;
 hal_t *g_hal;
 static uint16_t current_freq = 0;
+static uint16_t play_freq = 0; 
 static bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH/8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 static cpu_state_t cpuState;
@@ -428,9 +429,52 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_rld = (prog_timer_rld & 0xF) | (v << 4);
       break;
 
+    case REG_K00_K03_INPUT_PORT:
+      /* Input port (K00-K03) */
+      /* Write not allowed */
+      break;
+
+    case REG_K40_K43_BZ_OUTPUT_PORT:
+      /* Output port (R40-R43) */
+      //g_hal->log(LOG_INFO, "Output/Buzzer: 0x%X\n", v);
+      hw_enable_buzzer(!(v & 0x8));
+      break;
+
+    case REG_CPU_OSC3_CTRL:
+      /* CPU/OSC3 clocks switch, CPU voltage switch */
+      /* Assume 32,768 OSC1 selected, OSC3 off, battery >= 3,1V (0x1) */
+      break;
+
+    case REG_LCD_CTRL:
+      /* LCD control */
+      break;
+
+    case REG_LCD_CONTRAST:
+      /* LCD contrast */
+      /* Assume medium contrast (0x8) */
+      break;
+
+    case REG_SVD_CTRL:
+      /* SVD */
+      /* Assume battery voltage always OK (0x6) */
+      break;
+
     case REG_BUZZER_CTRL1:
       /* Buzzer config 1 */
       hw_set_buzzer_freq(v & 0x7);
+      break;
+
+    case REG_BUZZER_CTRL2:
+      /* Buzzer config 2 */
+      break;
+
+    case REG_CLK_WD_TIMER_CTRL:
+      /* Clock/Watchdog timer reset */
+      /* Ignore watchdog */
+      break;
+
+    case REG_SW_TIMER_CTRL:
+      /* Stopwatch stop/run/reset */
       break;
 
     case REG_PROG_TIMER_CTRL:
@@ -446,8 +490,14 @@ static void set_io(u12_t n, u4_t v)
       prog_timer_enabled = v & 0x1;
       break;
 
+    case REG_PROG_TIMER_CLK_SEL:
+      /* Prog timer clock selection */
+      /* Assume 256Hz, output disabled */
+      break;
+
     default:
       break;
+      //g_hal->log(LOG_ERROR,   "Write 0x%X to unimplemented I/O 0x%03X - PC = 0x%04X\n", v, n, pc);
   }
 }
 
@@ -1826,6 +1876,14 @@ static void hal_sleep_until(timestamp_t ts) {
   }
 }
 
+static void hal_play_frequency(bool_t en) {
+  if(en){
+    play_freq = current_freq;
+  } else{
+    play_freq = 0;
+  }
+}
+
 static hal_t hal = {
   .log = &hal_log,
   .sleep_until = &hal_sleep_until,
@@ -1833,6 +1891,7 @@ static hal_t hal = {
   .set_lcd_matrix = &hal_set_lcd_matrix,
   .set_lcd_icon = &hal_set_lcd_icon,
   .set_frequency = &hal_set_frequency,
+  .play_frequency = &hal_play_frequency,
   .handler = &hal_handler,
 };
 
@@ -1926,6 +1985,11 @@ void hw_set_buzzer_freq(u4_t freq)
   g_hal->set_frequency(snd_freq[freq]);
 }
 
+void hw_enable_buzzer(bool_t en)
+{
+	g_hal->play_frequency(en);
+}
+
 // Constructor
 Tama::Tama() {
     tamalib_register_hal(&hal);
@@ -1966,7 +2030,7 @@ Rcpp::NumericMatrix Tama::GetMatrix() {
     }
     return matrix; }
 
-int Tama::GetFreq() { return current_freq; }
+int Tama::GetFreq() { return play_freq; }
 
 void Tama::SetButton(int n, bool state){
   if (state) {
