@@ -569,7 +569,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
                 } else if(etc[["todo"]]$unclick){
                     for(b in 0:2) tama$SetButton(b,F)
-                    etc[["todo"]]$wait = .1
+                    etc[["todo"]]$wait = ifelse(input$care,.4,.1)
                     etc[["todo"]]$unclick = F
                 } else {
                     if(length(etc[["todo"]]$actions) > 0){
@@ -577,8 +577,6 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                         act = etc[["todo"]]$actions[1]
 
                         if(act %in% c("A","B","C")) {
-                            #tama$click(act)
-                            #etc[["todo"]]$wait =  ifelse(input$care,.4,.1)
                             tama$SetButton(c(A = 0, B = 1, C = 2)[act], T)
                             etc[["todo"]]$wait = .1
                             etc[["todo"]]$unclick = T
