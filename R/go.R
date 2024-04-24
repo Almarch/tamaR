@@ -137,17 +137,6 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                             )),
                             align = "center"
                         ))
-                    ) |> bs_append(
-                        title = "Play as admin",
-                        content = fluidRow(column(12,
-                            splitLayout(
-                                actionButton("a","A",class="mid"),
-                                actionButton("b","B",class="mid"),
-                                actionButton("c","C",class="mid"),
-                                actionButton("ac","A+C",class="mid")
-                            ),
-                            align = "center"
-                        ))
                     )
                 )
             } else {
@@ -599,10 +588,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         })
 
         ## Original gameplay
-        observeEvent(input$A | input$a, {etc[["todo"]] = list(wait = 0, actions = "A", unclick = F)})
-        observeEvent(input$B | input$b, {etc[["todo"]] = list(wait = 0, actions = "B", unclick = F)})
-        observeEvent(input$C | input$c, {etc[["todo"]] = list(wait = 0, actions = "C", unclick = F)})
-        observeEvent(input$ac,tama$click(c("A","C"),2))
+        observeEvent(input$A, {etc[["todo"]] = list(wait = 0, actions = "A", unclick = F)})
+        observeEvent(input$B, {etc[["todo"]] = list(wait = 0, actions = "B", unclick = F)})
+        observeEvent(input$C, {etc[["todo"]] = list(wait = 0, actions = "C", unclick = F)})
 
         ## display screen
         observe({

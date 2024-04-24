@@ -201,10 +201,6 @@ The following settings are available from the administrator board:
 
     - Enable the use of the automatic care feature.
 
-- Play as admin (the game must be running):
-
-    - Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock.
-
 - Aesthetics (the game must be stopped):
 
     - Change the background for a light, square png ;
@@ -226,11 +222,21 @@ The following settings are available from the administrator board:
 
 The original gameplay is available when the user is connected using the user password.
 
-The 3 buttons (left, middle, right) are mapped as for the original toy.
+The 3 buttons A, B, C (*i.e.* left, middle, right) are mapped as for the original toy.
 
 ![game](https://github.com/Almarch/tamaR/assets/13364928/8d80eca2-1161-4cd1-844e-c69313d6d666)
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
+
+### A+C Command
+
+The original gameplay includes the A+C command (activation of the left and right buttons simultaneously). This command:
+
+- turns the sound off if the toy is focused on the pet ;
+
+- or allows setting the clock if the toy is focused on it.
+
+The app doesn't allow the simultaneous activation of 2 buttons. However, it is possible to quickly activate A then C in order to achieve an A+C command.
 
 ### Automatic care
 
