@@ -588,10 +588,6 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                             tama$SetButton(c(A = 0, B = 1, C = 2)[act], T)
                             etc[["todo"]]$wait = .1
                             etc[["todo"]]$unclick = T
-                        } else if(act == "AC") {
-                            for(b in c(0,2)) tama$SetButton(b,T)
-                            etc[["todo"]]$wait = 2
-                            etc[["todo"]]$unclick = T
                         } else {
                             etc[["todo"]]$wait = as.numeric(act)
                         }
