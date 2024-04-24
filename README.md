@@ -230,13 +230,13 @@ The jungle background comes from [this collection](https://www.vecteezy.com/vect
 
 ### A+C Command
 
-The original gameplay includes the A+C command (activation of the left and right buttons simultaneously). This command:
+The original gameplay includes the A+C command (activation of the left and right buttons simultaneously).
 
-- turns the sound off if the toy is focused on the pet ;
+- If the toy is focused on the pet, A+C turns the sound on or off.
 
-- or allows setting the clock if the toy is focused on it.
+- If the toy is focused on the clock, A+C sets the time.
 
-The app doesn't allow the simultaneous activation of 2 buttons. However, it is possible to quickly activate A then C in order to achieve an A+C command.
+The R-Shiny app doesn't allow the simultaneous activation of 2 buttons. However, it is possible to quickly activate A then C in order to achieve an A+C command.
 
 ### Automatic care
 
