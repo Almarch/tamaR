@@ -22,7 +22,7 @@ if(F) {
     library(audio)
 
     rate      = 44100  # Hz
-    duration  = .3 # sec
+    duration  = .5 # sec
     time = seq(0,duration,length.out = duration * rate)
 
     for(freq in c(0,4096,3279,2731,2341,2048,1638,1365,1170)) {

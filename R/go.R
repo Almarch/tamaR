@@ -424,7 +424,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 )
                 etc[["freq"]] = new_freq
             }
-            invalidateLater(1000/30,session)
+            invalidateLater(50,session)
         }, priority = 1)
 
         ## action & care routine
@@ -597,7 +597,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             output$screen = renderPlot({
                 tama$display(background = settings$background)
                 etc[["busy"]] = F
-                invalidateLater(1000/6, session)
+                invalidateLater(200, session) # ms
             })
         })
 
