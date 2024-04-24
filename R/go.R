@@ -108,6 +108,8 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                                 user  = F)
         etc[["running"]] = settings$running
         etc[["autocare"]] = settings$autocare
+        
+        etc[["t_until_unclick"]] = .1
 
         etc[["freq"]] = 0
 
@@ -436,7 +438,13 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             invalidateLater(1000/30,session)
         }, priority = 1)
 
-        ## care routine
+        ## action & care routine
+
+        observeEvent(input$care,{
+            etc[["t_until_unclick"]] = ifelse(input$care,.4,.1)
+        })
+
+
         observe({
             if(!etc[["busy"]]) {
                 etc[["busy"]] = T
@@ -569,7 +577,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
                 } else if(etc[["todo"]]$unclick){
                     for(b in 0:2) tama$SetButton(b,F)
-                    etc[["todo"]]$wait = ifelse(input$care,.4,.1)
+                    etc[["todo"]]$wait <- etc[["t_until_unclick"]]
                     etc[["todo"]]$unclick = F
                 } else {
                     if(length(etc[["todo"]]$actions) > 0){
