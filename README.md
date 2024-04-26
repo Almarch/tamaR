@@ -265,7 +265,7 @@ TamaLIB was adapted with attention to its platform agnosticity, so tamaR should 
 
 ## To do
 
-The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method. Implementation through a Websocket should be explored further.
+The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method. Implementation is being investigated in a feature branch.
 
 ## Disclaimer
 
