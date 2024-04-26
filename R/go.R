@@ -95,7 +95,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         ### Reactive values
         etc <- reactiveValues()
         etc[["t0"]]    = Sys.time()
-        etc[["todo"]]  = list(actions = c(), wait = 0, unclick = F)
+        etc[["todo"]]  = list(actions = c(), wait = 0)
         etc[["busy"]]  = F
         etc[["dead"]]  = F
         etc[["doing"]] = ""
@@ -108,12 +108,11 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                                 user  = F)
         etc[["running"]] = settings$running
         etc[["autocare"]] = settings$autocare
-        
-        etc[["t_until_unclick"]] = .1
 
         etc[["freq"]] = 0
 
         ### Conditionnal UI
+
         observe({
             if(etc[["running"]]) {
 
@@ -135,6 +134,17 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                                 "disable automatic care",
                                 "enable automatic care"))
                             )),
+                            align = "center"
+                        ))
+                    ) |> bs_append(
+                        title = "Play as admin",
+                        content = fluidRow(column(12,
+                            splitLayout(
+                                actionButton("a","A",class="mid"),
+                                actionButton("b","B",class="mid"),
+                                actionButton("c","C",class="mid"),
+                                actionButton("ac","A+C",class="mid")
+                            ),
                             align = "center"
                         ))
                     )
@@ -409,31 +419,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
             })
         })
 
-        ## play sound
-        observe({
-            new_freq = tama$GetFreq()
-            if(new_freq != etc[["freq"]]){
-                try(removeUI("audio"))
-                insertUI(
-                    selector = "#screen",
-                    where = "afterEnd",
-                    tags$audio(id = "audio",
-                               src = paste0("www/buzz/",new_freq,".wav"),
-                               type = "audio/wav",
-                               autoplay = T)
-                )
-                etc[["freq"]] = new_freq
-            }
-            invalidateLater(50,session)
-        }, priority = 1)
-
-        ## action & care routine
-
-        observeEvent(input$care,{
-            etc[["t_until_unclick"]] = ifelse(input$care,.4,.1)
-        })
-
-
+        ## care routine
         observe({
             if(!etc[["busy"]]) {
                 etc[["busy"]] = T
@@ -564,19 +550,14 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                 ### do what has been planned
                 if(etc[["todo"]]$wait > 0) {
                     etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
-                } else if(etc[["todo"]]$unclick){
-                    for(b in 0:2) tama$SetButton(b,F)
-                    etc[["todo"]]$wait <- etc[["t_until_unclick"]]
-                    etc[["todo"]]$unclick = F
                 } else {
                     if(length(etc[["todo"]]$actions) > 0){
 
                         act = etc[["todo"]]$actions[1]
 
                         if(act %in% c("A","B","C")) {
-                            tama$SetButton(c(A = 0, B = 1, C = 2)[act], T)
-                            etc[["todo"]]$wait = .1
-                            etc[["todo"]]$unclick = T
+                            tama$click(act)
+                            etc[["todo"]]$wait =  ifelse(input$care,.4,.1)
                         } else {
                             etc[["todo"]]$wait = as.numeric(act)
                         }
@@ -588,16 +569,21 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
         })
 
         ## Original gameplay
-        observeEvent(input$A, {etc[["todo"]] = list(wait = 0, actions = "A", unclick = F)})
-        observeEvent(input$B, {etc[["todo"]] = list(wait = 0, actions = "B", unclick = F)})
-        observeEvent(input$C, {etc[["todo"]] = list(wait = 0, actions = "C", unclick = F)})
+        observeEvent(input$A, tama$click("A"))
+        observeEvent(input$B, tama$click("B"))
+        observeEvent(input$C, tama$click("C"))
+
+        observeEvent(input$a, tama$click("A"))
+        observeEvent(input$b, tama$click("B"))
+        observeEvent(input$c, tama$click("C"))
+        observeEvent(input$ac,tama$click(c("A","C"),2))
 
         ## display screen
         observe({
             output$screen = renderPlot({
                 tama$display(background = settings$background)
                 etc[["busy"]] = F
-                invalidateLater(200, session) # ms
+                invalidateLater(1000/6, session)
             })
         })
 
