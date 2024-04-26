@@ -1,10 +1,11 @@
-empty_todo = list(actions = c(), wait = .25)
+empty_todo = list(actions = c(), wait = .25, unclick = F)
 out = c("C","C","2")
 
 set_clock = function(){
 
   todo = list(actions = c(),
-              wait    = 3)
+              wait    = 3,
+              unclick = F)
 
   todo$actions = c("B",
                    "1.5")
