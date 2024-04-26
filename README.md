@@ -41,7 +41,8 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
 R -e "install.packages(c('Rcpp','shiny','png','shinyjs','bsplus'))"
-R CMD INSTALL tamaR
+R CMD build tamaR
+R CMD INSTALL tamaR_*.tar.gz
 ```
 
 The package tamaR can now be called from an R console.
@@ -201,6 +202,10 @@ The following settings are available from the administrator board:
 
     - Enable the use of the automatic care feature.
 
+- Play as admin (the game must be running):
+
+    - Click A+C buttons simultaneously to turn the sound on or off, or to set up the clock.
+
 - Aesthetics (the game must be stopped):
 
     - Change the background for a light, square png ;
@@ -222,21 +227,11 @@ The following settings are available from the administrator board:
 
 The original gameplay is available when the user is connected using the user password.
 
-The 3 buttons A, B, C (*i.e.* left, middle, right) are mapped as for the original toy.
+The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 ![game](https://github.com/Almarch/tamaR/assets/13364928/8d80eca2-1161-4cd1-844e-c69313d6d666)
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
-
-### A+C Command
-
-The original gameplay includes the A+C command (activation of the left and right buttons simultaneously).
-
-- If the toy is focused on the pet, A+C turns the sound on or off.
-
-- If the toy is focused on the clock, A+C sets the time.
-
-The R-Shiny app doesn't allow the simultaneous activation of 2 buttons. However, it is possible to quickly activate A then C in order to achieve an A+C command.
 
 ### Automatic care
 
@@ -267,6 +262,10 @@ Several releases of P1 exist: an older one (1996) and a replica re-release. Acco
 TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
 
 TamaLIB was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
+
+## To do
+
+The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method. Implementation is being investigated in a feature branch.
 
 ## Disclaimer
 
