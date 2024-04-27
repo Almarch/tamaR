@@ -181,7 +181,7 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, from which the game can be parameterized. Among other parameterizations, the administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
+At first connection, the app requires the set-up of an administrator password. This password allows reaching the administrator board, from which the game can be parameterized. The administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
 ![pwd](https://github.com/Almarch/tamaR/assets/13364928/59311c44-5693-4905-9c75-8b509eb7ad98)
 
