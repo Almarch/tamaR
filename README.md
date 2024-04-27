@@ -41,8 +41,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
 R -e "install.packages(c('Rcpp','shiny','png','shinyjs','bsplus'))"
-R CMD build tamaR
-R CMD INSTALL tamaR_*.tar.gz
+R CMD INSTALL tamaR
 ```
 
 The package tamaR can now be called from an R console.
