@@ -1,5 +1,10 @@
 FROM rocker/shiny:4.1.0
 
+RUN R -e "install.packages('Rcpp')"
+RUN R -e "install.packages('png')"
+RUN R -e "install.packages('shinyjs')"
+RUN R -e "install.packages('bsplus')"
+
 RUN mkdir -p /app/tamaR
 ADD . /app/tamaR
 
@@ -8,7 +13,6 @@ WORKDIR /app
 RUN if ! [ -f "tamaR/src/rom.h" ]; then \
         R -e "source('tamaR/src/TamaRomConvert.r')"; \
     fi \
-    && R -e "install.packages(c('Rcpp','png','shinyjs','bsplus'))" \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_*.tar.gz
 
