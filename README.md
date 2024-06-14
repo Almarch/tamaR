@@ -41,8 +41,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
 R -e "install.packages(c('Rcpp','shiny','png','shinyjs','bsplus'))"
-R CMD build tamaR
-R CMD INSTALL tamaR_*.tar.gz
+R CMD INSTALL tamaR
 ```
 
 The package tamaR can now be called from an R console.
@@ -182,7 +181,7 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### Passwords
 
-At first connection, the app requires the set-up of an administrator password. This passwords allows reaching the administrator board, from which the game can be parameterized. Among other parameterizations, the administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
+At first connection, the app requires the set-up of an administrator password. This password allows reaching the administrator board, from which the game can be parameterized. The administrator must define an user password. The user password cannot be null and should be different from the administrator password. The user password may be changed from the administrator board, whereas the administrator password cannot be changed further. At each future connection, it is possible to connect either with the administrator password to reach the administrator board ; either with the user password to play the game.
 
 ![pwd](https://github.com/Almarch/tamaR/assets/13364928/59311c44-5693-4905-9c75-8b509eb7ad98)
 
@@ -263,9 +262,9 @@ TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotc
 
 TamaLIB was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
-## To do
+## Sound
 
-The sound has not been implemented in the R shiny app yet. However, it is properly fetched with the GetFreq method. Implementation is being investigated in a feature branch.
+The sound is properly fetched with the GetFreq method. Implementation is being investigated in a feature branch, however, it seems to raise performance issues.
 
 ## Disclaimer
 
