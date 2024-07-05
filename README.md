@@ -264,7 +264,9 @@ TamaLIB was adapted with attention to its platform agnosticity, so tamaR should 
 
 ## Sound
 
-The sound is properly fetched with the GetFreq method. Implementation is being investigated in a feature branch, however, it seems to raise performance issues.
+The buzzer frequency is properly fetched with the `GetFreq` method.
+
+Sound implementation to the web app is being investigated in a feature branch, however, the current approach raises performance issues.
 
 ## Disclaimer
 
