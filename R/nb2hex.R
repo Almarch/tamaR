@@ -1,11 +1,11 @@
-nb2hex = function(x){
+nb2hex = function(x, header = "static unsigned char g_program_b12[] = {"){
     
     x = as.character(as.hexmode(x))
     x = paste0("00",x)
     x = substr(x,start = nchar(x) - 1, stop = nchar(x))
     x = paste0("0x",toupper(x),",")
 
-    y = c("static unsigned char g_program_b12[] = {\n")
+    y = paste0(header,"\n")
     for(i in 1:length(x)) {
         y = paste0(y, x[i])
 
@@ -21,7 +21,7 @@ nb2hex = function(x){
 
 hex2nb = function(x){
 
-    for(pat in c("static unsigned char g_program_b12[] = {",
+    for(pat in c(formals(nb2hex)$header,
                  "\n",
                  "0x",
                  " ",
