@@ -5,6 +5,7 @@
 #' @param background A png image to use as background. It should be square and imported using png::readPNG
 #' @param port The port to use for shiny, default is 1996
 #' @param host The host to use for shiny, default is "127.0.0.1" (localhost)
+#' @param light Should a lighter version of the app be used ? This is more adapted for non-web deployment. Default is FALSE
 #' @export go
 #' @examples
 #' guizmo = Tama()
@@ -12,7 +13,7 @@
 #' 
 #' 
 
-go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
+go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = FALSE){
 
     options(shiny.port = port,
             shiny.host = host)
@@ -41,21 +42,23 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
 
         headerPanel(""),
 
+        ### Game screen
+        fluidRow(column(12,align = "center",
+            mainPanel(plotOutput("screen"))
+        )),
+
         ### First connection screen
         fluidRow(column(12,splitLayout(
             textInput("pass_admin","Administrator password:"),
-            actionButton("save_pass_admin","Save",class="menu"))
+            actionButton("save_pass_admin","Save"))
         )),
 
-        ### Game screen
-        fluidRow(column(12,
-            mainPanel(plotOutput("screen"))
-        )),
+
 
         ### Log in prompt
         fluidRow(column(12,splitLayout(
             textInput("pass","Password:"),
-            actionButton("log_in","Log in", class = "menu"))
+            actionButton("log_in","Log in"))
         )),
 
         ### Buttons
@@ -125,7 +128,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                         content = fluidRow(column(12,
                             splitLayout(
                                 textInput("pass_user","User password:"),
-                                actionButton("save_pass_user","Save",class="menu")
+                                actionButton("save_pass_user","Save")
                             ),
                             br(),
                             fluidRow(column(12,
@@ -160,7 +163,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1"){
                         content = fluidRow(column(12,
                             splitLayout(
                                 textInput("pass_user","User password:"),
-                                actionButton("save_pass_user","Save",class="menu")
+                                actionButton("save_pass_user","Save")
                             ),
                             br(),
                             fluidRow(column(12,

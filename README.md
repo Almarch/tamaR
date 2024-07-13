@@ -92,7 +92,7 @@ guizmo$start()
 Finally, you can launch the shiny app from a running Tamagotchi using the `go` function.
 
 ```r
-go(guizmo, port = 1996)
+go(guizmo, port = 1996, light = T)
 ```
 
 The app is now available locally at http://127.0.0.1:1996/
