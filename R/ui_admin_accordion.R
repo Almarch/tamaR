@@ -24,8 +24,8 @@ ui_admin_accordion = function(running, enable_care) {
             fluidRow(column(12,align = "center",
                 actionButton("enable_care",
                 ifelse(enable_care,
-                    "disable automatic care",
-                    "enable automatic care")
+                    "Disable automatic care",
+                    "Enable automatic care")
                 ))
             ))
         ) |>
@@ -64,8 +64,8 @@ ui_admin_accordion = function(running, enable_care) {
             fluidRow(column(12,align = "center",
                 actionButton("enable_care",
                 ifelse(enable_care,
-                    "disable automatic care",
-                    "enable automatic care")
+                    "Disable automatic care",
+                    "Enable automatic care")
                 ))
             ))
         ) |>

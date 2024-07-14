@@ -135,10 +135,10 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
         observe({
             if(etc[["enable_care"]]) {
                 output$ui_care = renderUI(ui_care_switch())
-                updateActionButton(session,"enable_care","disable automatic care")
+                updateActionButton(session,"enable_care","Disable automatic care")
             } else {
                 output$ui_care = renderUI(br())
-                updateActionButton(session,"enable_care","enable automatic care")
+                updateActionButton(session,"enable_care","Enable automatic care")
             }
         })
 
