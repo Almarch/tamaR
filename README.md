@@ -50,6 +50,8 @@ The package tamaR can now be called from an R console.
 library(tamaR)
 ```
 
+![image](https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b)
+
 ## 2. Use as an R package
 
 The instanciation of an object of class `Tama` prepares a Tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single Tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
@@ -89,7 +91,8 @@ guizmo$reset()
 To automatically care for your virtual pet, call the `babysit()` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
 
 ```r
-babysit(guizmo, end = Sys.time() + 10*60)
+guizmo$start()
+babysit(guizmo, end = Sys.time() + 10*60) # ten minutes
 ```
 
 ### 2.3. P2 sprites
