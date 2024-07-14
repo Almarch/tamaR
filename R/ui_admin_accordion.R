@@ -13,11 +13,11 @@ ui_admin_accordion = function(running, enable_care) {
             content = fluidRow(column(12,
                 splitLayout(
                     textInput("pass_player","Player password:"),
-                    actionButton("save_pass_player","Save player password")
+                    actionButton("save_pass_player","Save player")
                 ),
                 splitLayout(
                     textInput("pass_admin","Admin password:"),
-                    actionButton("save_pass_admin","Save admin password")
+                    actionButton("save_pass_admin","Save admin")
                 )
             ),
             br(),
@@ -53,11 +53,11 @@ ui_admin_accordion = function(running, enable_care) {
             content = fluidRow(column(12,
                 splitLayout(
                     textInput("pass_player","Player password:"),
-                    actionButton("save_pass_player","Save player password")
+                    actionButton("save_pass_player","Save player")
                 ),
                 splitLayout(
                     textInput("pass_admin","Admin password:"),
-                    actionButton("save_pass_admin","Save admin password")
+                    actionButton("save_pass_admin","Save admin")
                 )
             ),
             br(),

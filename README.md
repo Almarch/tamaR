@@ -109,14 +109,22 @@ This is not a perfect emulation of P2: some animations vary slightly, and the "n
 
 ### 2.4. Shiny app
 
-The shiny app may be called from R with the `go` function. The `light` argument selects which one of a lighter or a more complete application to use.
+The shiny app may be called from R with the `go` function:
 
-- `light = TRUE` si well suited for playing locally ;
+```r
+go(guizmo)
+```
+
+The `light` argument selects which one of a lighter or a more complete application to use.
+
+- `light = TRUE` (default) is well suited for playing locally ;
 
 - `light = FALSE` is designed for a safer web experience.
 
-```r
-go(guizmo, port = 1996, light = F)
+To call the app directly from a bash console with the view to deploy it online:
+
+```bash
+R -e "library(tamaR); Tama() |> go(port = 1996, light = F)"
 ```
 
 The app is now available locally at http://127.0.0.1:1996/

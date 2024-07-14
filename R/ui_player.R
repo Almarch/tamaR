@@ -4,7 +4,6 @@ ui_player = function() {
         fluidRow(column(12,align="center",
             plotOutput("screen")
         )),
-        br(),
         fluidRow(column(12,align = "center",
             splitLayout(
                 actionButton("A","",class="big"),

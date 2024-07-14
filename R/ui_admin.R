@@ -2,15 +2,15 @@
 ui_admin = function() {
     tagList(
         fluidRow(
-            column(9,align="center",
+            column(12,align="center",
                 plotOutput("screen")
-            ),
-            column(3,align = "center",
-                br(),br(),br(),br(),br(),br(),br(),
+            )
+        ),fluidRow(
+            column(12,align = "center",
                 uiOutput("startstop")
             )
         ),
-        br(),
+        br(),br(),br(),
         fluidRow(column(12,align = "center",
             uiOutput("admin")
         ))
