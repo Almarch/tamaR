@@ -5,15 +5,15 @@
 #' @param background A png image to use as background. It should be square and imported using png::readPNG
 #' @param port The port to use for shiny, default is 1996
 #' @param host The host to use for shiny, default is "127.0.0.1" (localhost)
-#' @param light Should a lighter version of the app be used ? This is more adapted for non-web deployment. Default is FALSE
+#' @param light Should a lighter version of the app be used ? This is more adapted for non-web deployment. Default is TRUE
 #' @export go
 #' @examples
 #' guizmo = Tama()
-#' go(Guizmo)
-#' 
-#' 
+#' guizmo$start()
+#' go(guizmo, light = T)
 
-go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = FALSE){
+
+go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = TRUE){
 
     options(shiny.port = port,
             shiny.host = host)
@@ -80,22 +80,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             ### Reactive values
             etc <- reactiveValues()
 
-            etc[["state"]] = list(
-                t0 = Sys.time(),
-                todo = list(
-                    actions = c(),
-                    wait = 0
-                ),
-                dead = F,
-                doing = "",
-                stats = c(
-                    hunger = 4, #nb of full hearts
-                    happiness = 4
-                ),
-                scold = F,
-                egg = T,
-                next_check = 0
-            )
+            etc[["state"]] = state_init()
             etc[["busy"]]  = F
             etc[["running"]]   = settings$running
             etc[["enable_care"]]  = settings$enable_care

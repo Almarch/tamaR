@@ -4,7 +4,7 @@
 \alias{go}
 \title{A Shiny application to play with your virtual pet}
 \usage{
-go(tama, background = NULL, port = 1996, host = "127.0.0.1")
+go(tama, background = NULL, port = 1996, host = "127.0.0.1", light = TRUE)
 }
 \arguments{
 \item{tama}{An object of class Tama}
@@ -14,13 +14,14 @@ go(tama, background = NULL, port = 1996, host = "127.0.0.1")
 \item{port}{The port to use for shiny, default is 1996}
 
 \item{host}{The host to use for shiny, default is "127.0.0.1" (localhost)}
+
+\item{light}{Should a lighter version of the app be used ? This is more adapted for non-web deployment. Default is TRUE}
 }
 \description{
 A Shiny application to play with your virtual pet
 }
 \examples{
 guizmo = Tama()
-go(Guizmo)
-
-
+guizmo$start()
+go(guizmo, light = T)
 }

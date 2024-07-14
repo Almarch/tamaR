@@ -19,6 +19,6 @@ RUN if ! [ -f "tamaR/src/rom.h" ]; then \
     && R CMD build tamaR \
     && R CMD INSTALL tamaR_*.tar.gz
 
-CMD R -e "library('tamaR'); Tama() |> go(port = 80, host =  '0.0.0.0')"
+CMD R -e "library('tamaR'); Tama() |> go(port = 80, host =  '0.0.0.0', light = FALSE)"
 
 EXPOSE 80
