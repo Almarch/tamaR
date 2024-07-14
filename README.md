@@ -212,10 +212,10 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ## 4. Use as a web app
 
-### 4.1. Credentials
+### 4.1. Authentification
 
-There are 2 user profiles:
-
+The app is secured with [shinymanager](https://github.com/datastorm-open/shinymanager) and requires the user to authentify. There are 2 user profiles:
+ 
 - ***player***
 - ***admin***
 
@@ -227,7 +227,7 @@ Both start with the same password:
 
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
-Only ***admin*** can modify both ***admin*** and ***user*** passwords. The ***user*** credentials are designed as to be shareable with a friend or family member for instance. The ***admin*** credentials should remain private.
+Only ***admin*** can modify both ***admin*** and ***user*** passwords. The ***user*** can only play. The ***user*** credentials are designed to be shareable with a friend or family member for instance. The ***admin*** credentials should remain confidential.
 
 ### 4.2. Administration
 
@@ -280,7 +280,7 @@ When checking the "automatic care" option, it is possible to choose whether the 
 
 The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
-## 5. About
+## 5. Notes
 
 ### 5.1. Secret Character
 
