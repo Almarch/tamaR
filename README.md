@@ -218,7 +218,7 @@ Both start with the same password:
 ![image](https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f)
 
 
-You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as $admin$ to do so.
+You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
 ### 4.2. Administration
 
