@@ -208,12 +208,12 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 There are 2 user profiles:
 
-- $player$
-- $admin$
+- ***player***
+- ***admin***
 
 Both start with the same password:
 
-- $qwerty$
+- ***qwerty***
   
 ![image](https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f)
 
