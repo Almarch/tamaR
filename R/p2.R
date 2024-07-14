@@ -3,8 +3,11 @@
 #' @name p2
 #' @param tama An object of class Tama
 #' @export p2
-#' 
-#' 
+#' @examples
+#' guizmo = Tama()
+#' p2(guizmo)
+#' guizmo$start()
+#' go(guizmo)
 
 p2 = function(tama){
     rom = tama$GetROM()

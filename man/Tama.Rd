@@ -11,8 +11,7 @@ Instanciate a Tama object
 }
 \examples{
 guizmo = Tama()
-guizmo$run()
-guizmo$save("egg.txt")
+guizmo$start()
 guizmo$display()
 guizmo$click("B"); Sys.sleep(3)
 for(i in 1:7) {guizmo$click("A"); Sys.sleep(.25)}
@@ -20,5 +19,10 @@ guizmo$click("C"); Sys.sleep(3)
 Sys.sleep(300)
 guizmo$display()
 guizmo$save("babytchi.txt")
+guizmo$stop()
+guizmo$reset()
+guizmo$load("babytchi.txt")
+guizmo$start()
+
 
 }

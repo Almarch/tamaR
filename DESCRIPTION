@@ -6,7 +6,7 @@ Author@R:
 Description: Emulates a P1 Tamagotchi
 License: Attribution-NonCommercial 4.0 International
 Encoding: UTF-8
-Depends: R (>= 4.1.0), png, shiny, shinyjs, bsplus
+Depends: R (>= 4.1.0), png, shiny, bsplus, shinyjs, shinymanager, shinyalert, shinyWidgets
 Imports: Rcpp
 LinkingTo: Rcpp
 SystemRequirements: C++12

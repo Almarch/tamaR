@@ -12,3 +12,9 @@ p2(tama)
 \description{
 Convert the sprites to gen2
 }
+\examples{
+guizmo = Tama()
+p2(guizmo)
+guizmo$start()
+go(guizmo)
+}
