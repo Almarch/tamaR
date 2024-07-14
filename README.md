@@ -280,29 +280,33 @@ When checking the "automatic care" option, it is possible to choose whether the 
 
 The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
-## 5. Secret Character
+## 5. About
+
+### 5.1. Secret Character
 
 A new but familiar secret character has snuck in the game. Will you find out who this is ?
 
 Several releases of P1 exist: an older one (1996) and a replica re-release. According to the [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)), replicas evolve from Maskutchi independently on the discipline level, as opposed to the original 1996 version that requires a strict 0 discipline to unlock the secret character. Testing this property led to the conclusion that the circulating ROM would be the 1996 version, not the latter replica.
 
-## 6. Notes on the C++ structure
+### 5.2. C++ structure
 
 TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
 
 TamaLIB was adapted with attention to its platform agnosticity, so tamaR should run on any OS/architecture that supports R. So far, the package tamaR has been succesfully built, installed and locally tested on linux/amd64 and windows/amd64.
 
-## 7. Sound
+### 5.3. Sound
 
 The buzzer frequency is properly fetched with the `GetFreq` method.
 
 Sound implementation to the web app is being investigated in a feature branch, however, the current approach raises performance issues.
 
-## 8. Disclaimer
+## 6. Legal
+
+### 6.1. Disclaimer
 
 Enabling the web server exposes your server to the internet. Cares have been taken to make the web server application as safe as possible; however, by utilizing this functionality, you acknowledge and agree that you are solely responsible for configuring and securing your web server. The developer and associated parties are not liable for any damages, losses, or security breaches resulting from using the web server application or from using any information found on this page.
 
-## 9. License 
+### 6.2. License 
 
 This work is licensed under Attribution-NonCommercial 4.0 International.
 
