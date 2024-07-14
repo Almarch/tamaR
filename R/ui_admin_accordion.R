@@ -1,5 +1,5 @@
 
-ui_admin_accordion = function(running, autocare) {
+ui_admin_accordion = function(running, enable_care) {
 
     if(running) {
         accordion = bsplus::bs_accordion(
@@ -22,8 +22,8 @@ ui_admin_accordion = function(running, autocare) {
             ),
             br(),
             fluidRow(column(12,align = "center",
-                actionButton("autocare",
-                ifelse(autocare,
+                actionButton("enable_care",
+                ifelse(enable_care,
                     "disable automatic care",
                     "enable automatic care")
                 ))
@@ -62,8 +62,8 @@ ui_admin_accordion = function(running, autocare) {
             ),
             br(),
             fluidRow(column(12,align = "center",
-                actionButton("autocare",
-                ifelse(autocare,
+                actionButton("enable_care",
+                ifelse(enable_care,
                     "disable automatic care",
                     "enable automatic care")
                 ))

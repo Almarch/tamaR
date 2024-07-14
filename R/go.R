@@ -24,7 +24,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
 
     settings = list(
         background = background,
-        autocare = F,
+        enable_care = F,
         running = F,
         ROM = tama$GetROM()
     )
@@ -52,18 +52,28 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
 
         ### Reactive values
         etc <- reactiveValues()
-        etc[["t0"]]    = Sys.time()
-        etc[["todo"]]  = list(actions = c(), wait = 0)
+
+        etc[["state"]] = list(
+            t0 = Sys.time(),
+            todo = list(
+                actions = c(),
+                wait = 0
+            ),
+            dead = F,
+            doing = "",
+            stats = c(
+                hunger = 4, #nb of full hearts
+                happiness = 4
+            ),
+            scold = F,
+            egg = T,
+            next_check = 0
+        )
         etc[["busy"]]  = F
-        etc[["dead"]]  = F
-        etc[["doing"]] = ""
-        etc[["stats"]] = c(hunger = 4, #nb of full hearts
-                            happiness = 4)
-        etc[["scold"]] = F
-        etc[["egg"]]   = T
-        etc[["next_check"]] = 0
         etc[["running"]]   = settings$running
-        etc[["autocare"]]  = settings$autocare
+        etc[["enable_care"]]  = settings$enable_care
+        etc[["care"]] = F
+        etc[["disc"]] = F
 
         res_auth <- secure_server(
             check_credentials = check_credentials(credentials)
@@ -83,10 +93,10 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
         observe({
             if(etc[["running"]]) {
                 output$startstop = renderUI(actionButton("stop","STOP",class="big"))
-                output$admin = renderUI(ui_admin_accordion(running = T, autocare = settings$autocare))
+                output$admin = renderUI(ui_admin_accordion(running = T, enable_care = settings$enable_care))
             } else {
                 output$startstop = renderUI(actionButton("start","START",class="big"))
-                output$admin = renderUI(ui_admin_accordion(running = F, autocare = settings$autocare))
+                output$admin = renderUI(ui_admin_accordion(running = F, enable_care = settings$enable_care))
             }
         })
             
@@ -97,7 +107,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                 shinyalert("Error", "Player password cannot be null", type = "error")
             } else {
                 credentials$password[which(credentials$user == "player")] <<- input$pass_player
-                updateTextInput(session,"pass_player","Save player password:","")
+                updateTextInput(session,"pass_player","Player password:","")
                 shinyalert("Success", "Player password has been updated", type = "success")
             }
         })
@@ -108,24 +118,27 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                 shinyalert("Error", "Admin password cannot be null", type = "error")
             } else {
                 credentials$password[which(credentials$user == "admin")] <<- input$pass_admin
-                updateTextInput(session,"pass_admin","Save admin password:","")
+                updateTextInput(session,"pass_admin","Admin password:","")
                 shinyalert("Success", "Admin password has been updated", type = "success")
             }
         })
 
         ### admin board
-        observeEvent(input$autocare,{
-            settings$autocare  <<- !settings$autocare
-            etc[["autocare"]] = settings$autocare
+        observeEvent(input$enable_care,{
+            settings$enable_care  <<- !settings$enable_care
+            etc[["enable_care"]] = settings$enable_care
+            if(!settings$enable_care) {
+                etc[["care"]] = F
+            }
         })
 
         observe({
-            if(etc[["autocare"]]) {
-                output$ui_autocare = renderUI(ui_autocare_switch())
-                updateActionButton(session,"autocare","disable automatic care")
+            if(etc[["enable_care"]]) {
+                output$ui_care = renderUI(ui_care_switch())
+                updateActionButton(session,"enable_care","disable automatic care")
             } else {
-                output$ui_autocare = renderUI(br())
-                updateActionButton(session,"autocare","enable automatic care")
+                output$ui_care = renderUI(br())
+                updateActionButton(session,"enable_care","enable automatic care")
             }
         })
 
@@ -133,10 +146,17 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             if(input$care) {
                 shinyjs::show("disc")
                 shinyjs::show("disc_tag")
+                etc[["care"]] = T
             } else {
                 shinyjs::hide("disc")
                 shinyjs::hide("disc_tag")
+                etc[["care"]] = F
+                etc[["disc"]] = F
             }
+        })
+
+        observeEvent(input$disc,{
+            etc[["disc"]] = input$disc
         })
 
         observeEvent(input$start,{
@@ -221,154 +241,18 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             })
         })
 
-    #     ## care routine
-    #     observe({
-    #         if(!etc[["busy"]]) {
-    #             etc[["busy"]] = T
-
-    #             t1 = Sys.time()
-    #             elapsed = as.numeric(difftime(t1,etc[["t0"]],units = "sec"))
-    #             etc[["t0"]] = t1
-
-    #             if(input$care){
-
-    #                 ### if it's an egg, set the clock
-    #                 if(etc[["egg"]]) {
-    #                     if(is.egg(tama)) {
-    #                         etc[["todo"]] = set_clock()
-    #                     }
-    #                     etc[["egg"]]  = F
-    #                 }
-
-    #                 ### if dead, that's over
-    #                 if(is.dead(tama)) {
-    #                     etc[["dead"]] = T
-    #                     etc[["todo"]]$wait = Inf
-    #                 }
-                    
-    #                 ### stop the need to scold if it doesn't cry anymore
-    #                 if(!tama$GetIcon()[8]) {
-    #                     etc[["scold"]] = F
-    #                 }
-                    
-    #                 ### otherwise, plan an action
-    #                 if(is.asleep(tama,"off")){
-    #                     etc[["stats"]] = c(hunger = 4,
-    #                                     happiness = 4)
-
-    #                 } else if(etc[["todo"]]$wait <= 0 &
-    #                         length(etc[["todo"]]$actions) == 0) {
-
-    #                     # end what has been started
-    #                     if(etc[["doing"]] != "") {
-    #                         if(etc[["doing"]] == "try_to_clean") {
-    #                             if(is.dirty(tama,"top")) {
-    #                                 # still dirty => asleep, turn the light off
-    #                                 etc[["todo"]] = light()
-    #                                 etc[["doing"]] = ""
-    #                             }
-
-    #                         } else if(etc[["doing"]] == "check_arrow") {
-    #                             # now that the arrow is checked, feed
-    #                             etc[["todo"]] = feed(ifelse(is.burger(tama),
-    #                                             "top",
-    #                                             "bottom"),
-    #                                         times = 4 - etc[["stats"]]["hunger"])
-    #                             etc[["stats"]]["hunger"] = 4
-    #                             etc[["doing"]] = ""
-
-    #                         } else if(etc[["doing"]] == "check_status_1") {
-    #                             # check hunger
-    #                             etc[["stats"]]["hunger"] = nb.hearts(tama)
-    #                             etc[["todo"]] = check_status(step = 2)
-    #                             etc[["doing"]] = "check_status_2"
-
-    #                         } else if(etc[["doing"]] == "check_status_2") {
-    #                             # check happiness
-    #                             etc[["stats"]]["happiness"] = nb.hearts(tama)
-    #                             etc[["todo"]] = check_status(step = 3)
-    #                             etc[["doing"]] = ""
-
-    #                             if(tama$GetIcon()[8] &
-    #                             !is.asleep(tama, "on") &
-    #                             etc[["stats"]]["hunger"] > 0 &
-    #                             etc[["stats"]]["happiness"] > 0){
-    #                                 etc[["scold"]] = T
-    #                             }
-    #                         }
-
-    #                     # check bad screens (clock, light off when not asleep)
-    #                     } else if(is.clock(tama)) {
-    #                         etc[["todo"]] = unclock()
-
-    #                     } else if(is.dark(tama)) {
-    #                         etc[["todo"]] = light()
-
-    #                     # cares
-    #                     } else if(is.asleep(tama,"on")) {
-    #                         etc[["todo"]] = light()
-
-    #                     } else if(is.dirty(tama,"top")) {
-    #                         # double poop: try to clean - or is it asleep ?
-    #                         etc[["todo"]] = clean()
-    #                         etc[["doing"]] = "try_to_clean"
-
-    #                     } else if(is.dirty(tama,"bottom")) {
-    #                         etc[["todo"]] = clean()
-
-    #                     } else if(is.sick(tama)) {
-    #                         # heal after double poop that may hide it
-    #                         etc[["todo"]] = heal()
-
-    #                     } else if(input$disc & etc[["scold"]]) {
-    #                         etc[["todo"]] = scold()
-    #                         etc[["scold"]] = F
-
-    #                     } else if(etc[["stats"]]["hunger"] < 4 & !etc[["scold"]]){
-    #                         etc[["todo"]] = check_food_arrow()
-    #                         etc[["doing"]] = "check_arrow"
-
-    #                     } else if(etc[["stats"]]["happiness"] < 4 & !etc[["scold"]]){
-
-    #                         etc[["todo"]] = play_game(times = min(2,4 - etc[["stats"]]["happiness"]))
-    #                         etc[["stats"]]["happiness"] = 4
-    #                         etc[["next_check"]] = 0
-
-    #                         # if it's time and it's not sleeping,
-    #                         # or if it's crying with no apparent reason
-    #                         # reasons: light on when sleeping, hungry, unhappy, to scold
-    #                         # hungry and unhappy must be checked, if checked and !=0: "to scold"
-    #                     } else if(etc[["t0"]] > etc[["next_check"]] |
-    #                                     (tama$GetIcon()[8] &
-    #                                     !is.asleep(tama,"on"))) {
-    #                             etc[["next_check"]] = etc[["t0"]] + 5*60
-    #                             etc[["todo"]] = check_status(step = 1)
-    #                             etc[["doing"]] = "check_status_1"
-    #                             etc[["scold"]] = F # we will check that
-    #                     }
-    #                 }
-    #             }
-
-    #             ### do what has been planned
-    #             if(etc[["todo"]]$wait > 0) {
-    #                 etc[["todo"]]$wait = etc[["todo"]]$wait - elapsed
-    #             } else {
-    #                 if(length(etc[["todo"]]$actions) > 0){
-
-    #                     act = etc[["todo"]]$actions[1]
-
-    #                     if(act %in% c("A","B","C")) {
-    #                         tama$click(act)
-    #                         etc[["todo"]]$wait =  ifelse(input$care,.4,.1)
-    #                     } else {
-    #                         etc[["todo"]]$wait = as.numeric(act)
-    #                     }
-
-    #                     etc[["todo"]]$actions = etc[["todo"]]$actions[-1]
-    #                 }
-    #             }
-    #         }
-    #     })
+        ## care routine
+        observe({
+            if(etc[["enable_care"]]) if(etc[["care"]]) if(!etc[["busy"]]) {
+                etc[["busy"]] = T
+                etc[["state"]] = care_step(
+                    tama  = tama,
+                    state = etc[["state"]], 
+                    time  = Sys.time(),
+                    disc  = etc[["disc"]]
+                )
+            }
+        })
 
         ## Original gameplay
         observeEvent(input$A, tama$click("A"))

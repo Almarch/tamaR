@@ -1,6 +1,6 @@
 
 
-ui_autocare_switch = function() {
+ui_care_switch = function() {
     tagList(
         br(),br(),br(),
         fluidRow(

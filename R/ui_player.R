@@ -13,7 +13,7 @@ ui_player = function() {
             )
         )),
         fluidRow(column(12,align = "center",
-            uiOutput("ui_autocare")
+            uiOutput("ui_care")
         ))
     )
 }
