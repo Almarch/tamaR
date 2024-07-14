@@ -217,18 +217,19 @@ Both start with the same password:
   
 ![image](https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f)
 
-
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
+
+Only ***admin*** can modify both ***admin*** and ***user*** passwords. The ***user*** credentials are designed as to be shareable with a friend or family member for instance. The ***admin*** credentials should remain private.
 
 ### 4.2. Administration
 
-The following settings are available from the administrator board:
+The following settings are available when the user is authentified as ***admin***:
 
 - Stop or resume the emulation ;
 
 - Management:
 
-    - Set or modify the passwords ;
+    - Set or modify the passwords;
 
     - Enable the use of the automatic care feature.
 
@@ -255,7 +256,7 @@ The following settings are available from the administrator board:
 
 ### 4.3 Original gameplay
 
-The original gameplay is available when the user is connected using the user password.
+The original gameplay is available when the user is authentified as ***player***.
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
