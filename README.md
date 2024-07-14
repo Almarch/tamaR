@@ -262,7 +262,7 @@ The following settings are available when the user is authentified as ***admin**
     - Reset the game state (as the back button from the original toy).
 
 
-### 4.3 Original gameplay
+### 4.3. Original gameplay
 
 The original gameplay is available when the user is authentified as ***player***.
 
