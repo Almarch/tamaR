@@ -227,7 +227,7 @@ Both start with the same password:
 
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
-Only ***admin*** can modify both ***admin*** and ***user*** passwords. The ***user*** can only play. The ***user*** credentials are designed to be shareable with a friend or family member for instance. The ***admin*** credentials should remain confidential.
+Only ***admin*** can modify both ***admin*** and ***player*** passwords. The ***player*** can only play. The ***player*** credentials are designed to be shareable with a friend or family member for instance. The ***admin*** credentials should remain confidential.
 
 ### 4.2. Administration
 
