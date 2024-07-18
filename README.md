@@ -88,7 +88,7 @@ guizmo$reset()
 
 ### 2.2. Babysitting
 
-To automatically care for your virtual pet, call the `babysit()` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
+To automatically care for your virtual pet, call the `babysit` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
 
 ```r
 guizmo$start()
@@ -274,7 +274,7 @@ The jungle background comes from [this collection](https://www.vecteezy.com/vect
 
 ### 4.4. Automatic care
 
-The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix).
+The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix). It uses the same routine as the `babysit` function previously described.
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
