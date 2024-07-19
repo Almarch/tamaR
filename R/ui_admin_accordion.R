@@ -33,11 +33,11 @@ ui_admin_accordion = function(running, enable_care) {
             title = "Play as admin",
             content = fluidRow(column(12,
                 splitLayout(
-                    actionButton("a","A",class="plastic"),
-                    actionButton("b","B",class="plastic"),
-                    actionButton("c","C",class="plastic"),
-                    actionButton("ac","A+C",class="plastic"),
-                    cellWidths = c("10%")
+                    actionButton("a","A",class="small"),
+                    actionButton("b","B",class="small"),
+                    actionButton("c","C",class="small"),
+                    actionButton("ac","A+C",class="small"),
+                    cellWidths = c("24%")
                 ),
                 align = "center"
             ))

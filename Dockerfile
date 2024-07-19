@@ -1,11 +1,11 @@
-FROM rocker/shiny:4.1.0
+FROM rocker/shiny:4.4.1
 
-RUN R -e "install.packages('Rcpp')"
-RUN R -e "install.packages('png')"
-RUN R -e "install.packages('bsplus')"
-RUN R -e "install.packages('shinyjs')"
-RUN R -e "install.packages('shinymanager')"
-RUN R -e "install.packages('shinyWidgets')"
+RUN R -e "install.packages('Rcpp', version = '1.0.13')"
+RUN R -e "install.packages('png', version = '0.1-8')"
+RUN R -e "install.packages('bsplus', version = '0.1.4')"
+RUN R -e "install.packages('shinyjs', version = '2.1.0')"
+RUN R -e "install.packages('shinymanager', version = '1.0.410')"
+RUN R -e "install.packages('shinyWidgets', version = '0.8.6')"
 
 RUN mkdir -p /app/tamaR
 ADD . /app/tamaR

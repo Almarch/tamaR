@@ -1,9 +1,9 @@
 
-.plastic {
+.big {
 	text-align: center;
 	display: inline-block;
-	width: 80px;
-  height: 80px;
+	width: 75px;
+  height: 75px;
   border-radius: 50%;
 	box-shadow:  0 10px rgb(120,200,244);
 	color: black;
@@ -16,7 +16,24 @@
 	background-image: linear-gradient(left top, rgb(247, 200, 220) 40%, rgb(255, 255, 255) 60%, rgb(185, 227, 249) 80%);
 }
 
-.plastic:active {
+.small {
+	text-align: center;
+	display: inline-block;
+	width: 50px;
+  height: 50px;
+  border-radius: 50%;
+	box-shadow:  0 10px rgb(120,200,244);
+	color: black;
+  cursor: pointer;
+  margin: 10px;
+  
+	background-image: -o-linear-gradient(left top, rgb(247, 200, 220) 40%, rgb(255, 255, 255) 60%, rgb(185, 227, 249) 80%);
+	background-image: -moz-linear-gradient(left top, rgb(247, 200, 220) 40%, rgb(255, 255, 255) 60%, rgb(185, 227, 249) 80%);
+	background-image: -webkit-linear-gradient(left top, rgb(247, 200, 220) 40%, rgb(255, 255, 255) 60%, rgb(185, 227, 249) 80%);
+	background-image: linear-gradient(left top, rgb(247, 200, 220) 40%, rgb(255, 255, 255) 60%, rgb(185, 227, 249) 80%);
+}
+
+.big:active, .small:active {
 	box-shadow: none;
 	position: relative;
 	top: 10px;

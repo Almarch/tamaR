@@ -111,9 +111,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                             actionButton(
                                 "stop",
                                 "STOP",
-                                class="plastic"
+                                class="big"
                             ),
-                        cellWidths = c("25%")
+                        cellWidths = c("30%")
                         )
                     )
                     output$admin = renderUI(
@@ -128,9 +128,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                             actionButton(
                                 "start",
                                 "START",
-                                class="plastic"
+                                class="big"
                             ),
-                        cellWidths = c("25%")
+                        cellWidths = c("30%")
                         )
                     )
                     output$admin = renderUI(
