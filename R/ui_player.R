@@ -6,9 +6,10 @@ ui_player = function() {
         )),
         fluidRow(column(12,align = "center",
             splitLayout(
-                actionButton("A","",class="big"),
-                actionButton("B","",class="big"),
-                actionButton("C","",class="big")
+                actionButton("A","",class="plastic"),
+                actionButton("B","",class="plastic"),
+                actionButton("C","",class="plastic"),
+                cellWidths = c("25%")
             )
         )),
         fluidRow(column(12,align = "center",

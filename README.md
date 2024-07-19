@@ -40,7 +40,7 @@ tamaR can be installed as an R package. To do so, the first step is to convert t
 
 ```bash
 Rscript tamaR/src/TamaRomConvert.r
-R -e "install.packages(c('Rcpp','png','shiny','bsplus','shinyjs','shinymanager','shinyalert','shinyWidgets'))"
+R -e "install.packages(c('Rcpp','png','shiny','bsplus','shinyjs','shinymanager','shinyWidgets'))"
 R CMD INSTALL tamaR
 ```
 
@@ -61,7 +61,33 @@ guizmo = Tama()
 guizmo$start()
 ```
 
-### 2.1. Game state
+The Tamagotchi is either running (after calling the `start` method) or off (after calling the `stop` method).
+
+```r
+guizmo$stop()
+```
+
+### 2.1. Playing in command lines
+
+Once running, the `click` method allows an interaction with the 3 buttons: left (`"A"`), middle (`"B"`) and right (`"C"`). The `delay` argument specify how long the click should last.
+
+```r
+guizmo$start()
+guizmo$click(button = "B",delay = 1)
+Sys.sleep(3)
+for(i in 1:7) {
+    guizmo$click("A")
+    Sys.sleep(.5)
+}
+```
+
+The display method `prints` the screen.
+
+```r
+guizmo$display()
+```
+
+### 2.2. Game state
 
 The state can be saved anytime using the corresponding method:
 
@@ -86,7 +112,7 @@ guizmo$stop()
 guizmo$reset()
 ```
 
-### 2.2. Babysitting
+### 2.3. Babysitting
 
 To automatically care for your virtual pet, call the `babysit` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
 
@@ -95,7 +121,7 @@ guizmo$start()
 babysit(guizmo, end = Sys.time() + 10*60) # ten minutes
 ```
 
-### 2.3. P2 sprites
+### 2.4. P2 sprites
 
 Using [TamaTool](https://github.com/jcrona/tamatool) ROM editor, a mod of the original P1 ROM has been provided in order to use the P2 sprites.
 
@@ -107,7 +133,7 @@ guizmo$start()
 
 This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
-### 2.4. Shiny app
+### 2.5. Shiny app
 
 The shiny app may be called from R with the `go` function:
 
@@ -128,7 +154,6 @@ R -e "library(tamaR); Tama() |> go(port = 1996, light = F)"
 ```
 
 The app is now available locally at http://127.0.0.1:1996/
-
 
 ## 3. Web deployment
 

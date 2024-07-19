@@ -4,30 +4,33 @@ ui_care_switch = function() {
     tagList(
         br(),br(),br(),
         fluidRow(
-            column(6,align = "center",
-                fluidRow(tags$label(
-                    "Automatic care:"
-                )),
-                fluidRow(switchInput(
-                    "care",
-                    onLabel = "",
-                    offLabel = "",
+            column(12,align = "center",
+                prettyToggle(
+                    inputId = "care",
+                    label_off = "Automatic care",
+                    label_on = "Automatic care",
                     value = F,
-                    handleWidth = "50px"
-                ))
-            ),
-            column(6, align = "center",
-                fluidRow(tags$label(
-                    "Care for discipline:",
-                    id = "disc_tag"
-                )),
-                fluidRow(switchInput(
-                    "disc",
-                    onLabel = "",
-                    offLabel = "",
+                    plain = T,
+                    outline = T,
+                    bigger = T,
+                    status_on  = "danger",
+                    status_off = "danger",
+                    icon_on  = icon("heart", class = "fas"), 
+                    icon_off = icon("heart", class = "far")
+                ),
+                prettyToggle(
+                    inputId = "disc",
+                    label_off = "Care for discipline",
+                    label_on = "Care for discipline",
                     value = T,
-                    handleWidth = "50px"
-                ))
+                    plain = T,
+                    outline = T,
+                    bigger = T,
+                    status_on  = "danger",
+                    status_off = "danger",
+                    icon_on  = icon("heart", class = "fas"), 
+                    icon_off = icon("heart", class = "far")
+                )
             )
         )
     )

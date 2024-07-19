@@ -107,10 +107,13 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             observe({
                 if(etc[["running"]]) {
                     output$startstop = renderUI(
-                        actionButton(
-                            "stop",
-                            "STOP",
-                            class="big"
+                        splitLayout(
+                            actionButton(
+                                "stop",
+                                "STOP",
+                                class="plastic"
+                            ),
+                        cellWidths = c("25%")
                         )
                     )
                     output$admin = renderUI(
@@ -121,10 +124,13 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                     )
                 } else {
                     output$startstop = renderUI(
-                        actionButton(
-                            "start",
-                            "START",
-                            class="big"
+                        splitLayout(
+                            actionButton(
+                                "start",
+                                "START",
+                                class="plastic"
+                            ),
+                        cellWidths = c("25%")
                         )
                     )
                     output$admin = renderUI(
@@ -140,7 +146,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             ### register player password
             observeEvent(input$save_pass_player,{
                 if(input$pass_player == "") {
-                    shinyalert(
+                    show_alert(
                         "Error",
                         "Player password cannot be null",
                         type = "error"
@@ -153,7 +159,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                         "Player password:",
                         ""
                     )
-                    shinyalert(
+                    show_alert(
                         "Success",
                         "Player password has been updated",
                         type = "success"
@@ -164,7 +170,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             ### register admin password
             observeEvent(input$save_pass_admin,{
                 if(input$pass_admin == "") {
-                    shinyalert(
+                    show_alert(
                         "Error",
                         "Admin password cannot be null",
                         type = "error"
@@ -177,7 +183,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                         "Admin password:",
                         ""
                     )
-                    shinyalert(
+                    show_alert(
                         "Success",
                         "Admin password has been updated",
                         type = "success"
@@ -215,11 +221,9 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             observeEvent(input$care, {
                 if(input$care) {
                     shinyjs::show("disc")
-                    shinyjs::show("disc_tag")
                     etc[["care"]] = T
                 } else {
                     shinyjs::hide("disc")
-                    shinyjs::hide("disc_tag")
                     etc[["care"]] = F
                     etc[["disc"]] = F
                 }
