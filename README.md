@@ -67,7 +67,7 @@ The Tamagotchi is either running (after calling the `start` method) or off (afte
 guizmo$stop()
 ```
 
-### 2.1. Playing in command lines
+### 2.1. Playing with command lines
 
 Once running, the `click` method allows an interaction with the 3 buttons: left (`"A"`), middle (`"B"`) and right (`"C"`). The `delay` argument specify how long the click should last.
 
