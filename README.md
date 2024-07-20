@@ -297,7 +297,7 @@ The following settings are available when the user is authentified as ***admin**
 
 ### 4.3. Original gameplay
 
-The original gameplay is available when the user is authentified as ***player***. The 3 buttons (left, middle, right) are mapped as for the original toy. As a web app, it is accessible from a smartphone.
+The original gameplay is available when the user is authentified as ***player***. The 3 buttons (left, middle, right) are mapped as for the original toy.
 
 <p align="center"><img src="https://github.com/user-attachments/assets/65d6b9a6-5fb9-4c51-b282-566ab065ca4e" lat="gameplay" width="300px" /></p>
 
