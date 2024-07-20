@@ -9,7 +9,7 @@ ui_player = function() {
                 actionButton("A","",class="big"),
                 actionButton("B","",class="big"),
                 actionButton("C","",class="big"),
-                cellWidths = c("30%")
+                cellWidths = c("33%")
             )
         )),
         fluidRow(column(12,align = "center",

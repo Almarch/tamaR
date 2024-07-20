@@ -37,7 +37,7 @@ ui_admin_accordion = function(running, enable_care) {
                     actionButton("b","B",class="small"),
                     actionButton("c","C",class="small"),
                     actionButton("ac","A+C",class="small"),
-                    cellWidths = c("24%")
+                    cellWidths = c("25%")
                 ),
                 align = "center"
             ))

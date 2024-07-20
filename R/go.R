@@ -113,7 +113,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                                 "STOP",
                                 class="big"
                             ),
-                        cellWidths = c("30%")
+                        cellWidths = c("33%")
                         )
                     )
                     output$admin = renderUI(
@@ -130,7 +130,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                                 "START",
                                 class="big"
                             ),
-                        cellWidths = c("30%")
+                        cellWidths = c("25%")
                         )
                     )
                     output$admin = renderUI(
