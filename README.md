@@ -1,12 +1,14 @@
-# <img src="inst/www/icon.png" alt="TaMaGoTcHi" width="35"/> The Tamagotchi is live on <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/>
+# <img src="inst/www/icon.png" alt="TaMaGoTcHi" width="40"/> The Tamagotchi is live on <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/>
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either with R, either without, using [docker](https://docker.com).
 
-![311432812-dbf7285f-a233-4667-8983-b687dc40f67d](https://github.com/Almarch/tamaR/assets/13364928/aefe1e81-267b-49c3-8b2f-952dd32a0528)
+<p align="center"><img src="https://github.com/user-attachments/assets/54dc42e9-8086-4fdd-a454-ead95f952be5" width="600px"/></p>
 
 ## 1. Installation
 
@@ -17,7 +19,7 @@ git clone https://github.almarch/tamaR.git
 cp rom.bin tamaR/src/
 ```
 
-### 1.1. Installation as a docker container
+### 1.1. Installation with <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Docker_logo.svg/1920px-Docker_logo.svg.png" alt="docker" width="120"/>
 
 tamaR can be installed and launched as a docker container. As such, R installation is not required.
 
@@ -34,7 +36,7 @@ docker run -d -p 1996:80 tama
 
 The shiny app is directly available at http://127.0.0.1:1996/
 
-### 1.2. Installation as an R package
+### 1.2. Installation as an <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="30"/> package
 
 tamaR can be installed as an R package. To do so, the first step is to convert the ROM into 12 bits. Then the package can be built with [Rcpp](https://rcpp.org) and installed.
 
@@ -50,9 +52,7 @@ The package tamaR can now be called from an R console.
 library(tamaR)
 ```
 
-![image](https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b)
-
-## 2. Use as an R package
+## 2. Use as an <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/> package
 
 The instanciation of an object of class `Tama` prepares a Tamagotchi and provides an R interface for it. The `start` method launches the real-time emulation. A single Tamagotchi can be alive on a given R session: instancing several `Tama`'s will crash them. If you need several pets, run several R sessions.
 
@@ -86,6 +86,8 @@ The display method `prints` the screen.
 ```r
 guizmo$display()
 ```
+
+<p align="center"><img src="https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b" width="600px"/></p>
 
 ### 2.2. Game state
 
@@ -130,10 +132,12 @@ guizmo$stop()
 p2(guizmo)
 guizmo$start()
 ```
+<p align="center"><img src="https://github.com/user-attachments/assets/2fcf28b2-0039-4e12-bada-9ff676498319" alt="p2_egg" width="300" align="center"/></p>
 
 This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
 ### 2.5. Shiny app
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Shiny_hex_logo.svg/800px-Shiny_hex_logo.svg.png" alt="Shiny" width="120" align="right"/>
 
 The shiny app may be called from R with the `go` function:
 
@@ -192,8 +196,9 @@ sudo ufw allow 8000/tcp
 sudo ufw status
 sudo systemctl restart ufw
 ```
-
 ### 3.3. Web server
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/768px-Nginx_logo.svg.png" alt="nginx" width="200px" align="right"/> 
 
 A web server software is required to deploy the shiny app with its functionalities. For instance, [nginx](https://nginx.com) is a free, open-source popular solution.
 
@@ -239,6 +244,8 @@ The Tamagotchi runs backend, so it remains alive when the user disconnects.
 
 ### 4.1. Authentification
 
+<img src="https://datastorm-open.github.io/shinymanager/reference/figures/shinymanager.png" alt="shinymanager" width="120px" align="right" />
+
 The app is secured with [shinymanager](https://github.com/datastorm-open/shinymanager) and requires the user to authentify. There are 2 user profiles:
  
 - ***player***
@@ -247,8 +254,8 @@ The app is secured with [shinymanager](https://github.com/datastorm-open/shinyma
 Both start with the same password:
 
 - ***qwerty***
-  
-![image](https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f)
+
+<p align="center"><img src="https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f" lat="auth" width="450px" /></p>
 
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
@@ -257,6 +264,8 @@ Only ***admin*** can modify both ***admin*** and ***player*** passwords. The ***
 ### 4.2. Administration
 
 The following settings are available when the user is authentified as ***admin***:
+
+<p align="center"><img src="https://github.com/user-attachments/assets/c9877691-0676-4231-8e8e-c7df1c5a95e0" lat="admin" width="600px" /></p>
 
 - Stop or resume the emulation ;
 
@@ -293,13 +302,13 @@ The original gameplay is available when the user is authentified as ***player***
 
 The 3 buttons (left, middle, right) are mapped as for the original toy.
 
-![game](https://github.com/Almarch/tamaR/assets/13364928/8d80eca2-1161-4cd1-844e-c69313d6d666)
-
-The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board.
+The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board of the shiny web app.
 
 ### 4.4. Automatic care
 
 The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix). It uses the same routine as the `babysit` function previously described.
+
+<p align="center"><img src="https://github.com/user-attachments/assets/d3234874-68a5-4f20-a20e-74d394ea50e9" alt="babysitting" width="300"/></p> 
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
@@ -314,6 +323,8 @@ A new but familiar secret character has snuck in the game. Will you find out who
 Several releases of P1 exist: an older one (1996) and a replica re-release. According to the [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)), replicas evolve from Maskutchi independently on the discipline level, as opposed to the original 1996 version that requires a strict 0 discipline to unlock the secret character. Testing this property led to the conclusion that the circulating ROM would be the 1996 version, not the latter replica.
 
 ### 5.2. C++ structure
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/800px-ISO_C%2B%2B_Logo.svg.png" alt="c++" width="120" align="right"/>
 
 TamaLIB has been implemented on [Arduino](https://github.com/GaryZ88/Arduinogotchi), with a bit of re-writing. The Arduino version is the starting point for tamaR C++ module, including the ROM conversion step. TamaLIB was converted from C to C++ in order to ensure consistency with R object-orientation. However, because Rcpp dependencies management was not trivial, I gathered all TamaLIB code into a monolithic tamalib.cpp program.
 
