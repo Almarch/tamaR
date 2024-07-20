@@ -8,7 +8,7 @@ This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB]
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either with R, either without, using [docker](https://docker.com).
 
-<p align="center"><img src="https://github.com/user-attachments/assets/54dc42e9-8086-4fdd-a454-ead95f952be5" width="600px"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
 
 ## 1. Installation
 
@@ -87,7 +87,7 @@ The display method `prints` the screen.
 guizmo$display()
 ```
 
-<p align="center"><img src="https://github.com/Almarch/tamaR/assets/13364928/a6abad1b-8332-4234-ba14-b589757bf69b" width="600px"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/9e944691-df30-4296-aee2-b47cc8282683" width="800px"/></p>
 
 ### 2.2. Game state
 
@@ -132,7 +132,7 @@ guizmo$stop()
 p2(guizmo)
 guizmo$start()
 ```
-<p align="center"><img src="https://github.com/user-attachments/assets/2fcf28b2-0039-4e12-bada-9ff676498319" alt="p2_egg" width="300" align="center"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/1bf1a760-2aab-497d-9066-83beb1fa9cdd" alt="p2_egg" width="300" align="center"/></p>
 
 This is not a perfect emulation of P2: some animations vary slightly, and the "number game" is not available. The P2 secret character is not available neither.
 
@@ -255,7 +255,7 @@ Both start with the same password:
 
 - ***qwerty***
 
-<p align="center"><img src="https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f" lat="auth" width="450px" /></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f" lat="auth" width="600px" /></p>
 
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
@@ -265,7 +265,7 @@ Only ***admin*** can modify both ***admin*** and ***player*** passwords. The ***
 
 The following settings are available when the user is authentified as ***admin***:
 
-<p align="center"><img src="https://github.com/user-attachments/assets/c9877691-0676-4231-8e8e-c7df1c5a95e0" lat="admin" width="600px" /></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/c9877691-0676-4231-8e8e-c7df1c5a95e0" lat="admin" width="800px" /></p>
 
 - Stop or resume the emulation ;
 
@@ -295,12 +295,11 @@ The following settings are available when the user is authentified as ***admin**
 
     - Reset the game state (as the back button from the original toy).
 
-
 ### 4.3. Original gameplay
 
-The original gameplay is available when the user is authentified as ***player***.
+The original gameplay is available when the user is authentified as ***player***. The 3 buttons (left, middle, right) are mapped as for the original toy. As a web app, it is accessible from a smartphone.
 
-The 3 buttons (left, middle, right) are mapped as for the original toy.
+<p align="center"><img src="https://github.com/user-attachments/assets/65d6b9a6-5fb9-4c51-b282-566ab065ca4e" lat="gameplay" width="300px" /></p>
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board of the shiny web app.
 
