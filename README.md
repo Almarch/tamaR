@@ -2,9 +2,9 @@
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
-
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either with R, either without, using [docker](https://docker.com).
 
@@ -12,7 +12,7 @@ A web app can be launched online using the R library [shiny](https://shiny.posit
 
 ## 1. Installation
 
-Start by cloning the git repository. A ROM named "rom.bin" must then be placed into the src directory.
+Start by cloning the git repository. The ROM, named `rom.bin`, must then be placed into the `src` directory.
 
 ```bash
 git clone https://github.almarch/tamaR.git
