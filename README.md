@@ -317,6 +317,8 @@ The automatic care process works on the frontend, so it will not support being l
 
 ### 5.1. Secret Character
 
+<img src="https://static.wikia.nocookie.net/tamagotchi/images/c/c8/1646940251499.png/revision/latest?cb=20221116221251" alt="maskutchi" width="80" align="right"/>
+
 A new but familiar secret character has snuck in the game. Will you find out who this is ?
 
 Several releases of P1 exist: an older one (1996) and a replica re-release. According to the [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)), replicas evolve from Maskutchi independently on the discipline level, as opposed to the original 1996 version that requires a strict 0 discipline to unlock the secret character. Testing this property led to the conclusion that the circulating ROM would be the 1996 version, not the latter replica.
