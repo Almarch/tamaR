@@ -307,7 +307,7 @@ The jungle background comes from [this collection](https://www.vecteezy.com/vect
 
 The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix). It uses the same routine as the `babysit` function previously described.
 
-<p align="center"><img src="https://github.com/user-attachments/assets/d3234874-68a5-4f20-a20e-74d394ea50e9" alt="babysitting" width="300"/></p> 
+<p align="center"><img src="https://github.com/user-attachments/assets/961a9225-41bd-4316-ac3b-b6de753885a5" alt="babysitting" width="300"/></p> 
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
 
