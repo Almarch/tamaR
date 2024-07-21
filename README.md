@@ -309,7 +309,7 @@ The shiny app also provides the option to automatically care for the hosted pet,
 
 <p align="center"><img src="https://github.com/user-attachments/assets/961a9225-41bd-4316-ac3b-b6de753885a5" alt="babysitting" width="300"/></p> 
 
-When checking the "automatic care" option, it is possible to choose whether the creature should also be disciplined. Indeed, discipline strongly impact the evolutionary pathway of Tamagotchis.
+When checking the "automatic care" option, it is possible to choose whether the creature should also be scolded when needed. Indeed, discipline strongly impacts the evolutionary pathway of Tamagotchis.
 
 The automatic care process works on the frontend, so it will not support being launched from several instances. It also requires that a device (or the server itself) keeps a shiny session active.
 
