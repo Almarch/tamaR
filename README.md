@@ -81,7 +81,7 @@ for(i in 1:7) {
 }
 ```
 
-The display method `prints` the screen.
+The display method prints the screen.
 
 ```r
 guizmo$display()
@@ -99,7 +99,7 @@ guizmo$save("myTama.txt")
 guizmo$start()
 ```
 
-And it can be loaded just as well:
+And it can be loaded as well:
 
 ```r
 guizmo$stop()
@@ -107,7 +107,7 @@ guizmo$load("myTama.txt")
 guizmo$start()
 ```
 
-The game sate may be reset with the `reset` method:
+The game state may be reset with the `reset` method:
 
 ```r
 guizmo$stop()
@@ -116,7 +116,7 @@ guizmo$reset()
 
 ### 2.3. Babysitting
 
-To automatically care for your virtual pet, call the `babysit` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
+To provide automatic care for your virtual pet, call the `babysit` function on your running Tamagotchi. The `end` argument provides a date at which the automatic care should stop.
 
 ```r
 guizmo$start()
