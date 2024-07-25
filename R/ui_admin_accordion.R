@@ -6,15 +6,15 @@ bs_credentials = function(x,enable_care) {
         content = fluidRow(column(12,
             splitLayout(
                 textInput("name_player","Player name:"),
-                actionButton("save_name_player","Save player name")
+                actionButton("save_name_player",HTML("Save player<br>name"))
             ),
             splitLayout(
                 textInput("pass_player","Player password:"),
-                actionButton("save_pass_player","Save player password")
+                actionButton("save_pass_player",HTML("Save player<br>password"))
             ),
             splitLayout(
                 textInput("pass_admin","Admin password:"),
-                actionButton("save_pass_admin","Save admin password")
+                actionButton("save_pass_admin",HTML("Save admin<br>password"))
             )
         ),
         br(),
