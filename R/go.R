@@ -96,7 +96,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             observe({
                 user = reactiveValuesToList(res_auth)$user
                 if(length(user)>0) {
-                    if(user == "player") {
+                    if(user == credentials$user[1]) {
                         output$UI = renderUI(ui_player())
                     } else if(user == "admin") {
                         output$UI = renderUI(ui_admin())
@@ -141,7 +141,42 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                     )
                 }
             })
-                
+
+            ### register player name
+            observeEvent(input$save_name_player,{
+                if(input$name_player == "") {
+                    show_alert(
+                        "Error",
+                        "Player name cannot be null",
+                        type = "error"
+                    )
+                } else if(!all(unlist(strsplit(input$name_player,split="")) %in% c(letters,LETTERS,0:9))) {
+                    updateTextInput(
+                        session,
+                        "name_player",
+                        "Player name:",
+                        ""
+                    )
+                    show_alert(
+                        "Error",
+                        "Special characters are not allowed",
+                        type = "error"
+                    )
+                } else {
+                    credentials$user[1] <<- input$name_player
+                    updateTextInput(
+                        session,
+                        "name_player",
+                        "Player name:",
+                        ""
+                    )
+                    show_alert(
+                        "Success",
+                        "Player name has been updated",
+                        type = "success"
+                    )
+                }
+            })
 
             ### register player password
             observeEvent(input$save_pass_player,{
@@ -152,7 +187,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                         type = "error"
                     )
                 } else {
-                    credentials$password[which(credentials$user == "player")] <<- input$pass_player
+                    credentials$password[1] <<- input$pass_player
                     updateTextInput(
                         session,
                         "pass_player",

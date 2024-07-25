@@ -261,6 +261,8 @@ You are strongly encouraged to change both passwords as soon as possible for str
 
 Only ***admin*** can modify both ***admin*** and ***player*** passwords. The ***player*** can only play. The ***player*** credentials are designed to be shareable with a friend or family member for instance. The ***admin*** credentials should remain confidential.
 
+The ***admin*** can also change the ***player*** name.
+
 ### 4.2. Administration
 
 The following settings are available when the user is authentified as ***admin***:
@@ -271,7 +273,7 @@ The following settings are available when the user is authentified as ***admin**
 
 - Management:
 
-    - Set or modify the passwords;
+    - Set the credentials (player name, admin and player passwords)
 
     - Enable the use of the automatic care feature.
 
