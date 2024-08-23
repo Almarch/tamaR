@@ -2,7 +2,7 @@
 
 ui_care_switch = function() {
     tagList(
-        br(),br(),br(),
+        br(),br(),
         fluidRow(
             column(12,align = "center",
                 prettyToggle(
