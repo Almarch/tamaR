@@ -38,7 +38,6 @@ setRcppClass(Class = "Tama",
         main = array(0,dim = c(16,32,4))
         for(i in 1:3) main[,,i] = 1-tmp
         main[,,4] = tmp
-
         plot(c(0,32),c(0,32),type="n",axes=F,xlab="",ylab="",asp=1)
         rasterImage(background,-1, -1, 33, 33)
         rasterImage(main,0,8,32,24,interpolate = F)

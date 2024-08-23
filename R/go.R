@@ -39,7 +39,15 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                       href = "www/icon.png"),
             tags$link(rel  = "stylesheet",
                       type = "text/css",
-                      href = "www/styles.css")
+                      href = "www/styles.css"),
+            # font
+            tags$link(rel  = "preconnect",
+                      href = "https://fonts.googleapis.com"),
+            tags$link(rel  = "preconnect",
+                      href = "https://fonts.gstatic.com",
+                      crossorigin = "anonymous"),
+            tags$link(rel  = "stylesheet",
+                      href = "https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap")
         ),
         headerPanel(""),
         mainPanel(
@@ -63,6 +71,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
         ## display screen
         observe({
             output$screen = renderPlot({
+                par(bg = "#1F1F1F")
                 tama$display(
                     background = settings$background
                 )
@@ -74,7 +83,10 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
         })
      }
     } else {
-        ui <- secure_app(ui) 
+        ui <- secure_app(
+            ui,
+            background = "linear-gradient(#1F1F1F, #1F1F1F)"
+        ) 
         server = function(input,output,session){
 
             ### Reactive values
@@ -378,6 +390,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
             ## display screen
             observe({
                 output$screen = renderPlot({
+                    par(bg = "#1F1F1F")
                     tama$display(
                         background = settings$background
                     )
