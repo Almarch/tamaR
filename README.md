@@ -10,6 +10,14 @@ A web app can be launched online using the R library [shiny](https://shiny.posit
 
 <p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
 
+## 0. Demo
+
+A demo version is kindly hosted on POSIT Cloud and available [at this address](https://almarch.shinyapps.io/tamaR)
+
+Connect with de default credentials: `admin /// qwerty` and `player /// qwerty`.
+
+This version do not contain the ROM, it has to be manually added. More information of the [dedicated branch](https://github.com/Almarch/tamaR/tree/posit).
+
 ## 1. Installation
 
 Start by cloning the git repository. The ROM, named `rom.bin`, must then be placed into the `src` directory.
