@@ -2,3 +2,4 @@ src/rom.*
 src/*.o
 src/*.so
 src/*.dll
+tamaR.dcf

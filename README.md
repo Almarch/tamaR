@@ -8,7 +8,7 @@ This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB]
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either with R, either without, using [docker](https://docker.com).
 
-A demo instance is available here: https://almarch.shinyapps.io/tamaR
+Check out the demo instance: https://almarch.shinyapps.io/tamaR
 
 <p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
 
@@ -33,11 +33,9 @@ go()
 
 ## 2. Demo
 
-Check the demo version:
+Check out the demo instance: https://almarch.shinyapps.io/tamaR
 
-Connect as a player with the default credentials: player /// qwerty.
-
-The admin board is private.
+Connect as admin with the default credentials: admin /// qwerty, and load the ROM (rom.bin or rom.h)
 
 ## 3. Use as a web app
 
