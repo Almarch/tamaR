@@ -13,7 +13,9 @@
 #' go(guizmo, light = T)
 
 
-go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = TRUE){
+go = function(port = 1996, host = "127.0.0.1", light = F){
+
+    tama = Tama()
 
     options(shiny.port = port,
             shiny.host = host)
@@ -24,7 +26,7 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
         password = c("qwerty", "qwerty"))
 
     settings = list(
-        background = background,
+        background = NULL,
         enable_care = F,
         running = F,
         ROM = tama$GetROM()
@@ -347,7 +349,14 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                 tama$stop()
                 inFile <- input$load_rom
                 try({
-                    rom = readLines(inFile$datapath)
+                    extension = unlist(strsplit(inFile$datapath, split = ".",fixed=T))
+                    extension = extension[length(extension)]
+                    rom = ""
+                    if(extension == "bin") {
+                        rom = convert_rom(bin = inFile$datapath, hfile = NULL)
+                    } else if(extension == "h") {
+                        rom = readLines(inFile$datapath)
+                    }
                     rom = hex2nb(rom)
                     tama$SetROM(rom)
                     tama$glimpse()
