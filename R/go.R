@@ -323,7 +323,7 @@ go = function(...){
                 extension = unlist(strsplit(inFile$datapath, split = ".",fixed=T))
                 extension = extension[length(extension)]
                 rom = ""
-                if(extension == "bin") {
+                if(extension %in% c("bin","b")) {
                     rom = convert_rom(bin = inFile$datapath, hfile = NULL)
                 } else if(extension == "h") {
                     rom = readLines(inFile$datapath)

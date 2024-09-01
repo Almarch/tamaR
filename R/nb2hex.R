@@ -21,7 +21,8 @@ nb2hex = function(x, header = "static unsigned char g_program_b12[] = {"){
 
 hex2nb = function(x){
 
-    for(pat in c(formals(nb2hex)$header,
+    for(pat in c("static unsigned char g_program_b12[] = {",
+                 "static const unsigned char g_program_b12[] PROGMEM = {",
                  "\n",
                  "0x",
                  " ",

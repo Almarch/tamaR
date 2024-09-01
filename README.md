@@ -33,16 +33,20 @@ go()
 
 ## 2. Demo
 
-Check out the demo instance: https://almarch.shinyapps.io/tamaR
+A demo instance is available [here](https://almarch.shinyapps.io/tamaR).
 
-Connect as admin with the default credentials: admin /// qwerty, and load the ROM (rom.bin or rom.h)
+Connect as admin with the default credentials: **admin**, password: **qwerty**. Start by changing the passwords.
+
+Then, from the "aesthetics" panel, load a working Tamagotchi ROM <i>e.g</i>. **tama.b**, **rom.bin**, **rom.h** or **rom_12b.h**.
 
 ## 3. Use as a web app
 
-Have a look to the [documentation](https://github.com/Almarch/tamaR/tree/main#4-use-as-a-web-app).
+Have a look to the full [documentation](https://github.com/Almarch/tamaR/tree/main#4-use-as-a-web-app).
 
 ## 4. License 
 
 This work is licensed under Attribution-NonCommercial 4.0 International.
+
+The ROM is not provided and the author do not endorse game piracy: check your local regulation concerning retro games emulation.
 
 All graphical resources come from the extraordinarily rich Tamagotchi [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)).
