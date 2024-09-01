@@ -37,7 +37,11 @@ A demo instance is available [here](https://almarch.shinyapps.io/tamaR).
 
 Connect as admin with the default credentials: **admin**, password: **qwerty**. Start by changing the passwords.
 
-Then, from the "aesthetics" panel, load a working Tamagotchi ROM <i>e.g</i>. **tama.b**, **rom.bin**, **rom.h** or **rom_12b.h**.
+Enable the automatic care bot if you wish the player to use it.
+
+Finally, from the "aesthetics" panel, load a working Tamagotchi ROM <i>e.g</i>. **tama.b**, **rom.bin**, **rom.h** or **rom_12b.h**.
+
+You may now connect as **player** and enjoy the game !
 
 ## 3. Use as a web app
 
