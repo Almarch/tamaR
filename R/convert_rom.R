@@ -5,10 +5,6 @@
 #' @param hfile The output file name
 #' @param secret Let a new (but familiar) secret character sneak in the game
 #' @examples
-#' guizmo = Tama()
-#' p2(guizmo)
-#' guizmo$start()
-#' go(guizmo)
 
 convert_rom = function(bin, hfile = "rom.h", secret = T, ...) {
 
