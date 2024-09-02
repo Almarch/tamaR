@@ -2,9 +2,10 @@
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
+
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
 
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either from R, either from [docker](https://docker.com).
 
@@ -14,7 +15,7 @@ A web app can be launched online using the R library [shiny](https://shiny.posit
 
 <img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
-A demo version is kindly hosted on POSIT Cloud and available [at this address](https://almarch.shinyapps.io/tamaR). The demo version is slighlty different from the main one:
+A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available [at this address](https://almarch.shinyapps.io/tamaR). The demo version is slighlty different from the main one:
 
 <table>
     <tr>
