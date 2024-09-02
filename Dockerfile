@@ -15,8 +15,7 @@ WORKDIR /app
 RUN if ! [ -f "tamaR/src/rom.h" ]; then \
         R -e "source('tamaR/R/convert_rom.R'); source('tamaR/R/nb2hex.R'); convert_rom('tamaR/src/rom.bin', 'tamaR/src/rom.h')"; \
     fi \
-    && R CMD build tamaR \
-    && R CMD INSTALL tamaR_*.tar.gz
+    && R CMD INSTALL tamaR
 
 CMD R -e "library('tamaR'); Tama() |> go(port = 80, host =  '0.0.0.0', light = FALSE)"
 
