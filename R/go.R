@@ -347,7 +347,14 @@ go = function(tama, background = NULL, port = 1996, host = "127.0.0.1", light = 
                 tama$stop()
                 inFile <- input$load_rom
                 try({
-                    rom = readLines(inFile$datapath)
+                    extension = unlist(strsplit(inFile$datapath, split = ".",fixed=T))
+                    extension = extension[length(extension)]
+                    rom = ""
+                    if(extension %in% c("bin","b")) {
+                        rom = convert_rom(bin = inFile$datapath, hfile = NULL)
+                    } else if(extension == "h") {
+                        rom = readLines(inFile$datapath)
+                    }
                     rom = hex2nb(rom)
                     tama$SetROM(rom)
                     tama$glimpse()
