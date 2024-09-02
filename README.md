@@ -2,16 +2,15 @@
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
 
+<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-A demo version is kindly hosted on POSIT Cloud and available [at this address](https://almarch.shinyapps.io/tamaR).
+A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available [at this address](https://almarch.shinyapps.io/tamaR).
 
 <p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
 
 ## 1. Note on the <i>posit</i> branch
-
-<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
 The demo version is slighlty different from the main one:
 
