@@ -6,10 +6,9 @@ This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB]
 
 [R](https://r-project.org) is a scripting language, allowing either a live interaction or the elaboration of custom programs.
 
-
 A web app can be launched online using the R library [shiny](https://shiny.posit.co). The online app can be installed either from R, either from [docker](https://docker.com).
 
-<p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/fe3c4fdd-2a94-4edd-ae6a-c61e2424b517" alt = "ezgif" width="400px"/></p>
 
 ## 1. Demo version
 
@@ -298,7 +297,7 @@ Both start with the same password:
 
 - ***qwerty***
 
-<p align="center"><img src="https://github.com/user-attachments/assets/be032bb5-dc0b-47c1-a017-6f528da3122f" lat="auth" width="600px" /></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/5e61e654-94ca-4b5b-94d0-8802463cec77" lat="auth" width="400px" /></p>
 
 You are strongly encouraged to change both passwords as soon as possible for strong, distinct ones. Connect as ***admin*** to do so.
 
@@ -310,7 +309,7 @@ The ***admin*** can also change the ***player*** name.
 
 The following settings are available when the user is authentified as ***admin***:
 
-<p align="center"><img src="https://github.com/user-attachments/assets/c9877691-0676-4231-8e8e-c7df1c5a95e0" lat="admin" width="800px" /></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/227fef42-2a80-4e22-b1a2-9e8f7c74e80d" lat="admin" width="400px" /></p>
 
 - Stop or resume the emulation ;
 
@@ -344,7 +343,7 @@ The following settings are available when the user is authentified as ***admin**
 
 The original gameplay is available when the user is authentified as ***player***. The 3 buttons (left, middle, right) are mapped as for the original toy.
 
-<p align="center"><img src="https://github.com/user-attachments/assets/65d6b9a6-5fb9-4c51-b282-566ab065ca4e" lat="gameplay" width="300px" /></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/e2d89e4c-4b40-4f24-86eb-ed4f5a2cbe01" lat="gameplay" width="400px" /></p>
 
 The jungle background comes from [this collection](https://www.vecteezy.com/vector-art/294963-a-green-jungle-landscape). It has been cropped to a square, resized to 500*500px, converted to png, and lighten to improve contrasts. Finally, it has been set as background from the administrator board of the shiny web app.
 
@@ -352,7 +351,7 @@ The jungle background comes from [this collection](https://www.vecteezy.com/vect
 
 The shiny app also provides the option to automatically care for the hosted pet, a feature inspired from [tamatrix](https://github.com/greysonp/tamatrix). It uses the same routine as the `babysit` function previously described.
 
-<p align="center"><img src="https://github.com/user-attachments/assets/961a9225-41bd-4316-ac3b-b6de753885a5" alt="babysitting" width="300"/></p> 
+<p align="center"><img src="https://github.com/user-attachments/assets/cfa0c452-19a7-4a52-aac9-501609184927" alt="babysitting" width="300"/></p> 
 
 When checking the "automatic care" option, it is possible to choose whether the creature should also be scolded when needed. Indeed, discipline strongly impacts the evolutionary pathway of Tamagotchis.
 
