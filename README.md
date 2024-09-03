@@ -8,7 +8,7 @@ This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB]
 
 A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available [at this address](https://almarch.shinyapps.io/tamaR).
 
-<p align="center"><img src="https://github.com/user-attachments/assets/73957a59-64c4-4a3d-a7e6-bc7b5ac83d6f" alt = "ezgif" width="800px"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/fe3c4fdd-2a94-4edd-ae6a-c61e2424b517" alt = "ezgif" width="400px"/></p>
 
 ## 1. Note on the <i>posit</i> branch
 
