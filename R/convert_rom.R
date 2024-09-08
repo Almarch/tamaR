@@ -4,7 +4,6 @@
 #' @param bin A binary ROM
 #' @param hfile The output file name
 #' @param secret Let a new (but familiar) secret character sneak in the game
-#' @examples
 
 convert_rom = function(bin, hfile = "rom.h", secret = T, ...) {
 

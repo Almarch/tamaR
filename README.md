@@ -32,6 +32,7 @@ The demo version is slighlty different from the main one:
     </tr>
 </table>
 
+NB: Posit cloud shuts down inactive Shiny sessions, so the game state is lost after deconnection. Use your own server to keep a game consistent timeline.
 
 ## 2. Installation
 
