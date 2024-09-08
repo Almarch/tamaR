@@ -34,6 +34,8 @@ A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available
     </tr>
 </table>
 
+NB: Posit cloud shuts down inactive Shiny sessions, so the game state is lost after deconnection. Use your own server to keep a game consistent timeline.
+
 ## 2. Installation
 
 Start by cloning the git repository. The ROM (`rom.bin` or `rom.h`) must be placed into the `src` directory.
