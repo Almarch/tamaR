@@ -12,29 +12,11 @@ A web app can be launched online using the R library [shiny](https://shiny.posit
 
 ## 1. Demo version
 
-<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
+<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="60px" align="right"/>
 
-A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available [at this address](https://almarch.shinyapps.io/tamaR). The demo version is slighlty different from the main one:
+A demo version is kindly hosted on [Posit Cloud](https://posit.co) and available [at this address](https://almarch.shinyapps.io/tamaR). The demo version is slighlty different from the main one, check the information of the <a href = https://github.com/Almarch/tamaR/tree/posit>posit branch</a>. NB: Posit cloud shuts down inactive Shiny sessions, so the game state is lost after deconnection. Use your own server to keep a game consistent timeline.
 
-<table>
-    <tr>
-        <th><i>main</i> branch</th><th><i>posit</i> branch</th>
-    </tr>
-    <tr>
-        <td>The package contains the ROM</td><td>The package does not contain the ROM</td>
-    </tr>
-    <tr>
-        <td>Provide the ROM prior to install the package</td><td>Provide the ROM on the fly to the running app</td>
-    </tr>
-    <tr>
-        <td>Must be installed with <code>R CMD INSTALL</code></td><td>Can be installed with <code>devtools</code></td>
-    </tr>
-    <tr>
-        <td>Documentation below</td><td>Documentation <a href = https://github.com/Almarch/tamaR/tree/posit>here</a></td>
-    </tr>
-</table>
-
-NB: Posit cloud shuts down inactive Shiny sessions, so the game state is lost after deconnection. Use your own server to keep a game consistent timeline.
+Another demo version is available on a private virtual server at [at this address](https://creature.ovh). It runs a light version of the app and requires no credentials, so that the pet custody is shared with the world wide web. If someone else is interacting with the pet, please wait a few minutes in order not to turn it crazy. The automatic care feature and the sprites switch are not available on this demo version.
 
 ## 2. Installation
 
