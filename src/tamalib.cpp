@@ -1489,7 +1489,7 @@ static const op_t0 ops0[] = {
   {0xFF4, MASK_10B      , 5 }, // LD_R_SPL
   {0xC00, MASK_6B   , 7 }, // ADD_R_I
   {0xC40, MASK_6B   , 7 }, // ADC_R_I
-  {0xB40, MASK_6B   , 7 }, // SBC_R_I
+  {0xD40, MASK_6B   , 7 }, // SBC_R_I
   {0xC80, MASK_6B   , 7 }, // AND_R_I
   {0xCC0, MASK_6B   , 7 }, // OR_R_I
   {0xD00, MASK_6B   , 7 }, // XOR_R_I
