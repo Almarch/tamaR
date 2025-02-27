@@ -1,3 +1,17 @@
+⚠️ This project is deprecated. Please visit [PyGoTcHi](https://github.com/almarch/pygotchi).
+
+⚠️ The project presents a web vulnerability: not using encryption (HTTPS) compromises passwords.
+
+⚠️ The use of R-Shiny is a limitation to the efficiency of a real-time game. Websockets (needed for the buzzer) may never be implemented properly.
+
+⚠️ The p2 sprites switch is obsolete: new roms are available !
+
+⚠️ The automatic care feature is specific to P1-P2, which makes it poorly adaptable to the new roms.
+
+<br>
+<br>
+<br>
+
 # <img src="inst/www/icon.png" alt="TaMaGoTcHi" width="40"/> The Tamagotchi is live on <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/>
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
