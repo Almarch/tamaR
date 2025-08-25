@@ -1,3 +1,8 @@
+⚠️ This project is deprecated. Please visit [PyGoTcHi](https://github.com/almarch/pygotchi).
+
+<br>
+<br>
+
 # <img src="inst/www/icon.png" alt="TaMaGoTcHi" width="40"/> The Tamagotchi is live on <img src="https://cran.r-project.org/Rlogo.svg" alt="R" width="45"/>
 
 This is a package allowing the emulation of a P1 Tamagotchi in R using [TamaLIB](https://github.com/jcrona/tamalib).
@@ -66,8 +71,6 @@ Check out the main [doc](https://github.com/Almarch/tamaR/tree/main#5-use-as-a-w
 
 ## 4. License 
 
-This work is licensed under Attribution-NonCommercial 4.0 International.
-
-The ROM is not provided and the author do not endorse game piracy: check your local regulation concerning retro games emulation.
+This work is licensed under GPL-2.0.
 
 All graphical resources come from the extraordinarily rich Tamagotchi [fandom](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)).
